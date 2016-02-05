@@ -1,10 +1,7 @@
-The Studisme Theory
+# The Studisme Theory
 
-LACHTER Nazim
-LAUZIER Maeva
-PETITEAU Benoit
-QUATREVIEUX Vincent
-SANIGOU Alexandre
+*LACHTER Nazim*  |  *LAUZIER Maeva*  |  *PETITEAU Benoit*  |  *QUATREVIEUX Vincent*  |  *SANIGOU Alexandre*
 
+---
 
 Un projet... bien.

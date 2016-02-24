@@ -13,11 +13,11 @@ public class StudentGraduate extends AbstractModel<StudentGraduate>{
     final static public int NOT_GRADED_YET = -1;
     
     final private Student student;
-    final private Pole pole;
+    final private Division pole;
     final private int year;
     private int grade;
 
-    public StudentGraduate(Student student, Pole pole, int year, int grade) {
+    public StudentGraduate(Student student, Division pole, int year, int grade) {
         this.student = student;
         this.pole = pole;
         this.year = year;
@@ -28,7 +28,7 @@ public class StudentGraduate extends AbstractModel<StudentGraduate>{
         return student;
     }
 
-    public Pole getPole() {
+    public Division getPole() {
         return pole;
     }
 

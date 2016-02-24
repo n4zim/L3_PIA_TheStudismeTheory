@@ -9,14 +9,14 @@ package fr.thestudismetheory.data;
  *
  * @author q13000412
  */
-public class Pole extends AbstractModel<Pole>{
+public class Division extends AbstractModel<Division>{
     final private School school;
     final private Category category;
     private int seatsRate;
     private int cost;
     private int cond;
 
-    public Pole(School school, Category category, int seatsRate, int cost, int cond) {
+    public Division(School school, Category category, int seatsRate, int cost, int cond) {
         this.school = school;
         this.category = category;
         this.seatsRate = seatsRate;

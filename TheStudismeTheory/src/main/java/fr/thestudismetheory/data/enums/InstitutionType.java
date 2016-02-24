@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.thestudismetheory.game;
+package fr.thestudismetheory.data.enums;
 
 /**
- * Base de la logique du jeu
+ *
  * @author q13000412
  */
-public interface GameLogic {
-    public void startGame();
+public enum InstitutionType {
+    PUBLIC,
+    PRIVATE
 }

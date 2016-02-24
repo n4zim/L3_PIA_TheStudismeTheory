@@ -6,9 +6,9 @@
 package fr.thestudismetheory.game;
 
 /**
- * Base de la logique du jeu
+ *
  * @author q13000412
  */
-public interface GameLogic {
-    public void startGame();
+public interface Game {
+    
 }

@@ -5,9 +5,10 @@
  */
 package fr.thestudismetheory.data;
 
+import fr.thestudismetheory.data.enums.StudentFlaw;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -20,11 +21,12 @@ public class Student extends AbstractModel<Student>{
     private City city;
     private int studism;
     private int procrass;
-    private int flaws;
     
-    final private Map<Category, Integer> interests = new HashMap<>();
+    final private Set<StudentFlaw> flaws;
+    final private Map<Category, Integer> interests;
+    final private Map<Integer, Graduate> graduations;
 
-    public Student(long id, String name, Date birth, City city, int studism, int procrass, int flaws) {
+    public Student(long id, String name, Date birth, City city, int studism, int procrass, Set<StudentFlaw> flaws, Map<Category, Integer> interests, Map<Integer, Graduate> graduations) {
         this.id = id;
         this.name = name;
         this.birth = birth;
@@ -32,6 +34,8 @@ public class Student extends AbstractModel<Student>{
         this.studism = studism;
         this.procrass = procrass;
         this.flaws = flaws;
+        this.interests = interests;
+        this.graduations = graduations;
     }
 
     public long getId() {
@@ -58,7 +62,7 @@ public class Student extends AbstractModel<Student>{
         return procrass;
     }
 
-    public int getFlaws() {
+    public Set<StudentFlaw> getFlaws() {
         return flaws;
     }
 
@@ -76,10 +80,19 @@ public class Student extends AbstractModel<Student>{
         this.procrass = procrass;
         notifyUpdate();
     }
-
-    public void setFlaws(int flaws) {
-        this.flaws = flaws;
+    
+    public void addFlaw(StudentFlaw flaw){
+        flaws.add(flaw);
         notifyUpdate();
+    }
+    
+    public void removeFlaw(StudentFlaw flaw){
+        flaws.remove(flaw);
+        notifyUpdate();
+    }
+    
+    public boolean hasFlaw(StudentFlaw flaw){
+        return flaws.contains(flaw);
     }
     
     public void setInterestRate(Category category, int interestRate){
@@ -89,5 +102,13 @@ public class Student extends AbstractModel<Student>{
     
     public int getInterestRate(Category category){
         return interests.getOrDefault(category, 0);
+    }
+    
+    public Graduate getGraduate(int year){
+        return graduations.get(year);
+    }
+    
+    public void setGraduate(int year, Graduate graduate){
+        graduations.put(year, graduate);
     }
 }

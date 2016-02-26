@@ -22,7 +22,7 @@ abstract public class AbstractModel<M extends AbstractModel<M>> implements Model
      * courant a été modifié (permettant une MaJ de la GUI
      * Ou de la BD)
      */
-    protected void notifyUpdate(){
+    public void notifyUpdate(){
         for (ModelListener<M> listener : listeners) {
             listener.onUpdate((M)this);
         }

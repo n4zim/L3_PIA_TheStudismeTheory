@@ -5,14 +5,7 @@
  */
 package fr.thestudismetheory.data.dao.sqlite;
 
-import fr.thestudismetheory.data.dao.CategoryDAO;
-import fr.thestudismetheory.data.dao.CityDAO;
 import fr.thestudismetheory.data.dao.DAOFactory;
-import fr.thestudismetheory.data.dao.DivisionDAO;
-import fr.thestudismetheory.data.dao.InstitutionDAO;
-import fr.thestudismetheory.data.dao.SchoolDAO;
-import fr.thestudismetheory.data.dao.StudentDAO;
-import fr.thestudismetheory.data.dao.TeacherDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,45 +16,60 @@ import java.sql.SQLException;
  */
 public class SQLiteDAOFactory implements DAOFactory{
     final private Connection connection;
+    
+    final private SQLiteCategoryDAO categoryDAO;
+    final private SQLiteCityDAO cityDAO;
+    final private SQLiteDivisionDAO divisionDAO;
+    final private SQLiteInstitutionDAO institutionDAO;
+    final private SQLiteSchoolDAO schoolDAO;
+    final private SQLiteStudentDAO studentDAO;
+    final private SQLiteTeacherDAO teacherDAO;
 
     public SQLiteDAOFactory(String dbname) throws SQLException {
         connection = DriverManager.getConnection("jdbc://sqlite:" + dbname);
+        
+        categoryDAO = new SQLiteCategoryDAO(connection);
+        cityDAO = new SQLiteCityDAO(connection);
+        divisionDAO = new SQLiteDivisionDAO(connection);
+        institutionDAO = new SQLiteInstitutionDAO(connection);
+        schoolDAO = new SQLiteSchoolDAO(connection);
+        studentDAO = new SQLiteStudentDAO(connection);
+        teacherDAO = new SQLiteTeacherDAO(connection);
     }
 
     @Override
-    public CategoryDAO getCategoryDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteCategoryDAO getCategoryDAO() {
+        return categoryDAO;
     }
 
     @Override
-    public CityDAO getCityDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteCityDAO getCityDAO() {
+        return cityDAO;
     }
 
     @Override
-    public DivisionDAO getDivisionDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteDivisionDAO getDivisionDAO() {
+        return divisionDAO;
     }
 
     @Override
-    public InstitutionDAO getInstitutionDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteInstitutionDAO getInstitutionDAO() {
+        return institutionDAO;
     }
 
     @Override
-    public SchoolDAO getSchoolDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteSchoolDAO getSchoolDAO() {
+        return schoolDAO;
     }
 
     @Override
-    public StudentDAO getStudentDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteStudentDAO getStudentDAO() {
+        return studentDAO;
     }
 
     @Override
-    public TeacherDAO getTeacherDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SQLiteTeacherDAO getTeacherDAO() {
+        return teacherDAO;
     }
-    
-    
+
 }

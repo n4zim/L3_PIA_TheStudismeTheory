@@ -12,7 +12,11 @@ import java.awt.Dimension;
  * @author vincent
  */
 final public class UIConstants {
-    final static public String TITLE = "The Studisme Theory";
+    final static public String TITLE_GAME = "The Studisme Theory";
+    final static public String TITLE_INSTITUTION = "Gestion de l'institution";
+    final static public String TITLE_SCHOOL= "Gestion de l'école";
+    final static public String TITLE_STUDENT= "Gestion des étudiants";
+    final static public String TITLE_TEACHER = "Gestion des professeurs";
     
     final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);
 }

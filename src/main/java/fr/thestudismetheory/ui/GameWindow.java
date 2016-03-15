@@ -18,6 +18,13 @@ import static fr.thestudismetheory.Resources.getImage;
  * Created by Maeva on 11/03/2016.
  */
 public class GameWindow {
+
+    protected InstitutionWindow institutionWindow = null;
+    protected SchoolWindow schoolWindow = null;
+    protected TeacherWindow teacherWindow = null;
+    protected StudentWindow studentWindow = null;
+    protected FinanceWindow financeWindow = null;
+
     public GameWindow(){
         WindowConstants window = new WindowConstants(UIConstants.TITLE_GAME);
         window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
@@ -45,35 +52,50 @@ public class GameWindow {
         b_inst.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InstitutionWindow window = new InstitutionWindow();
+                if(institutionWindow == null)
+                    institutionWindow = new InstitutionWindow();
+                else
+                    institutionWindow.setVisible(true);
             }
         });
         JButton b_school = new JButton(UIConstants.BUTTON_SCHOOL);
         b_school.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SchoolWindow window = new SchoolWindow();
+                if(schoolWindow == null)
+                    schoolWindow = new SchoolWindow();
+                else
+                    schoolWindow.setVisible(true);
             }
         });
         JButton b_teacher = new JButton(UIConstants.BUTTON_TEACHER);
         b_teacher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TeacherWindow window = new TeacherWindow();
+                if(teacherWindow == null)
+                    teacherWindow = new TeacherWindow();
+                else
+                    teacherWindow.setVisible(true);
             }
         });
         JButton b_student = new JButton(UIConstants.BUTTON_STUDENT);
         b_student.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StudentWindow window = new StudentWindow();
+                if(studentWindow == null)
+                    studentWindow = new StudentWindow();
+                else
+                    studentWindow.setVisible(true);
             }
         });
         JButton b_fin = new JButton(UIConstants.BUTTON_FINANCE);
         b_fin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FinanceWindow window = new FinanceWindow();
+                if(financeWindow == null)
+                    financeWindow = new FinanceWindow();
+                else
+                    financeWindow.setVisible(true);
             }
         });
 

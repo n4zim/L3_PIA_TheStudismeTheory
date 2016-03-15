@@ -12,6 +12,7 @@ public class WindowConstants extends JFrame {
         pack();
         setVisible(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setResizable(false);
     }
 
     public void closeWindow()

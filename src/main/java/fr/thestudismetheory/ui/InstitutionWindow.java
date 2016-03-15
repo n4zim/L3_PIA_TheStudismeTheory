@@ -43,7 +43,7 @@ public class InstitutionWindow extends WindowConstants {
        JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
        content.add(south, BorderLayout.SOUTH);
 
-       JButton b_save = new JButton(UIConstants.BUTTON_SAVE);
+       JButton b_save = new JButton(UIConstants.BUTTON_VALIDATE);
        JButton b_cancel = new JButton(UIConstants.BUTTON_CANCEL);
 
        south.add(b_cancel);

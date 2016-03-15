@@ -20,7 +20,7 @@ final public class UIConstants {
     final static public String TITLE_FINANCE = "Finances";
 
     //COMMON BUTTONS
-    final static public String BUTTON_SAVE = "Enregistrer";
+    final static public String BUTTON_VALIDATE = "Enregistrer";
     final static public String BUTTON_CANCEL = "Annuler";
 
     // GAME WINDOW
@@ -29,6 +29,14 @@ final public class UIConstants {
     final static public String BUTTON_TEACHER = "Professeurs";
     final static public String BUTTON_STUDENT = "Etudiants";
     final static public String BUTTON_FINANCE = "Finances";
+    final static public String BUTTON_SAVE = "Sauvegarder la partie";
+    final static public String BUTTON_LOAD = "Charger une partie";
+    final static public String BUTTON_EXIT = "Quitter le jeu";
+    final static public String LABEL_RESSOURCE = "Ressources";
+    final static public String LABEL_TIME = "Temps";
+    final static public String LABEL_STAT= "Statistiques";
+    final static public String LABEL_OPT_GAME = "Options du jeu";
+
 
     // INSTITUTION WINDOW
     final static public String BUTTON_NEW_SCHOOL = "Créer une école";
@@ -39,6 +47,9 @@ final public class UIConstants {
     final static public String BUTTON_ADD_POLE = "Ajouter un pôle";
     final static public String BUTTON_UPGRADE_POLE = "Améliorer un pôle";
 
+
+
     
     final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);
+    final static public Dimension DEFAULT_OPT_DIM = new Dimension(400, 300);
 }

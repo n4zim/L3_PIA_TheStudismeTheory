@@ -19,6 +19,9 @@ final public class UIConstants {
     final static public String TITLE_TEACHER = "Gestion des professeurs";
     final static public String TITLE_FINANCE = "Finances";
 
+    //COMMON BUTTONS
+    final static public String BUTTON_SAVE = "Enregistrer";
+    final static public String BUTTON_CANCEL = "Annuler";
 
     // GAME WINDOW
     final static public String BUTTON_INST = "Institutions";
@@ -26,6 +29,11 @@ final public class UIConstants {
     final static public String BUTTON_TEACHER = "Professeurs";
     final static public String BUTTON_STUDENT = "Etudiants";
     final static public String BUTTON_FINANCE = "Finances";
+
+    // INSTITUTION WINDOW
+    final static public String BUTTON_NEW_SCHOOL = "Créer une école";
+    final static public String BUTTON_SELL_SCHOOL = "Vendre une école";;
+    final static public String BUTTON_GRANT = "Demander une subvention";
 
     
     final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);

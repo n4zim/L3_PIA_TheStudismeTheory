@@ -32,8 +32,12 @@ final public class UIConstants {
 
     // INSTITUTION WINDOW
     final static public String BUTTON_NEW_SCHOOL = "Créer une école";
-    final static public String BUTTON_SELL_SCHOOL = "Vendre une école";;
+    final static public String BUTTON_SELL_SCHOOL = "Vendre une école";
     final static public String BUTTON_GRANT = "Demander une subvention";
+
+    // SCHOOL WINDOW
+    final static public String BUTTON_ADD_POLE = "Ajouter un pôle";
+    final static public String BUTTON_UPGRADE_POLE = "Améliorer un pôle";
 
     
     final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);

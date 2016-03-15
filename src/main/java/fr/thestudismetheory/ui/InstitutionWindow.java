@@ -56,7 +56,6 @@ public class InstitutionWindow extends WindowConstants {
        cards.add(sellSchoolPanel(), UIConstants.BUTTON_SELL_SCHOOL);
        cards.add(grantPanel(), UIConstants.BUTTON_GRANT);
 
-       cards.setBackground(Color.blue);
        content.add(cards, BorderLayout.CENTER);
 
        b_new_school.addActionListener(new ActionListener() {
@@ -83,24 +82,38 @@ public class InstitutionWindow extends WindowConstants {
            }
        });
 
+       b_save.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               closeWindow();
+           }
+       });
+
+       b_cancel.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               closeWindow();
+           }
+       });
+
        this.setContentPane(content);
    }
 
-    JPanel newSchoolPanel(){
+    public JPanel newSchoolPanel(){
         JPanel panel = new JPanel();
         panel.add(new JTextField("Carte création d'une école", 20));
 
         return panel;
     }
 
-    JPanel sellSchoolPanel(){
+    public JPanel sellSchoolPanel(){
         JPanel panel = new JPanel();
         panel.add(new JTextField("Carte vendre une école", 20));
 
         return panel;
     }
 
-    JPanel grantPanel(){
+    public JPanel grantPanel(){
         JPanel panel = new JPanel();
         panel.add(new JTextField("Carte demande de subvention", 20));
 

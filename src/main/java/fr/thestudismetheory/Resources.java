@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  * @author vincent
  */
 final public class Resources {
-    final static public Image UNIV_IMG = getImage("img/univ.jpg");
+    final static public Image UNIV_IMG = getImage("img/univ-800x600.jpg");
     
     static public URL getResource(String name){
         return Resources.class.getClassLoader().getResource(name);

@@ -5,10 +5,8 @@
  */
 package fr.thestudismetheory.ui;
 
-import fr.thestudismetheory.Resources;
+import fr.thestudismetheory.generator.WorldMapGenerator2;
 import java.awt.Graphics;
-import java.awt.Image;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -19,16 +17,16 @@ public class NewGame extends JPanel{
 
     public NewGame() {
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
-        add(new JLabel("test"));
+        WorldMapGenerator2 generator = new WorldMapGenerator2();
+        add(generator.showMap());
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g); //To change body of generated methods, choose Tools | Templates.
         
-        Image img;
-        img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
-        g.drawImage(img, 0, 0, null);
+//        Image img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+//        g.drawImage(img, 0, 0, null);
     }
     
     

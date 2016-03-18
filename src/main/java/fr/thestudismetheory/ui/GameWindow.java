@@ -1,23 +1,17 @@
 package fr.thestudismetheory.ui;
+import fr.thestudismetheory.Resources;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-
-import fr.thestudismetheory.Resources;
-import fr.thestudismetheory.data.Student;
-import fr.thestudismetheory.data.Teacher;
-
-import static fr.thestudismetheory.Resources.UNIV_IMG;
-import static fr.thestudismetheory.Resources.getImage;
 
 
 /**
  * Fenetre principale du jeu
  * Created by Maeva on 11/03/2016.
  */
-public class GameWindow {
+public class GameWindow extends WindowConstants{
 
     protected InstitutionWindow institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
@@ -29,20 +23,37 @@ public class GameWindow {
     private JFrame gameWindow;
 
     public GameWindow(){
-        WindowConstants window = new WindowConstants(UIConstants.TITLE_GAME);
-        this.gameWindow = window;
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
-        window.setContentPane(Content());
-        window.pack();
+        super(UIConstants.TITLE_GAME);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.setContentPane(Content());
+        this.pack();
     }
 
-    JPanel Content(){
+    public JPanel Content(){
         JPanel content = new JPanel();
         content.setLayout(new BorderLayout());
 
+        // Titre de la fenetre
+        JPanel north = title();
+        content.add(north, BorderLayout.NORTH);
+
         // Creation du panel contenant les boutons de navigation du jeu
-        JPanel west = new JPanel();
+        JPanel west = navGame();
         content.add(west, BorderLayout.WEST);
+
+        // Panel des statistiques générales du jeu
+        JPanel south = stat();
+        content.add(south, BorderLayout.SOUTH);
+
+        // Panel image
+        JPanel center = img();
+        content.add(center, BorderLayout.CENTER);
+
+        return content;
+    }
+
+    public JPanel navGame(){
+        JPanel west = new JPanel();
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -112,16 +123,17 @@ public class GameWindow {
             }
         });
 
-
         west.add(b_inst, gbc);
         west.add(b_school, gbc);
         west.add(b_teacher, gbc);
         west.add(b_student, gbc);
         west.add(b_fin, gbc);
 
-        // Panel des statistiques générales du jeu
+        return west;
+    }
+
+    public JPanel stat(){
         JPanel south = new JPanel();
-        content.add(south, BorderLayout.SOUTH);
 
         FlowLayout f = new FlowLayout();
         f.setHgap(90);
@@ -139,19 +151,32 @@ public class GameWindow {
         south.add(new JLabel(UIConstants.LABEL_TIME));
         south.add(new JLabel(UIConstants.LABEL_STAT));
         south.add(optGame);
+        return south;
+    }
 
-        // Panel image
+    public JPanel img(){
         JPanel center = new JPanel();
-        content.add(center, BorderLayout.CENTER);
-        ImageIcon icon = new ImageIcon(UNIV_IMG);
-        JLabel j = new JLabel(icon);
+        Image img;
+        img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+
+        ImageIcon newIcon = new ImageIcon(img);
+
+        JLabel j = new JLabel(newIcon);
         center.add(j);
 
-        return content;
+        return center;
+    }
+
+    public JPanel title() {
+        JPanel north = new JPanel();
+        JLabel title = new JLabel(UIConstants.TITLE_GAME);
+        title.setFont(new Font("Verdana",1,20));
+        north.add(title);
+
+        return north;
     }
 
     public void setSaved(boolean saved) { this.saved = saved; }
-
     public boolean isSaved() { return saved; }
 
     public void optGame(){
@@ -165,19 +190,19 @@ public class GameWindow {
         gbc.gridx = 0;
         gbc.gridy = GridBagConstraints.RELATIVE;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacemet des boutons
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
         opt.setLayout(new GridBagLayout());
 
         JButton save = new JButton(UIConstants.BUTTON_SAVE);
         JButton load = new JButton(UIConstants.BUTTON_LOAD);
-        JButton time = new JButton("time");
+        //JButton time = new JButton("time");
         JButton exit = new JButton(UIConstants.BUTTON_EXIT);
-
 
         opt.add(save, gbc);
         opt.add(load, gbc);
         opt.add(exit, gbc);
 
+        // Listener des boutons
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -202,7 +227,4 @@ public class GameWindow {
 
         opts.setVisible(true);
     }
-
-
-
 }

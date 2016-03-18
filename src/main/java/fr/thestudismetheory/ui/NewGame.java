@@ -26,7 +26,8 @@ public class NewGame extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponents(g); //To change body of generated methods, choose Tools | Templates.
         
-        Image img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        Image img;
+        img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         g.drawImage(img, 0, 0, null);
     }
     

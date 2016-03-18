@@ -1,6 +1,10 @@
 package fr.thestudismetheory.ui;
 
+import fr.thestudismetheory.Resources;
+
 import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created by Maeva on 11/03/2016.
  */

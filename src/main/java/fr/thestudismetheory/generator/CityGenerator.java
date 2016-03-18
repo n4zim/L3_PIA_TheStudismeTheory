@@ -1,4 +1,4 @@
-package TST_MapGenerator;
+package fr.thestudismetheory.generator;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,12 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class CityGenerator extends JPanel {
-	private static final long serialVersionUID = 1L;
-
 	public static final int GRID_SIZE = 8;
 	
     private final int SQUARE_SIZE = 80;
-    public static final int BORDER_SIZE = 2;
     private final Color BORDER_COLOR = Color.BLACK;
     
     private final int KIND_OF_TYPES = 5;
@@ -67,7 +64,7 @@ public class CityGenerator extends JPanel {
             currentCitySquare.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println(currentCitySquare.getNeighbors().size());
+                    // Actions à faire lors du clic
                 }
             });
 
@@ -78,7 +75,11 @@ public class CityGenerator extends JPanel {
     private void generateCitySquares() {
         // Instantiation de toutes les cases
         for(int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
-            cityMap[i/GRID_SIZE][i%GRID_SIZE] = new CitySquare(i);
+            CitySquare citySquare = new CitySquare();
+            if ((i / CityGenerator.GRID_SIZE + i % CityGenerator.GRID_SIZE) % 2 == 1) {
+                citySquare.setBackground(Color.gray);
+            }
+            cityMap[i/GRID_SIZE][i%GRID_SIZE] = citySquare;
         }
 
         // Ajout des voisins
@@ -97,16 +98,13 @@ public class CityGenerator extends JPanel {
     private void generateCityAreas() {
         Random random = new Random();
         // Zones allouables par le joueur
-        //int availableAreas = (GRID_SIZE/2) + random.nextInt(2); // Nombre entre ((8/2)+0)=4 et ((8/2)+2)= 6
         int availableAreas = (GRID_SIZE/2) + 2;
 
         // Nombre de cases encore vides
         int remainingSquares = GRID_SIZE*GRID_SIZE;
 
-        // Identifiant de la zone actuelle
+        // Identifiant, taille et type de la zone actuelle
         int currentAreaId = 0;
-
-        // Taille et type pour la case courante
         int currentAreaSize = 0;
         int currentAreaType = 0;
 
@@ -134,8 +132,8 @@ public class CityGenerator extends JPanel {
             // V?rifie l'?tat de la case
             if(currentCitySquare.getAreaId() == 0) {
                 currentCitySquare.setAreaId(currentAreaId);
-                currentCitySquare.setText(""+currentAreaId);
                 currentCitySquare.setType(currentAreaType);
+                currentCitySquare.setText("T"+currentAreaType+" A"+currentAreaId);
                 remainingSquares--;
             } else { // R?cup?re la prochaine case
                 List<CitySquare> neighbors = currentCitySquare.getNeighbors();
@@ -145,12 +143,7 @@ public class CityGenerator extends JPanel {
                 for(CitySquare neighbor : neighbors) {
                     if(neighbor.getAreaId() == 0) {
                         neighbor.setAncestor(currentCitySquare);
-
-                        /*if(neighbor.getAncestor().getAreaId() != currentCitySquare.getAreaId())
-                            currentAreaId++;*/
-
                         currentCitySquare = neighbor;
-
                         wasUpdated = true;
                         break;
                     }

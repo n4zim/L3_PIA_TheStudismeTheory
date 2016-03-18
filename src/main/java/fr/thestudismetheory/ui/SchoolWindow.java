@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,16 +98,84 @@ public class SchoolWindow extends WindowConstants {
         this.setContentPane(content);
     }
 
+    protected String[] cat_list = { "** Informatique **", "** Sport **", "** Médecine **", "** Science **", "** Ninja **" };
+
     public JPanel addPole(){
         JPanel panel = new JPanel();
-        panel.add(new JTextField("Carte ajouter un pôle", 20));
+        panel.setLayout(new BorderLayout());
+
+        JPanel north = new JPanel();
+
+        JLabel title = new JLabel(UIConstants.BUTTON_ADD_POLE);
+        title.setFont(new Font("Verdana",1,20));
+
+        north.add(title);
+
+        JLabel cost = new JLabel(UIConstants.ADD_POLE_COST);
+
+        JLabel poleNameLabel = new JLabel("Nom de l'école : ");
+        JTextField poleName = new JTextField(30);
+        JLabel catLabel = new JLabel("Catégorie : ");
+        JComboBox catName = new JComboBox(cat_list);
+
+        JPanel formPanel = new JPanel();
+
+        panel.add(north, BorderLayout.NORTH);
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
+        formPanel.setLayout(new GridBagLayout());
+
+        formPanel.add(poleNameLabel, gbc);
+        formPanel.add(poleName, gbc);
+        formPanel.add(catLabel, gbc);
+        formPanel.add(catName, gbc);
+        formPanel.add(cost, gbc);
 
         return panel;
     }
 
+    protected String[] pole_list = { "** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **" };
+
     public JPanel upgradePole(){
         JPanel panel = new JPanel();
-        panel.add(new JTextField("Carte améliorer un pôle", 20));
+        panel.setLayout(new BorderLayout());
+
+        JPanel north = new JPanel();
+
+        JLabel title = new JLabel(UIConstants.BUTTON_UPGRADE_POLE);
+        title.setFont(new Font("Verdana",1,20));
+
+        north.add(title);
+
+        JButton cost = new JButton(UIConstants.UPGRADE_POLE_COST);
+
+        JLabel poleListLabel = new JLabel("Pôle : ");
+        JComboBox cb_pole = new JComboBox(pole_list);
+        JLabel description = new JLabel(UIConstants.UPGRADE_POLE_DESC);
+
+        JPanel formPanel = new JPanel();
+
+        panel.add(north, BorderLayout.NORTH);
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
+        formPanel.setLayout(new GridBagLayout());
+
+        formPanel.add(poleListLabel, gbc);
+        formPanel.add(cb_pole, gbc);
+        formPanel.add(description, gbc);
+        formPanel.add(cost, gbc);
 
         return panel;
     }

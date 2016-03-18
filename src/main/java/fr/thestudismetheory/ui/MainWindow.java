@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
     final private CardLayout layout;
 
     public MainWindow() {
-        super(UIConstants.TITLE);
+        super(UIConstants.TITLE_GAME);
         
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
         

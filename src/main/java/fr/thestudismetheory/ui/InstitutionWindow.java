@@ -101,21 +101,104 @@ public class InstitutionWindow extends WindowConstants {
 
     public JPanel newSchoolPanel(){
         JPanel panel = new JPanel();
-        panel.add(new JTextField("Carte création d'une école", 20));
+        panel.setLayout(new BorderLayout());
+
+        JPanel north = new JPanel();
+
+        JLabel title = new JLabel(UIConstants.BUTTON_NEW_SCHOOL);
+        title.setFont(new Font("Verdana",1,20));
+
+        north.add(title);
+
+        JLabel cost = new JLabel(UIConstants.NEW_SCHOOL_COST);
+
+        JLabel schoolNameLabel = new JLabel("Nom de l'école : ");
+        JTextField schoolName = new JTextField(30);
+
+        JPanel formPanel = new JPanel();
+        formPanel.add(schoolNameLabel);
+        formPanel.add(schoolName);
+
+        panel.add(north, BorderLayout.NORTH);
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
+        formPanel.setLayout(new GridBagLayout());
+
+        formPanel.add(cost, gbc);
 
         return panel;
     }
 
+    protected String[] schools_list = { "** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **" };
+
     public JPanel sellSchoolPanel(){
         JPanel panel = new JPanel();
-        panel.add(new JTextField("Carte vendre une école", 20));
+        panel.setLayout(new BorderLayout());
+
+        JPanel north = new JPanel();
+
+        JLabel title = new JLabel(UIConstants.BUTTON_SELL_SCHOOL);
+        title.setFont(new Font("Verdana",1,20));
+
+        north.add(title);
+
+        JLabel cost = new JLabel(UIConstants.SELL_SCHOOL_COST);
+
+        JLabel schoolNameLabel = new JLabel("Nom de l'école : ");
+        JComboBox cb_schools = new JComboBox(schools_list);
+
+        JPanel formPanel = new JPanel();
+        formPanel.add(schoolNameLabel);
+        formPanel.add(cb_schools);
+
+        panel.add(north, BorderLayout.NORTH);
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
+        formPanel.setLayout(new GridBagLayout());
+
+        formPanel.add(cost, gbc);
 
         return panel;
     }
 
     public JPanel grantPanel(){
         JPanel panel = new JPanel();
-        panel.add(new JTextField("Carte demande de subvention", 20));
+        panel.setLayout(new BorderLayout());
+
+        JPanel north = new JPanel();
+
+        JLabel title = new JLabel(UIConstants.BUTTON_GRANT);
+        title.setFont(new Font("Verdana",1,20));
+
+        north.add(title);
+
+        JButton cost = new JButton(UIConstants.GRANT_COST);
+
+        JPanel formPanel = new JPanel();
+        formPanel.add(cost);
+
+        panel.add(north, BorderLayout.NORTH);
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
+        formPanel.setLayout(new GridBagLayout());
 
         return panel;
     }

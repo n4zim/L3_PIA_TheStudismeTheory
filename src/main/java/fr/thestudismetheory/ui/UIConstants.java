@@ -42,6 +42,10 @@ final public class UIConstants {
     final static public String BUTTON_NEW_SCHOOL = "Créer une école";
     final static public String BUTTON_SELL_SCHOOL = "Vendre une école";
     final static public String BUTTON_GRANT = "Demander une subvention";
+        //Onglet créer une école
+        final static public String NEW_SCHOOL_COST = "Prix de la création : ????€";
+        final static public String SELL_SCHOOL_COST = "Prix de la vente : ????€";
+        final static public String GRANT_COST = "Demander une subvention (????€)";
 
     // SCHOOL WINDOW
     final static public String BUTTON_ADD_POLE = "Ajouter un pôle";

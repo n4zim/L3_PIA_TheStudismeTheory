@@ -1,4 +1,4 @@
-package fr.thestudismetheory.generator;
+package fr.thestudismetheory.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -129,13 +129,13 @@ public class CityGenerator extends JPanel {
                 currentAreaId++;
             }
 
-            // V?rifie l'?tat de la case
+            // Vérifie l'?tat de la case
             if(currentCitySquare.getAreaId() == 0) {
                 currentCitySquare.setAreaId(currentAreaId);
                 currentCitySquare.setType(currentAreaType);
                 currentCitySquare.setText("T"+currentAreaType+" A"+currentAreaId);
                 remainingSquares--;
-            } else { // R?cup?re la prochaine case
+            } else { // Récupère la prochaine case
                 List<CitySquare> neighbors = currentCitySquare.getNeighbors();
                 Collections.shuffle(neighbors);
 

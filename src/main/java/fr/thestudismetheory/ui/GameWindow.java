@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 /**
  * Fenetre principale du jeu
- * Created by Maeva on 11/03/2016.
  */
 public class GameWindow extends WindowConstants{
 
@@ -25,6 +24,7 @@ public class GameWindow extends WindowConstants{
     public GameWindow(){
         super(UIConstants.TITLE_GAME);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setContentPane(Content());
         this.pack();
     }
@@ -45,9 +45,9 @@ public class GameWindow extends WindowConstants{
         JPanel south = stat();
         content.add(south, BorderLayout.SOUTH);
 
-        // Panel image
-        JPanel center = img();
-        content.add(center, BorderLayout.CENTER);
+        // Panel des cartes
+        JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
+        content.add(map, BorderLayout.CENTER);
 
         return content;
     }

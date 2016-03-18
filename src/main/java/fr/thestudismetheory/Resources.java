@@ -11,10 +11,9 @@ import javax.imageio.ImageIO;
 
 /**
  * Pool de constantes associées à des ressources
- * @author vincent
  */
 final public class Resources {
-    final static public Image UNIV_IMG = getImage("img/univ-800x600.jpg");
+    final static public Image UNIV_IMG = getImage("img/univ.jpg");
     
     static public URL getResource(String name){
         return Resources.class.getClassLoader().getResource(name);

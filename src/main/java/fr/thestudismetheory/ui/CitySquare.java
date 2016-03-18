@@ -1,4 +1,4 @@
-package fr.thestudismetheory.generator;
+package fr.thestudismetheory.ui;
 
 import java.util.ArrayList;
 import java.util.List;

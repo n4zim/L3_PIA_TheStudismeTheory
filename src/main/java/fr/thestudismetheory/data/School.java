@@ -6,10 +6,9 @@
 package fr.thestudismetheory.data;
 
 /**
- *
  * @author q13000412
  */
-public class School extends AbstractModel<School>{
+public class School extends AbstractModel<School> {
     final private int id;
     final private City city;
     final private Institution institution;
@@ -44,21 +43,13 @@ public class School extends AbstractModel<School>{
         return name;
     }
 
-    public int getRepute() {
-        return repute;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public int getSeats() {
-        return seats;
-    }
-
     public void setName(String name) {
         this.name = name;
         notifyUpdate();
+    }
+
+    public int getRepute() {
+        return repute;
     }
 
     public void setRepute(int repute) {
@@ -66,15 +57,23 @@ public class School extends AbstractModel<School>{
         notifyUpdate();
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     public void setCost(int cost) {
         this.cost = cost;
         notifyUpdate();
+    }
+
+    public int getSeats() {
+        return seats;
     }
 
     public void setSeats(int seats) {
         this.seats = seats;
         notifyUpdate();
     }
-    
-    
+
+
 }

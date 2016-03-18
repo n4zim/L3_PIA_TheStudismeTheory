@@ -7,8 +7,9 @@ package fr.thestudismetheory.data.enums;
 
 /**
  * Les défaut d'un étudiant
+ *
  * @author vincent
  */
 public enum StudentFlaw {
-    
+
 }

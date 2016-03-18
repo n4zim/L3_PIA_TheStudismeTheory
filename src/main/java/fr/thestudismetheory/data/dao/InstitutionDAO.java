@@ -1,6 +1,5 @@
 package fr.thestudismetheory.data.dao;
 
-import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.Institution;
 
 /**

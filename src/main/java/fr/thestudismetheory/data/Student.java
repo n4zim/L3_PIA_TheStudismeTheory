@@ -6,25 +6,24 @@
 package fr.thestudismetheory.data;
 
 import fr.thestudismetheory.data.enums.StudentFlaw;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
 /**
- *
  * @author q13000412
  */
-public class Student extends AbstractModel<Student>{
+public class Student extends AbstractModel<Student> {
     final private long id;
     final private String name;
     final private Date birth;
-    private City city;
-    private int studism;
-    private int procrass;
-    
     final private Set<StudentFlaw> flaws;
     final private Map<Category, Integer> interests;
     final private Map<Integer, Graduate> graduations;
+    private City city;
+    private int studism;
+    private int procrass;
 
     public Student(long id, String name, Date birth, City city, int studism, int procrass, Set<StudentFlaw> flaws, Map<Category, Integer> interests, Map<Integer, Graduate> graduations) {
         this.id = id;
@@ -54,21 +53,13 @@ public class Student extends AbstractModel<Student>{
         return city;
     }
 
-    public int getStudism() {
-        return studism;
-    }
-
-    public int getProcrass() {
-        return procrass;
-    }
-
-    public Set<StudentFlaw> getFlaws() {
-        return flaws;
-    }
-
     public void setCity(City city) {
         this.city = city;
         notifyUpdate();
+    }
+
+    public int getStudism() {
+        return studism;
     }
 
     public void setStudism(int studism) {
@@ -76,39 +67,47 @@ public class Student extends AbstractModel<Student>{
         notifyUpdate();
     }
 
+    public int getProcrass() {
+        return procrass;
+    }
+
     public void setProcrass(int procrass) {
         this.procrass = procrass;
         notifyUpdate();
     }
-    
-    public void addFlaw(StudentFlaw flaw){
+
+    public Set<StudentFlaw> getFlaws() {
+        return flaws;
+    }
+
+    public void addFlaw(StudentFlaw flaw) {
         flaws.add(flaw);
         notifyUpdate();
     }
-    
-    public void removeFlaw(StudentFlaw flaw){
+
+    public void removeFlaw(StudentFlaw flaw) {
         flaws.remove(flaw);
         notifyUpdate();
     }
-    
-    public boolean hasFlaw(StudentFlaw flaw){
+
+    public boolean hasFlaw(StudentFlaw flaw) {
         return flaws.contains(flaw);
     }
-    
-    public void setInterestRate(Category category, int interestRate){
+
+    public void setInterestRate(Category category, int interestRate) {
         interests.put(category, interestRate);
         notifyUpdate();
     }
-    
-    public int getInterestRate(Category category){
+
+    public int getInterestRate(Category category) {
         return interests.getOrDefault(category, 0);
     }
-    
-    public Graduate getGraduate(int year){
+
+    public Graduate getGraduate(int year) {
         return graduations.get(year);
     }
-    
-    public void setGraduate(int year, Graduate graduate){
+
+    public void setGraduate(int year, Graduate graduate) {
         graduations.put(year, graduate);
     }
 }

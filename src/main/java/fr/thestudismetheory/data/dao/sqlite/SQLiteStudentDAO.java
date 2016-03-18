@@ -7,15 +7,15 @@ package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Student;
 import fr.thestudismetheory.data.dao.StudentDAO;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
  * @author vincent
  */
-public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO{
+public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
 
     public SQLiteStudentDAO(Connection connection) throws SQLException {
         super(connection);
@@ -60,5 +60,5 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO{
     public void update(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

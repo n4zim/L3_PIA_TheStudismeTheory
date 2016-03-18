@@ -3,23 +3,10 @@ package fr.thestudismetheory.ui;
 /**
  * Created by Maeva on 14/03/2016.
  */
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import java.awt.*;
 
 
 /*
@@ -27,17 +14,17 @@ import javax.swing.border.BevelBorder;
  */
 public class CadreSaisieMembre extends JFrame {
 
-    public static void main(String[] args) {
-        JFrame cadre = new CadreSaisieMembre("Test du cadre de saisie d'un membre");
-        cadre.setLocationRelativeTo(null);
-        cadre.setVisible(true);
-    }
-
     public CadreSaisieMembre(String titre) {
         super(titre);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(panneauDeContenu());
         pack();
+    }
+
+    public static void main(String[] args) {
+        JFrame cadre = new CadreSaisieMembre("Test du cadre de saisie d'un membre");
+        cadre.setLocationRelativeTo(null);
+        cadre.setVisible(true);
     }
 
     /*

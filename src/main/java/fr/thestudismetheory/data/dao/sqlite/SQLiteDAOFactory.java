@@ -6,17 +6,17 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.dao.DAOFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
  * @author vincent
  */
-public class SQLiteDAOFactory implements DAOFactory{
+public class SQLiteDAOFactory implements DAOFactory {
     final private Connection connection;
-    
+
     final private SQLiteCategoryDAO categoryDAO;
     final private SQLiteCityDAO cityDAO;
     final private SQLiteDivisionDAO divisionDAO;
@@ -27,7 +27,7 @@ public class SQLiteDAOFactory implements DAOFactory{
 
     public SQLiteDAOFactory(String dbname) throws SQLException {
         connection = DriverManager.getConnection("jdbc://sqlite:" + dbname);
-        
+
         categoryDAO = new SQLiteCategoryDAO(connection);
         cityDAO = new SQLiteCityDAO(connection);
         divisionDAO = new SQLiteDivisionDAO(connection);

@@ -7,15 +7,15 @@ package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Category;
 import fr.thestudismetheory.data.dao.CategoryDAO;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
  * @author vincent
  */
-public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDAO{
+public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDAO {
 
     public SQLiteCategoryDAO(Connection connection) throws SQLException {
         super(connection);
@@ -23,7 +23,7 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
 
     @Override
     protected void makeTable() throws SQLException {
-        
+
     }
 
     @Override
@@ -49,9 +49,9 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     @Override
     protected Category createByRS(ResultSet RS) throws SQLException {
         return new Category(
-            RS.getInt("CATEGORY_ID"), 
-            RS.getString("CATEGORY_NAME"), 
-            RS.getInt("CATEGORY_ATTRACT")
+                RS.getInt("CATEGORY_ID"),
+                RS.getString("CATEGORY_NAME"),
+                RS.getInt("CATEGORY_ATTRACT")
         );
     }
 
@@ -64,5 +64,5 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     public void update(Category model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

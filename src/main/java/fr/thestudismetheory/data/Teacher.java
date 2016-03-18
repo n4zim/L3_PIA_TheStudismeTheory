@@ -8,10 +8,9 @@ package fr.thestudismetheory.data;
 import java.util.Date;
 
 /**
- *
  * @author q13000412
  */
-public class Teacher extends AbstractModel<Teacher>{
+public class Teacher extends AbstractModel<Teacher> {
     final private long id;
     final private String name;
     final private Date birth;
@@ -54,25 +53,13 @@ public class Teacher extends AbstractModel<Teacher>{
         return charisma;
     }
 
-    public int getSkill() {
-        return skill;
-    }
-
-    public int getPunct() {
-        return punct;
-    }
-
-    public int getTeachSkill() {
-        return teachSkill;
-    }
-
-    public Category getCatergory() {
-        return catergory;
-    }
-
     public void setCharisma(int charisma) {
         this.charisma = charisma;
         notifyUpdate();
+    }
+
+    public int getSkill() {
+        return skill;
     }
 
     public void setSkill(int skill) {
@@ -80,9 +67,17 @@ public class Teacher extends AbstractModel<Teacher>{
         notifyUpdate();
     }
 
+    public int getPunct() {
+        return punct;
+    }
+
     public void setPunct(int punct) {
         this.punct = punct;
         notifyUpdate();
+    }
+
+    public int getTeachSkill() {
+        return teachSkill;
     }
 
     public void setTeachSkill(int teachSkill) {
@@ -90,10 +85,14 @@ public class Teacher extends AbstractModel<Teacher>{
         notifyUpdate();
     }
 
+    public Category getCatergory() {
+        return catergory;
+    }
+
     public void setCatergory(Category catergory) {
         this.catergory = catergory;
         notifyUpdate();
     }
-    
-    
+
+
 }

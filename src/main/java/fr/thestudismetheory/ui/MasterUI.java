@@ -6,9 +6,8 @@
 package fr.thestudismetheory.ui;
 
 /**
- *
  * @author q13000412
  */
 public interface MasterUI {
-    
+
 }

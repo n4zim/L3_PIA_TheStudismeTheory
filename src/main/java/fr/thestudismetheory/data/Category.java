@@ -6,10 +6,9 @@
 package fr.thestudismetheory.data;
 
 /**
- *
  * @author q13000412
  */
-public class Category extends AbstractModel<Category>{
+public class Category extends AbstractModel<Category> {
     final private int id;
     final private String name;
     private int attract;

@@ -5,7 +5,7 @@ package fr.thestudismetheory.ui;
  * Created by Maeva on 11/03/2016.
  */
 public class StudentWindow extends WindowConstants {
-    public StudentWindow(){
+    public StudentWindow() {
         super(UIConstants.TITLE_STUDENT);
     }
 }

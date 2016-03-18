@@ -6,10 +6,9 @@
 package fr.thestudismetheory.data;
 
 /**
- *
  * @author q13000412
  */
-public class City extends AbstractModel<City>{
+public class City extends AbstractModel<City> {
     final private int id;
     private String name;
     private int studentsCount;
@@ -28,13 +27,13 @@ public class City extends AbstractModel<City>{
         return name;
     }
 
-    public int getStudentsCount() {
-        return studentsCount;
-    }
-
     public void setName(String name) {
         this.name = name;
         notifyUpdate();
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
     }
 
     public void setStudentsCount(int studentsCount) {

@@ -7,15 +7,15 @@ package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.dao.DivisionDAO;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
  * @author vincent
  */
-public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDAO{
+public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDAO {
 
     public SQLiteDivisionDAO(Connection connection) throws SQLException {
         super(connection);
@@ -60,5 +60,5 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
     public void update(Division model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

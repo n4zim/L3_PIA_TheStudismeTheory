@@ -7,11 +7,13 @@ package fr.thestudismetheory.data;
 
 /**
  * Listener pour les modèles
+ *
  * @author q13000412
  */
-public interface ModelListener<M extends Model>{
+public interface ModelListener<M extends Model> {
     /**
      * Evènement envoyé en cas de changement dans le modèle
+     *
      * @param model Modèle changé
      */
     public void onUpdate(M model);

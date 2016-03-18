@@ -6,7 +6,6 @@
 package fr.thestudismetheory.data.enums;
 
 /**
- *
  * @author q13000412
  */
 public enum InstitutionType {

@@ -6,10 +6,9 @@
 package fr.thestudismetheory.data;
 
 /**
- *
  * @author q13000412
  */
-public class Division extends AbstractModel<Division>{
+public class Division extends AbstractModel<Division> {
     final private School school;
     final private Category category;
     private int seatsRate;
@@ -36,17 +35,13 @@ public class Division extends AbstractModel<Division>{
         return seatsRate;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
-    public int getCond() {
-        return cond;
-    }
-
     public void setSeatsRate(int seatsRate) {
         this.seatsRate = seatsRate;
         notifyUpdate();
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     public void setCost(int cost) {
@@ -54,10 +49,14 @@ public class Division extends AbstractModel<Division>{
         notifyUpdate();
     }
 
+    public int getCond() {
+        return cond;
+    }
+
     public void setCond(int cond) {
         this.cond = cond;
         notifyUpdate();
     }
-    
-    
+
+
 }

@@ -5,25 +5,25 @@
  */
 package fr.thestudismetheory;
 
-import java.awt.Image;
-import java.net.URL;
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.net.URL;
 
 /**
  * Pool de constantes associées à des ressources
  */
 final public class Resources {
     final static public Image UNIV_IMG = getImage("img/univ.jpg");
-    
-    static public URL getResource(String name){
+
+    static public URL getResource(String name) {
         return Resources.class.getClassLoader().getResource(name);
     }
-    
-    static public Image getImage(String name){
-        try{
+
+    static public Image getImage(String name) {
+        try {
             System.out.println(name);
             return ImageIO.read(getResource(name).openStream());
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

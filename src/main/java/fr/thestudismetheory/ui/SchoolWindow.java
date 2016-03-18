@@ -1,7 +1,6 @@
 package fr.thestudismetheory.ui;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +12,9 @@ import java.awt.event.ActionListener;
 public class SchoolWindow extends WindowConstants {
 
     protected JPanel cards;
-    protected String[] schools_list = { "** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **" };
+    protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
+    protected String[] cat_list = {"** Informatique **", "** Sport **", "** Médecine **", "** Science **", "** Ninja **"};
+    protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
 
     public SchoolWindow() {
         super(UIConstants.TITLE_SCHOOL);
@@ -68,7 +69,7 @@ public class SchoolWindow extends WindowConstants {
         b_add_pole.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout)(cards.getLayout());
+                CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_ADD_POLE);
             }
         });
@@ -76,7 +77,7 @@ public class SchoolWindow extends WindowConstants {
         b_upgrade_pole.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout)(cards.getLayout());
+                CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_UPGRADE_POLE);
             }
         });
@@ -98,16 +99,14 @@ public class SchoolWindow extends WindowConstants {
         this.setContentPane(content);
     }
 
-    protected String[] cat_list = { "** Informatique **", "** Sport **", "** Médecine **", "** Science **", "** Ninja **" };
-
-    public JPanel addPole(){
+    public JPanel addPole() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
 
         JLabel title = new JLabel(UIConstants.BUTTON_ADD_POLE);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 
@@ -140,16 +139,14 @@ public class SchoolWindow extends WindowConstants {
         return panel;
     }
 
-    protected String[] pole_list = { "** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **" };
-
-    public JPanel upgradePole(){
+    public JPanel upgradePole() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
 
         JLabel title = new JLabel(UIConstants.BUTTON_UPGRADE_POLE);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 

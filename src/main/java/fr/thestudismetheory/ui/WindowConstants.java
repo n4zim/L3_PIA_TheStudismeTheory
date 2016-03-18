@@ -1,12 +1,9 @@
 package fr.thestudismetheory.ui;
 
-import fr.thestudismetheory.Resources;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class WindowConstants extends JFrame {
-    public WindowConstants(String title){
+    public WindowConstants(String title) {
         super();
         setTitle(title);
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
@@ -17,8 +14,7 @@ public class WindowConstants extends JFrame {
         setResizable(false);
     }
 
-    public void closeWindow()
-    {
+    public void closeWindow() {
         this.setVisible(false);
     }
 }

@@ -12,101 +12,102 @@ import java.awt.event.ActionListener;
 public class InstitutionWindow extends WindowConstants {
 
     protected JPanel cards;
+    protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
 
-   public InstitutionWindow(){
-       super(UIConstants.TITLE_INSTITUTION);
+    public InstitutionWindow() {
+        super(UIConstants.TITLE_INSTITUTION);
 
-       JPanel content = new JPanel();
-       content.setLayout(new BorderLayout());
+        JPanel content = new JPanel();
+        content.setLayout(new BorderLayout());
 
-       //Ajout des bouttons
-       JPanel west = new JPanel();
-       content.add(west, BorderLayout.WEST);
+        //Ajout des bouttons
+        JPanel west = new JPanel();
+        content.add(west, BorderLayout.WEST);
 
-       GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
 
-       gbc.gridx = 0;
-       gbc.gridy = GridBagConstraints.RELATIVE;
-       gbc.fill = GridBagConstraints.HORIZONTAL;
-       gbc.insets = new Insets(15, 15, 15, 15);
-       west.setLayout(new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15, 15, 15, 15);
+        west.setLayout(new GridBagLayout());
 
-       JButton b_new_school = new JButton(UIConstants.BUTTON_NEW_SCHOOL);
-       JButton b_sell_school = new JButton(UIConstants.BUTTON_SELL_SCHOOL);
-       JButton b_grant = new JButton(UIConstants.BUTTON_GRANT);
+        JButton b_new_school = new JButton(UIConstants.BUTTON_NEW_SCHOOL);
+        JButton b_sell_school = new JButton(UIConstants.BUTTON_SELL_SCHOOL);
+        JButton b_grant = new JButton(UIConstants.BUTTON_GRANT);
 
-       west.add(b_new_school, gbc);
-       west.add(b_sell_school, gbc);
-       west.add(b_grant, gbc);
+        west.add(b_new_school, gbc);
+        west.add(b_sell_school, gbc);
+        west.add(b_grant, gbc);
 
-       //Menu enregistrer et anuler
-       JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-       content.add(south, BorderLayout.SOUTH);
+        //Menu enregistrer et anuler
+        JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        content.add(south, BorderLayout.SOUTH);
 
-       JButton b_save = new JButton(UIConstants.BUTTON_VALIDATE);
-       JButton b_cancel = new JButton(UIConstants.BUTTON_CANCEL);
+        JButton b_save = new JButton(UIConstants.BUTTON_VALIDATE);
+        JButton b_cancel = new JButton(UIConstants.BUTTON_CANCEL);
 
-       south.add(b_cancel);
-       south.add(b_save);
+        south.add(b_cancel);
+        south.add(b_save);
 
-       //Création des onglets
-       cards = new JPanel(new CardLayout());
+        //Création des onglets
+        cards = new JPanel(new CardLayout());
 
-       cards.add(newSchoolPanel(), UIConstants.BUTTON_NEW_SCHOOL);
-       cards.add(sellSchoolPanel(), UIConstants.BUTTON_SELL_SCHOOL);
-       cards.add(grantPanel(), UIConstants.BUTTON_GRANT);
+        cards.add(newSchoolPanel(), UIConstants.BUTTON_NEW_SCHOOL);
+        cards.add(sellSchoolPanel(), UIConstants.BUTTON_SELL_SCHOOL);
+        cards.add(grantPanel(), UIConstants.BUTTON_GRANT);
 
-       content.add(cards, BorderLayout.CENTER);
+        content.add(cards, BorderLayout.CENTER);
 
-       b_new_school.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               CardLayout cl = (CardLayout)(cards.getLayout());
-               cl.show(cards, UIConstants.BUTTON_NEW_SCHOOL);
-           }
-       });
+        b_new_school.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) (cards.getLayout());
+                cl.show(cards, UIConstants.BUTTON_NEW_SCHOOL);
+            }
+        });
 
-       b_sell_school.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               CardLayout cl = (CardLayout)(cards.getLayout());
-               cl.show(cards, UIConstants.BUTTON_SELL_SCHOOL);
-           }
-       });
+        b_sell_school.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) (cards.getLayout());
+                cl.show(cards, UIConstants.BUTTON_SELL_SCHOOL);
+            }
+        });
 
-       b_grant.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               CardLayout cl = (CardLayout)(cards.getLayout());
-               cl.show(cards, UIConstants.BUTTON_GRANT);
-           }
-       });
+        b_grant.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) (cards.getLayout());
+                cl.show(cards, UIConstants.BUTTON_GRANT);
+            }
+        });
 
-       b_save.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               closeWindow();
-           }
-       });
+        b_save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeWindow();
+            }
+        });
 
-       b_cancel.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               closeWindow();
-           }
-       });
+        b_cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeWindow();
+            }
+        });
 
-       this.setContentPane(content);
-   }
+        this.setContentPane(content);
+    }
 
-    public JPanel newSchoolPanel(){
+    public JPanel newSchoolPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
 
         JLabel title = new JLabel(UIConstants.BUTTON_NEW_SCHOOL);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 
@@ -135,16 +136,14 @@ public class InstitutionWindow extends WindowConstants {
         return panel;
     }
 
-    protected String[] schools_list = { "** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **" };
-
-    public JPanel sellSchoolPanel(){
+    public JPanel sellSchoolPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
 
         JLabel title = new JLabel(UIConstants.BUTTON_SELL_SCHOOL);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 
@@ -173,14 +172,14 @@ public class InstitutionWindow extends WindowConstants {
         return panel;
     }
 
-    public JPanel grantPanel(){
+    public JPanel grantPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
 
         JLabel title = new JLabel(UIConstants.BUTTON_GRANT);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 

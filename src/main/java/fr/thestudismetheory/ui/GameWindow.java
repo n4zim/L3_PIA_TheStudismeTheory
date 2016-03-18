@@ -1,4 +1,5 @@
 package fr.thestudismetheory.ui;
+
 import fr.thestudismetheory.Resources;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * Fenetre principale du jeu
  */
-public class GameWindow extends WindowConstants{
+public class GameWindow extends WindowConstants {
 
     protected InstitutionWindow institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
@@ -21,7 +22,7 @@ public class GameWindow extends WindowConstants{
     private boolean saved = false;
     private JFrame gameWindow;
 
-    public GameWindow(){
+    public GameWindow() {
         super(UIConstants.TITLE_GAME);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -29,7 +30,7 @@ public class GameWindow extends WindowConstants{
         this.pack();
     }
 
-    public JPanel Content(){
+    public JPanel Content() {
         JPanel content = new JPanel();
         content.setLayout(new BorderLayout());
 
@@ -52,7 +53,7 @@ public class GameWindow extends WindowConstants{
         return content;
     }
 
-    public JPanel navGame(){
+    public JPanel navGame() {
         JPanel west = new JPanel();
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -68,7 +69,7 @@ public class GameWindow extends WindowConstants{
         b_inst.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(institutionWindow == null)
+                if (institutionWindow == null)
                     institutionWindow = new InstitutionWindow();
                 else
                     institutionWindow.setVisible(true);
@@ -80,7 +81,7 @@ public class GameWindow extends WindowConstants{
         b_school.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(schoolWindow == null)
+                if (schoolWindow == null)
                     schoolWindow = new SchoolWindow();
                 else
                     schoolWindow.setVisible(true);
@@ -92,7 +93,7 @@ public class GameWindow extends WindowConstants{
         b_teacher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(teacherWindow == null)
+                if (teacherWindow == null)
                     teacherWindow = new TeacherWindow();
                 else
                     teacherWindow.setVisible(true);
@@ -104,7 +105,7 @@ public class GameWindow extends WindowConstants{
         b_student.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(studentWindow == null)
+                if (studentWindow == null)
                     studentWindow = new StudentWindow();
                 else
                     studentWindow.setVisible(true);
@@ -116,7 +117,7 @@ public class GameWindow extends WindowConstants{
         b_fin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(financeWindow == null)
+                if (financeWindow == null)
                     financeWindow = new FinanceWindow();
                 else
                     financeWindow.setVisible(true);
@@ -132,7 +133,7 @@ public class GameWindow extends WindowConstants{
         return west;
     }
 
-    public JPanel stat(){
+    public JPanel stat() {
         JPanel south = new JPanel();
 
         FlowLayout f = new FlowLayout();
@@ -154,7 +155,7 @@ public class GameWindow extends WindowConstants{
         return south;
     }
 
-    public JPanel img(){
+    public JPanel img() {
         JPanel center = new JPanel();
         Image img;
         img = Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
@@ -170,17 +171,22 @@ public class GameWindow extends WindowConstants{
     public JPanel title() {
         JPanel north = new JPanel();
         JLabel title = new JLabel(UIConstants.TITLE_GAME);
-        title.setFont(new Font("Verdana",1,20));
+        title.setFont(new Font("Verdana", 1, 20));
         north.add(title);
 
         return north;
     }
 
-    public void setSaved(boolean saved) { this.saved = saved; }
-    public boolean isSaved() { return saved; }
+    public boolean isSaved() {
+        return saved;
+    }
 
-    public void optGame(){
-        JDialog opts = new JDialog(gameWindow,UIConstants.LABEL_OPT_GAME, true );
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    public void optGame() {
+        JDialog opts = new JDialog(gameWindow, UIConstants.LABEL_OPT_GAME, true);
         opts.setSize(UIConstants.DEFAULT_OPT_DIM);
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -207,7 +213,7 @@ public class GameWindow extends WindowConstants{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Fonction save
-                if(!isSaved()) setSaved(true);
+                if (!isSaved()) setSaved(true);
             }
         });
 

@@ -9,6 +9,7 @@ import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.dao.DivisionDAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,6 +17,7 @@ import java.sql.SQLException;
  * @author vincent
  */
 public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDAO {
+    
 
     public SQLiteDivisionDAO(Connection connection) throws SQLException {
         super(connection);
@@ -37,13 +39,18 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
     }
 
     @Override
-    protected Object[] getPkValues(Division entity) {
+    protected void bindValues(Division entity, PreparedStatement stmt, int offset) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void bindPk(Division entity, PreparedStatement stmt, int offset) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     protected String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DIVISION";
     }
 
     @Override

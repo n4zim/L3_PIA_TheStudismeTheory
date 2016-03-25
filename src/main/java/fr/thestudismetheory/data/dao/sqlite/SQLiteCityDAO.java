@@ -9,13 +9,21 @@ import fr.thestudismetheory.data.City;
 import fr.thestudismetheory.data.dao.CityDAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 /**
  * @author vincent
  */
 public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
+    final static public String ATTR_ID = "CITY_ID";
+    final static public String ATTR_NAME = "CITY_NAME";
+    final static public String ATTR_STU_COUNT = "CITY_STUDENTS_COUNT";
+    
+    final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_STU_COUNT};
+    final static private String[] PK_COL = new String[]{ATTR_ID};
 
     public SQLiteCityDAO(Connection connection) throws SQLException {
         super(connection);
@@ -23,42 +31,57 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
 
     @Override
     protected void makeTable() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection.createStatement().execute(
+                "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
+                        ATTR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + 
+                        ATTR_NAME + " TEXT," +
+                        ATTR_STU_COUNT + " INTEGER" +
+                ")"
+        );
     }
 
     @Override
     protected String[] getColumns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return COLUMNS;
     }
 
     @Override
     protected String[] getPkColumns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected Object[] getPkValues(City entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return PK_COL;
     }
 
     @Override
     protected String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "CITY";
+    }
+
+    @Override
+    protected void bindValues(City entity, PreparedStatement stmt, int offset) throws SQLException {
+        stmt.setString(offset, entity.getName());
+        stmt.setInt(offset + 1, entity.getStudentsCount());
+    }
+
+    @Override
+    protected void bindPk(City entity, PreparedStatement stmt, int offset) throws SQLException {
+        if(entity.getId() == -1)
+            stmt.setNull(offset, Types.INTEGER);
+        else
+            stmt.setInt(offset, entity.getId());
     }
 
     @Override
     protected City createByRS(ResultSet RS) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new City(
+                RS.getInt(ATTR_ID), 
+                RS.getString(ATTR_NAME), 
+                RS.getInt(ATTR_STU_COUNT)
+        );
     }
 
     @Override
     public City insert(City model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(City model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = (int)internalInsert(model);
+        return new City(id, model.getName(), model.getStudentsCount());
     }
 
 }

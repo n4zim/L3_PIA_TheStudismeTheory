@@ -27,6 +27,16 @@ public class School extends AbstractModel<School> {
         this.seats = seats;
     }
 
+    public School(int id, School school) {
+        this.id = id;
+        city = school.city;
+        institution = school.institution;
+        name = school.name;
+        repute = school.repute;
+        cost = school.cost;
+        seats = school.seats;
+    }
+
     public int getId() {
         return id;
     }

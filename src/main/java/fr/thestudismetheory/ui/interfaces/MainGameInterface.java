@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 /**
  * Fenetre principale du jeu
  */
-public class GameInterface extends JPanel {
+public class MainGameInterface extends AbstractGameInterface {
 
     protected InstitutionWindow institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
@@ -30,7 +30,7 @@ public class GameInterface extends JPanel {
     private boolean saved = false;
     private JFrame gameWindow;
 
-    public GameInterface() {
+    public MainGameInterface() {
         setLayout(new BorderLayout());
 
         // Titre de la fenetre
@@ -48,6 +48,16 @@ public class GameInterface extends JPanel {
         // Panel des cartes
         JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
         add(map, BorderLayout.CENTER);
+    }
+
+    @Override
+    public String getTitle() {
+        return UIConstants.TITLE_GAME;
+    }
+
+    @Override
+    public String getId() {
+        return "MAIN_GAME";
     }
 
     public JPanel navGame() {

@@ -1,5 +1,7 @@
 package fr.thestudismetheory.ui;
 
+import fr.thestudismetheory.data.strings.UIConstants;
+
 import javax.swing.*;
 
 public class WindowConstants extends JFrame {

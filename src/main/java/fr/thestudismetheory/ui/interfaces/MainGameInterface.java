@@ -7,7 +7,7 @@ import fr.thestudismetheory.ui.InstitutionWindow;
 import fr.thestudismetheory.ui.SchoolWindow;
 import fr.thestudismetheory.ui.StudentWindow;
 import fr.thestudismetheory.ui.TeacherWindow;
-import fr.thestudismetheory.ui.UIConstants;
+import fr.thestudismetheory.data.strings.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;

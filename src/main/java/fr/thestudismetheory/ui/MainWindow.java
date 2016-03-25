@@ -1,5 +1,6 @@
 package fr.thestudismetheory.ui;
 
+import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.interfaces.InterfacesHandler;
 import javax.swing.*;
 import java.awt.*;

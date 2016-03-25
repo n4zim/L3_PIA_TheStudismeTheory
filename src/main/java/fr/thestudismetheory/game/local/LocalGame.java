@@ -29,9 +29,13 @@ public class LocalGame implements Game{
 	private List<School> schools;
 	private List<Student> students;
 	private List<Teacher> teachers;
+	
 	private GameData data;
 	
+	private ScheduledExecutorService ses;
+	
 	public LocalGame(DAOFactory dao, GameData data) {
+		
 		cities = dao.getCityDAO().getAll();
 		institutions = dao.getInstitutionDAO().getAll();
 		divisions = dao.getDivisionDAO().getAll();
@@ -39,12 +43,14 @@ public class LocalGame implements Game{
 		schools = dao.getSchoolDAO().getAll();
 		students = dao.getStudentDAO().getAll();
 		teachers = dao.getTeacherDAO().getAll();
+		
 		this.data = data;
+		
+	    ses = Executors.newSingleThreadScheduledExecutor();
 	}
 	
     @Override
     public void start() {
-        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
         ses.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -53,6 +59,8 @@ public class LocalGame implements Game{
             	cal.setTime(data.getGameDate());
             	cal.add(Calendar.DATE, data.getSpeed());
             	data.setGameDate(cal.getTime());
+            	
+            	updateScore();
             	
                 onTick(data.getGameDate());
             }
@@ -76,7 +84,11 @@ public class LocalGame implements Game{
 
     @Override
     public void quit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ses.shutdown();
+    }
+    
+    public void updateScore() {
+    	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

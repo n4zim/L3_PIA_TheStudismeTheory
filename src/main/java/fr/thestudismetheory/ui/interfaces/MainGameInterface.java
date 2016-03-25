@@ -3,12 +3,13 @@ package fr.thestudismetheory.ui.interfaces;
 import fr.thestudismetheory.Resources;
 import fr.thestudismetheory.generator.WorldCityGenerator;
 import fr.thestudismetheory.ui.FinanceWindow;
-import fr.thestudismetheory.ui.InstitutionWindow;
+import fr.thestudismetheory.ui.gamepanel.InstitutionPanel;
 import fr.thestudismetheory.ui.SchoolWindow;
 import fr.thestudismetheory.ui.StudentWindow;
 import fr.thestudismetheory.ui.TeacherWindow;
 import fr.thestudismetheory.data.strings.UIConstants;
-
+import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
+import fr.thestudismetheory.ui.gamepanel.GamePanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,8 +20,9 @@ import java.awt.event.ActionListener;
  * Fenetre principale du jeu
  */
 public class MainGameInterface extends AbstractGameInterface {
+    final private CentralGamePanel centralPanel;
 
-    protected InstitutionWindow institutionWindow = null;
+    protected InstitutionPanel institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
     protected TeacherWindow teacherWindow = null;
     protected StudentWindow studentWindow = null;
@@ -30,6 +32,8 @@ public class MainGameInterface extends AbstractGameInterface {
     private JFrame gameWindow;
 
     public MainGameInterface() {
+        centralPanel = new CentralGamePanel();
+        
         setLayout(new BorderLayout());
 
         // Titre de la fenetre
@@ -45,8 +49,8 @@ public class MainGameInterface extends AbstractGameInterface {
         add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
-        JPanel map = new WorldCityGenerator();
-        add(map, BorderLayout.CENTER);
+        //JPanel map = new WorldCityGenerator();
+        add(centralPanel, BorderLayout.CENTER);
     }
 
     @Override
@@ -75,10 +79,7 @@ public class MainGameInterface extends AbstractGameInterface {
         b_inst.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (institutionWindow == null)
-                    institutionWindow = new InstitutionWindow();
-                else
-                    institutionWindow.setVisible(true);
+                centralPanel.switchInstitution();
             }
         });
 

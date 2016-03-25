@@ -18,8 +18,19 @@ import java.sql.Types;
  * @author vincent
  */
 public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
+    /**
+     * INTEGER PRIMARY KEY AUTOINCREMENT
+     */
     final static public String ATTR_ID = "CITY_ID";
+    
+    /**
+     * TEXT
+     */
     final static public String ATTR_NAME = "CITY_NAME";
+    
+    /**
+     * INTEGER > 0
+     */
     final static public String ATTR_STU_COUNT = "CITY_STUDENTS_COUNT";
     
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_STU_COUNT};

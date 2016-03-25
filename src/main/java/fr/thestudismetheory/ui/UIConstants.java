@@ -23,6 +23,9 @@ final public class UIConstants {
     //COMMON BUTTONS
     final static public String BUTTON_VALIDATE = "Enregistrer";
     final static public String BUTTON_CANCEL = "Annuler";
+    
+    //NewGameInterface
+    final static public String BUTTON_START_GAME = "Lancer le jeu";
 
     // GAME WINDOW
     final static public String BUTTON_INST = "Institutions";

@@ -18,8 +18,19 @@ import java.sql.Types;
  * @author vincent
  */
 public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDAO {
+    /**
+     * INTEGER PRIMARY KEY AUTOINCREMNT
+     */
     final static public String ATTR_ID = "CATEGORY_ID";
+    
+    /**
+     * TEXT
+     */
     final static public String ATTR_NAME = "CATEGORY_NAME";
+    
+    /**
+     * INTEGER 0 <= attract <= 100
+     */
     final static public String ATTR_ATTRACT = "CATEGORY_ATTRACT";
     
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_ATTRACT};

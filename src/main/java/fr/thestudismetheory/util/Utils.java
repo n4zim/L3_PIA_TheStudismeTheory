@@ -15,6 +15,13 @@ final public class Utils {
 
     private Utils() {}
     
+    /**
+     * Vérifie si un tableau contient un certain élément
+     * @param <T>
+     * @param array
+     * @param elem
+     * @return 
+     */
     static public<T> boolean arrayContains(T[] array, T elem){
         for(T e : array){
             if(Objects.equals(e, elem))
@@ -23,5 +30,4 @@ final public class Utils {
         
         return false;
     }
-    
 }

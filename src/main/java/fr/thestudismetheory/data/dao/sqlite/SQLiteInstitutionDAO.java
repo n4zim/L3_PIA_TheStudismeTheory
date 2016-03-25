@@ -19,8 +19,20 @@ import java.sql.Types;
  * @author vincent
  */
 public class SQLiteInstitutionDAO extends SQLiteDAO<Institution> implements InstitutionDAO {
+    /**
+     * INTEGER PRIMARY KEY AUTOINCREMENT
+     */
     final static public String ATTR_ID = "INSTITUTION_ID";
+    
+    /**
+     * TEXT
+     */
     final static public String ATTR_NAME = "INSTITUTION_NAME";
+    
+    /**
+     * TEXT
+     * @see InstitutionType
+     */
     final static public String ATTR_TYPE = "INSTITUTION_TYPE";
     
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_TYPE};

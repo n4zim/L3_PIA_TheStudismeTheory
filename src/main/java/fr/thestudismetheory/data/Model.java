@@ -10,18 +10,18 @@ package fr.thestudismetheory.data;
  *
  * @author q13000412
  */
-public interface Model<M extends Model<M>> {
+public interface Model<M extends Model<M, L>, L extends ModelListener<M>> {
     /**
      * Ajoute un listener dans la liste des listeners
      *
      * @param listener
      */
-    public void addListener(ModelListener<M> listener);
+    public void addListener(L listener);
 
     /**
      * Supprime le listener
      *
      * @param listener
      */
-    public void removeListener(ModelListener<M> listener);
+    public void removeListener(L listener);
 }

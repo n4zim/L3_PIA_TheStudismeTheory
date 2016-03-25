@@ -11,7 +11,7 @@ import java.util.Date;
  * Représentation d'une partie
  *
  * @author q13000412
- * @warming Ne gère pas (directement) l'interface graphique !
+ * @warning Ne gère pas (directement) l'interface graphique !
  */
 public interface Game {
     /**

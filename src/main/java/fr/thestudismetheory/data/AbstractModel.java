@@ -15,8 +15,8 @@ import java.util.List;
  * @param <M> Doit correspondre OBLIGATOIREMENT à la classe courante (class A extends AbstractModel<A>{})
  * @author q13000412
  */
-abstract public class AbstractModel<M extends AbstractModel<M>> implements Model<M> {
-    final protected List<ModelListener<M>> listeners = new ArrayList<>();
+abstract public class AbstractModel<M extends AbstractModel<M, L>, L extends ModelListener<M>> implements Model<M, L> {
+    final protected List<L> listeners = new ArrayList<>();
 
     /**
      * Notifie à tout les listeners comme quoi le modèle
@@ -30,12 +30,12 @@ abstract public class AbstractModel<M extends AbstractModel<M>> implements Model
     }
 
     @Override
-    public void addListener(ModelListener<M> listener) {
+    public void addListener(L listener) {
         listeners.add(listener);
     }
 
     @Override
-    public void removeListener(ModelListener<M> listener) {
+    public void removeListener(L listener) {
         listeners.remove(listener);
     }
 }

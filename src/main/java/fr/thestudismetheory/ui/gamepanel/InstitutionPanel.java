@@ -1,5 +1,6 @@
-package fr.thestudismetheory.ui;
+package fr.thestudismetheory.ui.gamepanel;
 
+import fr.thestudismetheory.ui.UIConstants;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,20 +10,22 @@ import java.awt.event.ActionListener;
  * Fenetre permettant la gestion de l'institution
  * Created by Maeva on 11/03/2016.
  */
-public class InstitutionWindow extends WindowConstants {
+public class InstitutionPanel extends GamePanel {
+    final static public String PANEL_ID = "INSTITUTION";
 
     protected JPanel cards;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
+    
+    final private CentralGamePanel centralPanel;
 
-    public InstitutionWindow() {
-        super(UIConstants.TITLE_INSTITUTION);
-
-        JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
+    public InstitutionPanel(CentralGamePanel parent) {
+        setLayout(new BorderLayout());
+        
+        this.centralPanel = parent;
 
         //Ajout des bouttons
         JPanel west = new JPanel();
-        content.add(west, BorderLayout.WEST);
+        add(west, BorderLayout.WEST);
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -42,7 +45,7 @@ public class InstitutionWindow extends WindowConstants {
 
         //Menu enregistrer et anuler
         JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        content.add(south, BorderLayout.SOUTH);
+        add(south, BorderLayout.SOUTH);
 
         JButton b_save = new JButton(UIConstants.BUTTON_VALIDATE);
         JButton b_cancel = new JButton(UIConstants.BUTTON_CANCEL);
@@ -57,7 +60,7 @@ public class InstitutionWindow extends WindowConstants {
         cards.add(sellSchoolPanel(), UIConstants.BUTTON_SELL_SCHOOL);
         cards.add(grantPanel(), UIConstants.BUTTON_GRANT);
 
-        content.add(cards, BorderLayout.CENTER);
+        add(cards, BorderLayout.CENTER);
 
         b_new_school.addActionListener(new ActionListener() {
             @Override
@@ -86,18 +89,21 @@ public class InstitutionWindow extends WindowConstants {
         b_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeWindow();
+                centralPanel.switchDefaultPanel();
             }
         });
 
         b_cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeWindow();
+                centralPanel.switchDefaultPanel();
             }
         });
+    }
 
-        this.setContentPane(content);
+    @Override
+    public String getId() {
+        return "INSITUTION";
     }
 
     public JPanel newSchoolPanel() {

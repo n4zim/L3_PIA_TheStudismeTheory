@@ -7,8 +7,9 @@ package fr.thestudismetheory.data.dao.sqlite.sub;
 
 import fr.thestudismetheory.data.Student;
 import fr.thestudismetheory.data.dao.DivisionDAO;
-import fr.thestudismetheory.data.dao.InstitutionDAO;
+import fr.thestudismetheory.data.dao.sqlite.SQLiteCategoryDAO;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteDivisionDAO;
+import fr.thestudismetheory.data.dao.sqlite.SQLiteSchoolDAO;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteStudentDAO;
 import fr.thestudismetheory.data.subentity.Graduate;
 import java.sql.Connection;
@@ -23,10 +24,34 @@ import java.util.Map;
  * @author vincent
  */
 public class SQLiteGraduation {
+    /**
+     * @see SQLiteSchoolDAO#ATTR_ID
+     */
     final static public String ATTR_STUDENT = SQLiteStudentDAO.ATTR_ID;
+    
+    /**
+     * INTEGER > 0, 4 digits
+     */
     final static public String ATTR_YEAR = "GRADUATION_YEAR";
-    final static public String ATTR_DIVISION = SQLiteDivisionDAO.ATTR_ID;
+    
+    /**
+     * @see SQLiteDivisionDAO#ATTR_SCHOOL
+     */
+    final static public String ATTR_SCHOOL = SQLiteDivisionDAO.ATTR_SCHOOL;
+    
+    /**
+     * @see SQLiteDivisionDAO#ATTR_CATEGORY
+     */
+    final static public String ATTR_CATEGORY = SQLiteDivisionDAO.ATTR_CATEGORY;
+    
+    /**
+     * INTEGER 0 < level <= 8
+     */
     final static public String ATTR_LEVEL = "GRADUATION_LEVEL";
+    
+    /**
+     * INTEGER 0 <= grade <= 20
+     */
     final static public String ATTR_GRADE = "GRADUATION_GRADE";
     
     final static public String TABLE_NAME = "GRADUATION";
@@ -39,6 +64,11 @@ public class SQLiteGraduation {
         this.divisionDAO = divisionDAO;
     }
     
+    /**
+     * Récupère les notes + études d'un étudiant
+     * @param student
+     * @return Map des études, avec pour clé l'année
+     */
     public Map<Integer, Graduate> getStudentGraduation(Student student){
         Map<Integer, Graduate> graduations = new HashMap<>();
         
@@ -51,7 +81,7 @@ public class SQLiteGraduation {
                 Graduate graduate = new Graduate(
                     student, 
                     RS.getInt(ATTR_YEAR), 
-                    divisionDAO.findByPrimaryKey(RS.getInt(ATTR_DIVISION)), 
+                    divisionDAO.findByPrimaryKey(RS.getInt(ATTR_SCHOOL), RS.getInt(ATTR_CATEGORY)), 
                     RS.getInt(ATTR_LEVEL), 
                     RS.getInt(ATTR_GRADE)
                 );

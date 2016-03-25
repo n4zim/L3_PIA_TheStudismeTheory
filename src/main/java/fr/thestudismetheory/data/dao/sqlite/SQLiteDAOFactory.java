@@ -6,6 +6,8 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.dao.DAOFactory;
+import fr.thestudismetheory.data.dao.sqlite.sub.SQLiteGraduation;
+import fr.thestudismetheory.data.dao.sqlite.sub.SQLiteInterest;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,17 +26,24 @@ public class SQLiteDAOFactory implements DAOFactory {
     final private SQLiteSchoolDAO schoolDAO;
     final private SQLiteStudentDAO studentDAO;
     final private SQLiteTeacherDAO teacherDAO;
+    
+    final private SQLiteGraduation graduation;
+    final private SQLiteInterest interest;
 
     public SQLiteDAOFactory(String dbname) throws SQLException {
         connection = DriverManager.getConnection("jdbc://sqlite:" + dbname);
 
         categoryDAO = new SQLiteCategoryDAO(connection);
         cityDAO = new SQLiteCityDAO(connection);
-        divisionDAO = new SQLiteDivisionDAO(connection);
         institutionDAO = new SQLiteInstitutionDAO(connection);
         schoolDAO = new SQLiteSchoolDAO(cityDAO, institutionDAO, connection);
-        studentDAO = new SQLiteStudentDAO(null, null, null, connection);
-        teacherDAO = new SQLiteTeacherDAO(connection);
+        divisionDAO = new SQLiteDivisionDAO(schoolDAO, categoryDAO, connection);
+        
+        interest = new SQLiteInterest(connection, categoryDAO);
+        graduation = new SQLiteGraduation(connection, divisionDAO);
+        studentDAO = new SQLiteStudentDAO(graduation, interest, cityDAO, connection);
+        
+        teacherDAO = new SQLiteTeacherDAO(categoryDAO, connection);
     }
 
     @Override

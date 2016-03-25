@@ -22,8 +22,19 @@ import java.util.Map;
  * @author vincent
  */
 public class SQLiteInterest {
+    /**
+     * @see SQLiteStudentDAO#ATTR_ID
+     */
     final static public String ATTR_STUDENT = SQLiteStudentDAO.ATTR_ID;
+    
+    /**
+     * @see SQLiteCategoryDAO#ATTR_ID
+     */
     final static public String ATTR_CATEGORY = SQLiteCategoryDAO.ATTR_ID;
+    
+    /**
+     * INTEGER 0 <= rate <= 100
+     */
     final static public String ATTR_RATE = "INTEREST_RATE";
     
     final static public String TABLE_NAME = "INTEREST";
@@ -36,6 +47,11 @@ public class SQLiteInterest {
         this.categoryDAO = categoryDAO;
     }
     
+    /**
+     * Récpère les intérêts d'un étudiant
+     * @param student
+     * @return 
+     */
     public Map<Category, Integer> getInsterestsByStudent(Student student){
         Map<Category, Integer> interests = new HashMap<>();
         

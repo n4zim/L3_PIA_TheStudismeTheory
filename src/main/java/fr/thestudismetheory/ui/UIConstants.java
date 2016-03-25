@@ -62,4 +62,8 @@ final public class UIConstants {
 
     final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);
     final static public Dimension DEFAULT_OPT_DIM = new Dimension(400, 300);
+
+    //STUDENT WINDOW
+
+    final static public String BUTTON_FIRED = "Renvoyer";
 }

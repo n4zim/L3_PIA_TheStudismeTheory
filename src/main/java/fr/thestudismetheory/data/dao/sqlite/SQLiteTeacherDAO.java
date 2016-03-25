@@ -9,6 +9,7 @@ import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.dao.TeacherDAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -37,11 +38,6 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
     }
 
     @Override
-    protected Object[] getPkValues(Teacher entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     protected String getTableName() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -49,6 +45,16 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
     @Override
     protected Teacher createByRS(ResultSet RS) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void bindValues(Teacher entity, PreparedStatement stmt, int offset) throws SQLException {
+
+    }
+
+    @Override
+    protected void bindPk(Teacher entity, PreparedStatement stmt, int offset) throws SQLException {
+
     }
 
     @Override

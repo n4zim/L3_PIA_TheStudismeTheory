@@ -1,12 +1,12 @@
 package fr.thestudismetheory.ui;
 
 import fr.thestudismetheory.Resources;
+import fr.thestudismetheory.generator.WorldCityGenerator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 /**
  * Fenetre principale du jeu
@@ -47,7 +47,7 @@ public class GameWindow extends WindowConstants {
         content.add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
-        JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
+        JPanel map = new WorldCityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
         content.add(map, BorderLayout.CENTER);
 
         return content;

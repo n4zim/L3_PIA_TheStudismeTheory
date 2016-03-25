@@ -1,6 +1,14 @@
-package fr.thestudismetheory.ui;
+package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
+import fr.thestudismetheory.ui.CityGenerator;
+import fr.thestudismetheory.ui.FinanceWindow;
+import fr.thestudismetheory.ui.InstitutionWindow;
+import fr.thestudismetheory.ui.SchoolWindow;
+import fr.thestudismetheory.ui.StudentWindow;
+import fr.thestudismetheory.ui.TeacherWindow;
+import fr.thestudismetheory.ui.UIConstants;
+import fr.thestudismetheory.ui.WindowConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +19,7 @@ import java.awt.event.ActionListener;
 /**
  * Fenetre principale du jeu
  */
-public class GameWindow extends WindowConstants {
+public class GameInterface extends JPanel {
 
     protected InstitutionWindow institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
@@ -22,35 +30,24 @@ public class GameWindow extends WindowConstants {
     private boolean saved = false;
     private JFrame gameWindow;
 
-    public GameWindow() {
-        super(UIConstants.TITLE_GAME);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setContentPane(Content());
-        this.pack();
-    }
-
-    public JPanel Content() {
-        JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
+    public GameInterface() {
+        setLayout(new BorderLayout());
 
         // Titre de la fenetre
         JPanel north = title();
-        content.add(north, BorderLayout.NORTH);
+        add(north, BorderLayout.NORTH);
 
         // Creation du panel contenant les boutons de navigation du jeu
         JPanel west = navGame();
-        content.add(west, BorderLayout.WEST);
+        add(west, BorderLayout.WEST);
 
         // Panel des statistiques générales du jeu
         JPanel south = stat();
-        content.add(south, BorderLayout.SOUTH);
+        add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
         JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
-        content.add(map, BorderLayout.CENTER);
-
-        return content;
+        add(map, BorderLayout.CENTER);
     }
 
     public JPanel navGame() {

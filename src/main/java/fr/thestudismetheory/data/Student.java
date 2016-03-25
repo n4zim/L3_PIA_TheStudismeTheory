@@ -5,7 +5,9 @@
  */
 package fr.thestudismetheory.data;
 
+import fr.thestudismetheory.data.subentity.Graduate;
 import fr.thestudismetheory.data.enums.StudentFlaw;
+import fr.thestudismetheory.data.listener.StudentListener;
 
 import java.util.Date;
 import java.util.Map;
@@ -14,7 +16,7 @@ import java.util.Set;
 /**
  * @author q13000412
  */
-public class Student extends AbstractModel<Student> {
+public class Student extends AbstractModel<Student, StudentListener> {
     final private long id;
     final private String name;
     final private Date birth;

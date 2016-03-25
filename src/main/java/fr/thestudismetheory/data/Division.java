@@ -8,7 +8,7 @@ package fr.thestudismetheory.data;
 /**
  * @author q13000412
  */
-public class Division extends AbstractModel<Division> {
+public class Division extends AbstractModel<Division, ModelListener<Division>> {
     final private School school;
     final private Category category;
     private int seatsRate;

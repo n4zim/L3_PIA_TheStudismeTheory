@@ -8,7 +8,7 @@ package fr.thestudismetheory.data;
 /**
  * @author q13000412
  */
-public class School extends AbstractModel<School> {
+public class School extends AbstractModel<School, ModelListener<School>> {
     final private int id;
     final private City city;
     final private Institution institution;

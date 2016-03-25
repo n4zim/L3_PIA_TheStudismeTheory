@@ -10,7 +10,7 @@ import fr.thestudismetheory.data.enums.InstitutionType;
 /**
  * @author q13000412
  */
-public class Institution extends AbstractModel<Institution> {
+public class Institution extends AbstractModel<Institution, ModelListener<Institution>> {
     final private int id;
     private String name;
     private InstitutionType type;

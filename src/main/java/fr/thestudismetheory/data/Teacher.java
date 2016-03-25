@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author q13000412
  */
-public class Teacher extends AbstractModel<Teacher> {
+public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
     final private long id;
     final private String name;
     final private Date birth;

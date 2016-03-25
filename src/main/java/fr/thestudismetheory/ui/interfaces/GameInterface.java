@@ -1,18 +1,8 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
-<<<<<<< HEAD:src/main/java/fr/thestudismetheory/ui/GameWindow.java
 import fr.thestudismetheory.generator.WorldCityGenerator;
-=======
-import fr.thestudismetheory.ui.CityGenerator;
-import fr.thestudismetheory.ui.FinanceWindow;
-import fr.thestudismetheory.ui.InstitutionWindow;
-import fr.thestudismetheory.ui.SchoolWindow;
-import fr.thestudismetheory.ui.StudentWindow;
-import fr.thestudismetheory.ui.TeacherWindow;
-import fr.thestudismetheory.ui.UIConstants;
-import fr.thestudismetheory.ui.WindowConstants;
->>>>>>> fbddb800649c4bb3bcb23ee10904cfde34065e3c:src/main/java/fr/thestudismetheory/ui/interfaces/GameInterface.java
+import fr.thestudismetheory.ui.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,15 +39,8 @@ public class GameInterface extends JPanel {
         add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
-<<<<<<< HEAD:src/main/java/fr/thestudismetheory/ui/GameWindow.java
         JPanel map = new WorldCityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
-        content.add(map, BorderLayout.CENTER);
-
-        return content;
-=======
-        JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
         add(map, BorderLayout.CENTER);
->>>>>>> fbddb800649c4bb3bcb23ee10904cfde34065e3c:src/main/java/fr/thestudismetheory/ui/interfaces/GameInterface.java
     }
 
     public JPanel navGame() {

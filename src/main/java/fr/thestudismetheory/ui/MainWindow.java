@@ -1,5 +1,6 @@
 package fr.thestudismetheory.ui;
 
+import fr.thestudismetheory.ui.interfaces.GameInterface;
 import fr.thestudismetheory.ui.interfaces.NewGameInterface;
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,8 @@ public class MainWindow extends JFrame {
         layout = new CardLayout();
         setContentPane(new JPanel(layout));
 
-        addInterface(new NewGameInterface(), "a");
+        // Changé depuis NewGameInterface
+        addInterface(new GameInterface(), "a");
         switchInterface("a");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();

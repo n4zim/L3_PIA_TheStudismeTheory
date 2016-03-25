@@ -6,6 +6,7 @@
 package fr.thestudismetheory;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
@@ -14,6 +15,7 @@ import java.net.URL;
  */
 final public class Resources {
     final static public Image UNIV_IMG = getImage("img/univ.jpg");
+    final static public Image SCHOOL_TILE = getImage("img/school.jpg");
 
     static public URL getResource(String name) {
         return Resources.class.getClassLoader().getResource(name);

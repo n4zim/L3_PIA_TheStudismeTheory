@@ -1,5 +1,7 @@
 package fr.thestudismetheory.generator;
 
+import fr.thestudismetheory.Resources;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,19 +11,19 @@ import java.util.List;
 import java.util.Random;
 
 public class WorldCityGenerator extends JPanel {
-    public static final int GRID_SIZE = 4;
+    public static final int GRID_SIZE = 20;
 
     private final Color BORDER_COLOR = Color.BLACK;
 
     private final int KIND_OF_TYPES = 5;
     private final int MAX_SECTION_SQUARES = 6;
 
-    private final Color[] TYPES_COLORS = {Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.GREEN};
-
     private WorldCitySquare[][] cityMap = new WorldCitySquare[GRID_SIZE][GRID_SIZE];
 
+    private final Color[] TYPES_COLORS = {Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.GREEN};
+
     public WorldCityGenerator() {
-        super(new GridLayout(7, 7));
+        super(new GridLayout(GRID_SIZE, GRID_SIZE));
         //this.setPreferredSize(new Dimension(GRID_SIZE * SQUARE_SIZE, GRID_SIZE * SQUARE_SIZE));
 
         // G?n?re les cases de la grille
@@ -48,42 +50,28 @@ public class WorldCityGenerator extends JPanel {
             if (w < (GRID_SIZE - 1) && cityMap[h][w].getAreaId() != cityMap[h][w + 1].getAreaId())
                 currentWorldCitySquare.setRightBorder(true);
 
+            // Si c'est une école
+            if(currentWorldCitySquare.getType() == 0) {
+                currentWorldCitySquare.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, "Edition l'école " + currentWorldCitySquare.getAreaId());
+                    }
+                });
+            }
+
+            // Si ne n'est pas une école
+            else {
+                currentWorldCitySquare.setBackground(TYPES_COLORS[currentWorldCitySquare.getType()]);
+                currentWorldCitySquare.setFocusPainted(false);
+            }
+
             /*currentWorldCitySquare.setBorder(BorderFactory.createMatteBorder(
                     currentWorldCitySquare.getTopBorder(),
                     currentWorldCitySquare.getLeftBorder(),
                     currentWorldCitySquare.getBottomBorder(),
                     currentWorldCitySquare.getRightpBorder(),
                     BORDER_COLOR));*/
-
-            currentWorldCitySquare.setBackground(TYPES_COLORS[currentWorldCitySquare.getType()]);
-
-            currentWorldCitySquare.setFocusPainted(false);
-
-            if(currentWorldCitySquare.getType() == 0) {
-                currentWorldCitySquare.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, "Edition l'école "+currentWorldCitySquare.getAreaId());
-                    }
-                });
-            } else {
-                //currentWorldCitySquare.setFocusPainted(false);
-                //Resources.UNIV_IMG.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
-            }
-
-            // Ajout des séparateurs horizontaux
-            if(w == 0 && h > 0) {
-                for(int j = 0; j < 7; j++) {
-                    JButton horizontalButton = new JButton();
-                    horizontalButton.setText("H"+h + ":" + w);
-                    this.add(horizontalButton);
-                }
-
-            } else if(w != 0) {
-                JButton verticalButton = new JButton();
-                verticalButton.setText("V"+h + ":" + w);
-                this.add(verticalButton);
-            }
 
             // Ajout de l'élément courrant
             this.add(currentWorldCitySquare);

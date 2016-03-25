@@ -17,6 +17,7 @@ import java.sql.SQLException;
  * @author vincent
  */
 public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDAO {
+    final static public String ATTR_ID = "DIVISTION_ID";
     
 
     public SQLiteDivisionDAO(Connection connection) throws SQLException {

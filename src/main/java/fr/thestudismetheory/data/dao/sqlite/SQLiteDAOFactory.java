@@ -33,7 +33,7 @@ public class SQLiteDAOFactory implements DAOFactory {
         divisionDAO = new SQLiteDivisionDAO(connection);
         institutionDAO = new SQLiteInstitutionDAO(connection);
         schoolDAO = new SQLiteSchoolDAO(cityDAO, institutionDAO, connection);
-        studentDAO = new SQLiteStudentDAO(connection);
+        studentDAO = new SQLiteStudentDAO(null, null, null, connection);
         teacherDAO = new SQLiteTeacherDAO(connection);
     }
 

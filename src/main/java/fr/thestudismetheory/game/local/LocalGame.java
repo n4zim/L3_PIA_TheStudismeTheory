@@ -7,6 +7,9 @@ package fr.thestudismetheory.game.local;
 
 import fr.thestudismetheory.game.Game;
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Versio locale du jeu
@@ -16,7 +19,14 @@ public class LocalGame implements Game{
 
     @Override
     public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Pour exemple uniquement !
+        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+        ses.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                onTick(new Date());
+            }
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
     @Override

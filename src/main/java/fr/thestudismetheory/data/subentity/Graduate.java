@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.thestudismetheory.data;
+package fr.thestudismetheory.data.subentity;
+
+import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.Student;
 
 /**
  * Réprésentation du graduate

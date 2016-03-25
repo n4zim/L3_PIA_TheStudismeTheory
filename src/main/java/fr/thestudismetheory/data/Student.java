@@ -5,7 +5,9 @@
  */
 package fr.thestudismetheory.data;
 
+import fr.thestudismetheory.data.subentity.Graduate;
 import fr.thestudismetheory.data.enums.StudentFlaw;
+import fr.thestudismetheory.data.listener.StudentListener;
 
 import java.util.Date;
 import java.util.Map;
@@ -14,13 +16,13 @@ import java.util.Set;
 /**
  * @author q13000412
  */
-public class Student extends AbstractModel<Student> {
+public class Student extends AbstractModel<Student, StudentListener> {
     final private long id;
     final private String name;
     final private Date birth;
     final private Set<StudentFlaw> flaws;
-    final private Map<Category, Integer> interests;
-    final private Map<Integer, Graduate> graduations;
+    private Map<Category, Integer> interests;
+    private Map<Integer, Graduate> graduations;
     private City city;
     private int studism;
     private int procrass;
@@ -35,6 +37,18 @@ public class Student extends AbstractModel<Student> {
         this.flaws = flaws;
         this.interests = interests;
         this.graduations = graduations;
+    }
+
+    public Student(long id, Student other) {
+        this.id = id;
+        name = other.name;
+        birth = other.birth;
+        flaws = other.flaws;
+        interests = other.interests;
+        graduations = other.graduations;
+        city = other.city;
+        studism = other.studism;
+        procrass = other.procrass;
     }
 
     public long getId() {
@@ -109,5 +123,19 @@ public class Student extends AbstractModel<Student> {
 
     public void setGraduate(int year, Graduate graduate) {
         graduations.put(year, graduate);
+    }
+
+    public void setInterests(Map<Category, Integer> interests) {
+        if(this.interests != null)
+            throw new IllegalStateException("interests are already set");
+        
+        this.interests = interests;
+    }
+
+    public void setGraduations(Map<Integer, Graduate> graduations) {
+        if(this.graduations != null)
+            throw new IllegalStateException("graduations are already set");
+            
+        this.graduations = graduations;
     }
 }

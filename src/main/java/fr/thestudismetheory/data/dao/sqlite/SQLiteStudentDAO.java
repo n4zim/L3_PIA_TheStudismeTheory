@@ -23,16 +23,41 @@ import java.util.Date;
  * @author vincent
  */
 public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
+    /**
+     * INTEGER PRIMARY KEY AUTOINCREMENT
+     */
     final static public String ATTR_ID = "SUTDENT_ID";
+    
+    /**
+     * TEXT
+     */
     final static public String ATTR_NAME = "STUDENT_NAME";
     
     /**
-     * Les dates sont codé en timestamp en millisecondes, donc des long !
+     * INTEGER
+     * Les dates sont codées en timestamp en millisecondes, donc des long !
      */
     final static public String ATTR_BIRTH = "STUDENT_BIRTH";
+    
+    /**
+     * INTEGER
+     * @see StudentFlaw#flawsToBitset(java.util.Set) 
+     */
     final static public String ATTR_FLAWS = "STUDENT_FLAWS";
+    
+    /**
+     * @see SQLiteCityDAO#ATTR_ID
+     */
     final static public String ATTR_CITY = SQLiteCityDAO.ATTR_ID;
+    
+    /**
+     * INTEGER 0 <= studism <= 100
+     */
     final static public String ATTR_STUDISM = "STUDENT_STUDISM";
+    
+    /**
+     * INTEGER 0 <= procrass <= 100
+     */
     final static public String ATTR_PROCRASS = "STUDENT_PROCRASS";
     
     final static private String[] COLUMNS = new String[]{
@@ -55,7 +80,17 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
 
     @Override
     protected void makeTable() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection.createStatement().execute(
+                "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
+                        ATTR_ID + " INTEGER PRIMARY KEY AUTOINCEMENT," +
+                        ATTR_NAME + " TEXT," +
+                        ATTR_BIRTH + " INTEGER," +
+                        ATTR_FLAWS + " INTEGER," +
+                        ATTR_CITY + " INTEGER," +
+                        ATTR_STUDISM + " INTEGER," +
+                        ATTR_PROCRASS + " INTEGER" +
+                ")"
+        );
     }
 
     @Override
@@ -95,7 +130,12 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
 
     @Override
     protected void bindValues(Student entity, PreparedStatement stmt, int offset) throws SQLException {
-        
+        stmt.setString(offset++, entity.getName());
+        stmt.setLong(offset++, entity.getBirth().getTime());
+        stmt.setInt(offset++, StudentFlaw.flawsToBitset(entity.getFlaws()));
+        stmt.setInt(offset++, entity.getCity().getId());
+        stmt.setInt(offset++, entity.getStudism());
+        stmt.setInt(offset, entity.getProcrass());
     }
 
     @Override

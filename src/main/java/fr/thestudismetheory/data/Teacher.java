@@ -32,6 +32,18 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         this.teachSkill = teachSkill;
         this.catergory = catergory;
     }
+    
+    public Teacher(long id, Teacher other){
+        this.id = id;
+        name = other.name;
+        birth = other.birth;
+        entering = other.entering;
+        charisma = other.charisma;
+        skill = other.skill;
+        punct = other.punct;
+        teachSkill = other.teachSkill;
+        catergory = other.catergory;
+    }
 
     public long getId() {
         return id;

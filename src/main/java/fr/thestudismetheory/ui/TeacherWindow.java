@@ -66,7 +66,7 @@ public class TeacherWindow extends WindowConstants {
         this.setContentPane(content);
     }
 
-    Object[][] teachers = {
+    private Object[][] teachers = {
             {"Johnathan", "Sykes", 10, 8, 10, 8},
             {"Nicolas", "Van de Kampf", 5, 3, 15, 5},
             {"Damien", "Cuthbert", 8, 10, 7, 20},
@@ -75,6 +75,8 @@ public class TeacherWindow extends WindowConstants {
             {"Delphine", "Duke", 9, 42, 5, 19},
             {"Eric", "Trump", 12, 1, 9, 1},
     };
+
+    private JTable tableau = new JTable();
 
     public JPanel teacherList(){
         JPanel panel = new JPanel();
@@ -91,7 +93,6 @@ public class TeacherWindow extends WindowConstants {
         String[] entetes = {"Prénom", "Nom", "Charisme", "Skill", "Ponctualité", "Compétence d'apprentissage"};
 
         //Création d'une table non éditable
-        JTable tableau = new JTable();
         tableau.setModel(new DefaultTableModel(teachers, entetes) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -99,10 +100,29 @@ public class TeacherWindow extends WindowConstants {
             }
         });
 
+        tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JButton b_engager = new JButton("Engager le professeur sélectionné");
+
+        b_engager.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int select = tableau.getSelectedRow();
+
+                //Sélection correcte
+                if(select >= 0)
+                {
+                    System.out.println(select);
+
+                }
+            }
+        });
+
         JPanel center = new JPanel();
+        center.setLayout(new BoxLayout(center, BoxLayout.PAGE_AXIS));
         center.add(tableau.getTableHeader());
         center.add(tableau);
-
+        center.add(b_engager);
 
         panel.add(north, BorderLayout.NORTH);
         panel.add(center, BorderLayout.CENTER);

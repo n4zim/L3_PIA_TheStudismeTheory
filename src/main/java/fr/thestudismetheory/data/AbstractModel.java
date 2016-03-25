@@ -16,7 +16,7 @@ import java.util.List;
  * @author q13000412
  */
 abstract public class AbstractModel<M extends AbstractModel<M, L>, L extends ModelListener<M>> implements Model<M, L> {
-    final protected List<ModelListener<M>> listeners = new ArrayList<>();
+    final protected List<L> listeners = new ArrayList<>();
 
     /**
      * Notifie à tout les listeners comme quoi le modèle

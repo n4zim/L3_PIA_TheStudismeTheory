@@ -1,18 +1,18 @@
-package fr.thestudismetheory.ui;
+package fr.thestudismetheory.generator;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CitySquare extends JButton {
+public class WorldCitySquare extends JButton {
     private final int BORDER_SIZE = 2;
     private int type;
     private int areaId = 0;
-    private List<CitySquare> neighbors = new ArrayList<>();
-    private CitySquare ancestor;
+    private List<WorldCitySquare> neighbors = new ArrayList<>();
+    private WorldCitySquare ancestor;
     private boolean[] borders = {false, false, false, false};
 
-    public CitySquare() {
+    public WorldCitySquare() {
         this.setOpaque(true);
         this.setBorderPainted(false);
     }
@@ -33,19 +33,19 @@ public class CitySquare extends JButton {
         type = t;
     }
 
-    public List<CitySquare> getNeighbors() {
+    public List<WorldCitySquare> getNeighbors() {
         return neighbors;
     }
 
-    public void addNeighbors(CitySquare s) {
+    public void addNeighbors(WorldCitySquare s) {
         neighbors.add(s);
     }
 
-    public CitySquare getAncestor() {
+    public WorldCitySquare getAncestor() {
         return ancestor;
     }
 
-    public void setAncestor(CitySquare a) {
+    public void setAncestor(WorldCitySquare a) {
         ancestor = a;
     }
 

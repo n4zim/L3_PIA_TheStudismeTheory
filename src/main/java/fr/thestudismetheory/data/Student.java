@@ -110,7 +110,9 @@ public class Student extends AbstractModel<Student, StudentListener> {
 
     public void setInterestRate(Category category, int interestRate) {
         interests.put(category, interestRate);
-        notifyUpdate();
+        
+        for(StudentListener listener : listeners)
+            listener.onInterestChange(this, category, interestRate);
     }
 
     public int getInterestRate(Category category) {
@@ -123,8 +125,15 @@ public class Student extends AbstractModel<Student, StudentListener> {
 
     public void setGraduate(int year, Graduate graduate) {
         graduations.put(year, graduate);
+        
+        for(StudentListener listener : listeners)
+            listener.onNewGraduation(this, graduate);
     }
 
+    /**
+     * A appeler uniquement dans le DAO
+     * @param interests 
+     */
     public void setInterests(Map<Category, Integer> interests) {
         if(this.interests != null)
             throw new IllegalStateException("interests are already set");
@@ -132,6 +141,10 @@ public class Student extends AbstractModel<Student, StudentListener> {
         this.interests = interests;
     }
 
+    /**
+     * A appeler uniquement dans le DAO
+     * @param graduations  
+     */
     public void setGraduations(Map<Integer, Graduate> graduations) {
         if(this.graduations != null)
             throw new IllegalStateException("graduations are already set");

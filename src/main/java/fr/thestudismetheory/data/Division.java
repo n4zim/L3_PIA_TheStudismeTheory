@@ -5,6 +5,9 @@
  */
 package fr.thestudismetheory.data;
 
+import fr.thestudismetheory.data.enums.StudentFlaw;
+import java.util.Set;
+
 /**
  * @author q13000412
  */
@@ -13,9 +16,9 @@ public class Division extends AbstractModel<Division, ModelListener<Division>> {
     final private Category category;
     private int seatsRate;
     private int cost;
-    private int cond;
+    final private Set<StudentFlaw> cond;
 
-    public Division(School school, Category category, int seatsRate, int cost, int cond) {
+    public Division(School school, Category category, int seatsRate, int cost, Set<StudentFlaw> cond) {
         this.school = school;
         this.category = category;
         this.seatsRate = seatsRate;
@@ -49,14 +52,7 @@ public class Division extends AbstractModel<Division, ModelListener<Division>> {
         notifyUpdate();
     }
 
-    public int getCond() {
+    public Set<StudentFlaw> getCond() {
         return cond;
     }
-
-    public void setCond(int cond) {
-        this.cond = cond;
-        notifyUpdate();
-    }
-
-
 }

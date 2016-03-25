@@ -20,12 +20,39 @@ import java.sql.Types;
  * @author vincent
  */
 public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
+    /**
+     * INTEGER PRIMARY KEY AUTOINCREMENT
+     */
     final static public String ATTR_ID = "SCHOOL_ID";
+    
+    /**
+     * @see SQLiteCityDAO#ATTR_ID
+     */
     final static public String ATTR_CITY = SQLiteCityDAO.ATTR_ID;
+    
+    /**
+     * @see SQLiteInstitutionDAO#ATTR_ID
+     */
     final static public String ATTR_INSITUTION = SQLiteInstitutionDAO.ATTR_ID;
+    
+    /**
+     * TEXT
+     */
     final static public String ATTR_NAME = "SCHOOL_NAME";
+    
+    /**
+     * INTEGER
+     */
     final static public String ATTR_REPUTE = "SCHOOL_REPUTE";
+    
+    /**
+     * INTEGER > 0
+     */
     final static public String ATTR_COST = "SCHOOL_COST";
+    
+    /**
+     * INTEGER > 0
+     */
     final static public String ATTR_SEATS = "SCHOOL_SEATS";
     
     final static private String[] COLUMNS = new String[]{
@@ -46,7 +73,17 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
 
     @Override
     protected void makeTable() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        connection.createStatement().execute(
+                "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
+                        ATTR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        ATTR_CITY + " INTEGER," +
+                        ATTR_INSITUTION + " INTEGER," +
+                        ATTR_NAME + " TEXT," +
+                        ATTR_REPUTE + " INTEGER," +
+                        ATTR_COST + " INTEGER," +
+                        ATTR_SEATS + " INTEGER" +
+                ")"
+        );
     }
 
     @Override

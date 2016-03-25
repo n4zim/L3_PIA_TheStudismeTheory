@@ -1,7 +1,7 @@
 package fr.thestudismetheory.ui;
 
 import fr.thestudismetheory.ui.interfaces.GameInterface;
-import fr.thestudismetheory.ui.interfaces.NewGameInterface;
+import fr.thestudismetheory.ui.interfaces.InterfacesHandler;
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,9 +24,6 @@ public class MainWindow extends JFrame {
         
         interfacesHandler.init();
 
-        // Changé depuis NewGameInterface
-        addInterface(new GameInterface(), "a");
-        switchInterface("a");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);

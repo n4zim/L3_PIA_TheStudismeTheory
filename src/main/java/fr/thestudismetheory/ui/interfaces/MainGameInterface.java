@@ -1,14 +1,13 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
-import fr.thestudismetheory.ui.CityGenerator;
+import fr.thestudismetheory.generator.WorldCityGenerator;
 import fr.thestudismetheory.ui.FinanceWindow;
 import fr.thestudismetheory.ui.InstitutionWindow;
 import fr.thestudismetheory.ui.SchoolWindow;
 import fr.thestudismetheory.ui.StudentWindow;
 import fr.thestudismetheory.ui.TeacherWindow;
 import fr.thestudismetheory.ui.UIConstants;
-import fr.thestudismetheory.ui.WindowConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +45,7 @@ public class MainGameInterface extends AbstractGameInterface {
         add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
-        JPanel map = new CityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
+        JPanel map = new WorldCityGenerator();
         add(map, BorderLayout.CENTER);
     }
 

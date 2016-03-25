@@ -17,7 +17,6 @@ public class InterfacesHandler {
     final private MainWindow mainWindow;
     
     final private Map<Class, AbstractGameInterface> interfaces = new HashMap<>();
-    final static public Class<? extends AbstractGameInterface> START_INTERFACE = NewGameInterface.class;
 
     public InterfacesHandler(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -29,8 +28,6 @@ public class InterfacesHandler {
         for(AbstractGameInterface agi : interfaces.values()){
             mainWindow.addInterface(agi, agi.getId());
         }
-        
-        switchInterface(START_INTERFACE);
     }
     
     private void constructAll(){
@@ -48,6 +45,10 @@ public class InterfacesHandler {
     
     public<T extends AbstractGameInterface> void switchInterface(Class<T> type){
         T i = getInterface(type);
+        switchInterface(i);
+    }
+    
+    public<T extends AbstractGameInterface> void switchInterface(T i){
         mainWindow.switchInterface(i.getId());
     }
 }

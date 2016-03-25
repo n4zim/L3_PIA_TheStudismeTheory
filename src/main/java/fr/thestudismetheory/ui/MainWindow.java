@@ -1,6 +1,5 @@
 package fr.thestudismetheory.ui;
 
-import fr.thestudismetheory.ui.interfaces.GameInterface;
 import fr.thestudismetheory.ui.interfaces.InterfacesHandler;
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +26,6 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     /**
@@ -49,5 +47,9 @@ public class MainWindow extends JFrame {
      */
     public void switchInterface(String name) {
         layout.show(getContentPane(), name);
+    }
+
+    public InterfacesHandler getInterfacesHandler() {
+        return interfacesHandler;
     }
 }

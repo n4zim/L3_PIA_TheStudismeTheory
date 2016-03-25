@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.thestudismetheory.game;
+package fr.thestudismetheory.handler;
+
+import fr.thestudismetheory.TheStudismeTheory;
 
 /**
- * Gère le jeu
+ *
  * @author vincent
  */
 public class GameHandler {
-    
+    final private TheStudismeTheory app;
+
+    public GameHandler(TheStudismeTheory app) {
+        this.app = app;
+    }
 }

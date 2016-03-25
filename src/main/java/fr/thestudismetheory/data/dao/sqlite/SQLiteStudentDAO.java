@@ -88,7 +88,7 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
         );
         
         student.setInterests(interest.getInsterestsByStudent(student));
-        student.setGraduations(graduation.getStudentGradution(student));
+        student.setGraduations(graduation.getStudentGraduation(student));
         
         return student;
     }

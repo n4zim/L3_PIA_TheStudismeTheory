@@ -39,7 +39,7 @@ public class SQLiteGraduation {
         this.divisionDAO = divisionDAO;
     }
     
-    public Map<Integer, Graduate> getStudentGradution(Student student){
+    public Map<Integer, Graduate> getStudentGraduation(Student student){
         Map<Integer, Graduate> graduations = new HashMap<>();
         
         try(PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE " + ATTR_STUDENT + " = ?")){

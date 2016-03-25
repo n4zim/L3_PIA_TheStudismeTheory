@@ -2,17 +2,23 @@ package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
 import fr.thestudismetheory.generator.WorldCityGenerator;
-import fr.thestudismetheory.ui.*;
+import fr.thestudismetheory.ui.FinanceWindow;
+import fr.thestudismetheory.ui.InstitutionWindow;
+import fr.thestudismetheory.ui.SchoolWindow;
+import fr.thestudismetheory.ui.StudentWindow;
+import fr.thestudismetheory.ui.TeacherWindow;
+import fr.thestudismetheory.ui.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
  * Fenetre principale du jeu
  */
-public class GameInterface extends JPanel {
+public class MainGameInterface extends AbstractGameInterface {
 
     protected InstitutionWindow institutionWindow = null;
     protected SchoolWindow schoolWindow = null;
@@ -23,7 +29,7 @@ public class GameInterface extends JPanel {
     private boolean saved = false;
     private JFrame gameWindow;
 
-    public GameInterface() {
+    public MainGameInterface() {
         setLayout(new BorderLayout());
 
         // Titre de la fenetre
@@ -39,8 +45,18 @@ public class GameInterface extends JPanel {
         add(south, BorderLayout.SOUTH);
 
         // Panel des cartes
-        JPanel map = new WorldCityGenerator(); // Ceci est temporaire, c'était juste pour tester l'implémentation
+        JPanel map = new WorldCityGenerator();
         add(map, BorderLayout.CENTER);
+    }
+
+    @Override
+    public String getTitle() {
+        return UIConstants.TITLE_GAME;
+    }
+
+    @Override
+    public String getId() {
+        return "MAIN_GAME";
     }
 
     public JPanel navGame() {

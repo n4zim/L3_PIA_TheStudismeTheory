@@ -30,8 +30,8 @@ public abstract class GameLoop {
 						} catch(InterruptedException e) {}
 					}
 				}
-				shutdown();
 			}
+			shutdown();
 			
 		}
 		

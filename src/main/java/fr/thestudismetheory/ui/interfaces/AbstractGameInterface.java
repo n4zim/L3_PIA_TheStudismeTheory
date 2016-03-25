@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.thestudismetheory.game;
+package fr.thestudismetheory.ui.interfaces;
+
+import javax.swing.JPanel;
 
 /**
- * Gère le jeu
+ *
  * @author vincent
  */
-public class GameHandler {
-    
+abstract public class AbstractGameInterface extends JPanel{
+    abstract public String getTitle();
+    abstract public String getId();
 }

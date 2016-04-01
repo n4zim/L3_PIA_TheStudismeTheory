@@ -17,17 +17,41 @@ import javax.swing.JPanel;
 public class CentralGamePanel extends JPanel{
     final private InstitutionPanel institutionView;
     final private WorldCityGenerator cityView;
+    final private SchoolPanel schoolPanel;
+    final private StudentPanel studentPanel;
+    final private TeacherPanel teacherPanel;
+    final private FinancePanel financePanel;
 
     public CentralGamePanel() {
         setLayout(new BorderLayout());
         institutionView = new InstitutionPanel(this);
         cityView = new WorldCityGenerator();
+        schoolPanel = new SchoolPanel(this);
+        studentPanel = new StudentPanel(this);
+        teacherPanel = new TeacherPanel(this);
+        financePanel = new FinancePanel();
         
-        switchPanel(cityView);
+        switchDefaultPanel();
     }
     
     public void switchInstitution(){
         switchPanel(institutionView);
+    }
+    
+    public void switchSchool(){
+        switchPanel(schoolPanel);
+    }
+    
+    public void switchStudent(){
+        switchPanel(studentPanel);
+    }
+    
+    public void switchTeacher(){
+        switchPanel(teacherPanel);
+    }
+    
+    public void switchFinance(){
+        switchPanel(financePanel);
     }
     
     public void switchDefaultPanel(){

@@ -1,5 +1,7 @@
-package fr.thestudismetheory.ui;
+package fr.thestudismetheory.ui.gamepanel;
 
+import fr.thestudismetheory.ui.UIConstants;
+import fr.thestudismetheory.ui.WindowConstants;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -10,21 +12,23 @@ import java.awt.event.ActionListener;
  * Fenetre permettant la gestion des étudiants d'une école
  * Created by Maeva on 11/03/2016.
  */
-public class StudentWindow extends WindowConstants {
+public class StudentPanel extends GamePanel {
+    final static public String PANEL_ID = "STUDENT";
 
     protected JPanel cards;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
     protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
+    
+    final private CentralGamePanel gamePanel;
 
-    public StudentWindow() {
-
-        super(UIConstants.TITLE_STUDENT);
-        JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
+    public StudentPanel(CentralGamePanel centralGamePanel) {
+        setLayout(new BorderLayout());
+        
+        this.gamePanel = centralGamePanel;
 
         //Ajout liste des écoles
         JPanel north = new JPanel();
-        content.add(north, BorderLayout.NORTH);
+        add(north, BorderLayout.NORTH);
 
         JComboBox cb_schools = new JComboBox(schools_list);
         JComboBox cb_poles = new JComboBox(pole_list);
@@ -34,7 +38,7 @@ public class StudentWindow extends WindowConstants {
 
         //Menu enregistrer et anuler
         JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        content.add(south, BorderLayout.SOUTH);
+        add(south, BorderLayout.SOUTH);
 
         JButton b_save = new JButton(UIConstants.BUTTON_VALIDATE);
         JButton b_cancel = new JButton(UIConstants.BUTTON_CANCEL);
@@ -47,25 +51,29 @@ public class StudentWindow extends WindowConstants {
 
         cards.add(studentList(), "studentList");
 
-        content.add(cards, BorderLayout.CENTER);
+        add(cards, BorderLayout.CENTER);
 
         b_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeWindow();
+                gamePanel.switchDefaultPanel();
             }
         });
 
         b_cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeWindow();
+                gamePanel.switchDefaultPanel();
             }
         });
-
-        this.setContentPane(content);
     }
 
+    @Override
+    public String getId() {
+        return PANEL_ID;
+    }
+
+    
     Object[][] student = {
             {"Johnathan Sykes", "10/02/1995", 8, 10, "informatique"},
             {"Nicolas Van de Kampf", "5/03/1994", 3, 15, "sculpture de mehnir"},

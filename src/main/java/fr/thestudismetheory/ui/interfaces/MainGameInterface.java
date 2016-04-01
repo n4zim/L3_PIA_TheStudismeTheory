@@ -1,15 +1,13 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
-import fr.thestudismetheory.generator.WorldCityGenerator;
-import fr.thestudismetheory.ui.FinanceWindow;
+import fr.thestudismetheory.ui.gamepanel.FinancePanel;
 import fr.thestudismetheory.ui.gamepanel.InstitutionPanel;
-import fr.thestudismetheory.ui.SchoolWindow;
-import fr.thestudismetheory.ui.StudentWindow;
-import fr.thestudismetheory.ui.TeacherWindow;
+import fr.thestudismetheory.ui.gamepanel.SchoolPanel;
+import fr.thestudismetheory.ui.gamepanel.StudentPanel;
+import fr.thestudismetheory.ui.gamepanel.TeacherPanel;
 import fr.thestudismetheory.ui.UIConstants;
 import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
-import fr.thestudismetheory.ui.gamepanel.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +20,6 @@ import java.awt.event.ActionListener;
  */
 public class MainGameInterface extends AbstractGameInterface {
     final private CentralGamePanel centralPanel;
-
-    protected InstitutionPanel institutionWindow = null;
-    protected SchoolWindow schoolWindow = null;
-    protected TeacherWindow teacherWindow = null;
-    protected StudentWindow studentWindow = null;
-    protected FinanceWindow financeWindow = null;
 
     private boolean saved = false;
     private JFrame gameWindow;
@@ -89,10 +81,7 @@ public class MainGameInterface extends AbstractGameInterface {
         b_school.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (schoolWindow == null)
-                    schoolWindow = new SchoolWindow();
-                else
-                    schoolWindow.setVisible(true);
+                centralPanel.switchSchool();
             }
         });
 
@@ -101,10 +90,7 @@ public class MainGameInterface extends AbstractGameInterface {
         b_teacher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (teacherWindow == null)
-                    teacherWindow = new TeacherWindow();
-                else
-                    teacherWindow.setVisible(true);
+                centralPanel.switchTeacher();
             }
         });
 
@@ -113,10 +99,7 @@ public class MainGameInterface extends AbstractGameInterface {
         b_student.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (studentWindow == null)
-                    studentWindow = new StudentWindow();
-                else
-                    studentWindow.setVisible(true);
+                centralPanel.switchStudent();
             }
         });
 
@@ -125,10 +108,7 @@ public class MainGameInterface extends AbstractGameInterface {
         b_fin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (financeWindow == null)
-                    financeWindow = new FinanceWindow();
-                else
-                    financeWindow.setVisible(true);
+                centralPanel.switchFinance();
             }
         });
 

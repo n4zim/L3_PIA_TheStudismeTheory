@@ -5,6 +5,8 @@
  */
 package fr.thestudismetheory.ui.gamepanel;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
 abstract public class GamePanel extends JPanel{
 
     public GamePanel() {
-        setOpaque(false);
+        setBorder(BorderFactory.createEtchedBorder());
     }
     
     abstract public String getId();

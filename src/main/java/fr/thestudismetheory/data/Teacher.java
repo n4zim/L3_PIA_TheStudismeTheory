@@ -19,10 +19,10 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
     private int skill;
     private int punct;
     private int teachSkill;
-    private Category catergory;
+    private Category category;
     private Division division;
 
-    public Teacher(long id, String name, Date birth, Date entering, int charisma, int skill, int punct, int teachSkill, Category catergory, Division division) {
+    public Teacher(long id, String name, Date birth, Date entering, int charisma, int skill, int punct, int teachSkill, Category category, Division division) {
         this.id = id;
         this.name = name;
         this.birth = birth;
@@ -31,7 +31,7 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         this.skill = skill;
         this.punct = punct;
         this.teachSkill = teachSkill;
-        this.catergory = catergory;
+        this.category = category;
         this.division = division;
     }
     
@@ -44,7 +44,7 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         skill = other.skill;
         punct = other.punct;
         teachSkill = other.teachSkill;
-        catergory = other.catergory;
+        category = other.category;
         division = other.division;
     }
 
@@ -100,12 +100,12 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         notifyUpdate();
     }
 
-    public Category getCatergory() {
-        return catergory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCatergory(Category catergory) {
-        this.catergory = catergory;
+    public void setCategory(Category category) {
+        this.category = category;
         notifyUpdate();
     }
 

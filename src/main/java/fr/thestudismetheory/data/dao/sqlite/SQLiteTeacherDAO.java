@@ -5,7 +5,6 @@
  */
 package fr.thestudismetheory.data.dao.sqlite;
 
-import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.dao.CategoryDAO;
 import fr.thestudismetheory.data.dao.DivisionDAO;
@@ -151,7 +150,7 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
         stmt.setInt(offset++, entity.getSkill());
         stmt.setInt(offset++, entity.getPunct());
         stmt.setInt(offset++, entity.getTeachSkill());
-        stmt.setInt(offset++, entity.getCatergory().getId());
+        stmt.setInt(offset++, entity.getCategory().getId());
         
         if(entity.getDivision() == null)
             stmt.setNull(offset, Types.INTEGER);

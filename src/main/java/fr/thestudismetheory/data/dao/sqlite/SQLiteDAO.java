@@ -14,7 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -185,6 +188,15 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
      * @param offset l'index de départ du bind des valeurs
      */
     abstract protected void bindPk(M entity, PreparedStatement stmt, int offset) throws SQLException;
+    
+    /**
+     * Récupère une entité depuis le cache
+     * @param pk
+     * @return 
+     */
+    protected M getCached(Object... pk){
+        return null;
+    }
 
     @Override
     public List<M> getAll() {
@@ -203,6 +215,11 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
 
     @Override
     public M findByPrimaryKey(Object... pk) {
+        M entity = getCached(pk);
+        
+        if(entity != null)
+            return entity;
+        
         try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + selectCond)) {
             for (int i = 0; i < pk.length; ++i) {
                 stmt.setObject(i + 1, pk[i]);
@@ -248,7 +265,7 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
     protected long internalInsert(M entity){
         try(PreparedStatement stmt = connection.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)){
             bindPk(entity, stmt, 1);
-            bindValues(entity, stmt, getNonPkColumns().length);
+            bindValues(entity, stmt, getPkColumns().length + 1);
             stmt.execute();
             ResultSet RS = stmt.getGeneratedKeys();
             

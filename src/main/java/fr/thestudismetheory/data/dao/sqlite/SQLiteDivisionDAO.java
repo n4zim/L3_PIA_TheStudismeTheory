@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author vincent
@@ -120,4 +122,21 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
         return model;
     }
 
+    @Override
+    public List<Division> getDivisionsBySchool(int schoolId) {
+        List<Division> divisions = new ArrayList<>();
+        
+        try(PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + ATTR_SCHOOL + " = ?")){
+            stmt.setInt(1, schoolId);
+            
+            ResultSet RS = stmt.executeQuery();
+            
+            while(RS.next())
+                divisions.add(createByRS(RS));
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return divisions;
+    }
 }

@@ -20,8 +20,9 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
     private int punct;
     private int teachSkill;
     private Category catergory;
+    private Division division;
 
-    public Teacher(long id, String name, Date birth, Date entering, int charisma, int skill, int punct, int teachSkill, Category catergory) {
+    public Teacher(long id, String name, Date birth, Date entering, int charisma, int skill, int punct, int teachSkill, Category catergory, Division division) {
         this.id = id;
         this.name = name;
         this.birth = birth;
@@ -31,6 +32,7 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         this.punct = punct;
         this.teachSkill = teachSkill;
         this.catergory = catergory;
+        this.division = division;
     }
     
     public Teacher(long id, Teacher other){
@@ -43,6 +45,7 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         punct = other.punct;
         teachSkill = other.teachSkill;
         catergory = other.catergory;
+        division = other.division;
     }
 
     public long getId() {
@@ -106,5 +109,12 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         notifyUpdate();
     }
 
+    public Division getDivision() {
+        return division;
+    }
 
+    public void setDivision(Division division) {
+        this.division = division;
+        notifyUpdate();
+    }
 }

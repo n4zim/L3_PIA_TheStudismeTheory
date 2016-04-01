@@ -5,64 +5,60 @@
  */
 package fr.thestudismetheory.game.local;
 
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.global.GameData;
-import fr.thestudismetheory.data.*;
 import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.game.Game;
+import fr.thestudismetheory.handler.SchoolHandler;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Versio locale du jeu
+ *
  * @author vincent
  */
-public class LocalGame implements Game{
-	
-	private List<City> cities;
-	private List<Institution> institutions;
-	private List<Division> divisions;
-	private List<Category> categories;
-	private List<School> schools;
-	private List<Student> students;
-	private List<Teacher> teachers;
-	
-	private GameData data;
-	
-	private ScheduledExecutorService ses;
-	
-	public LocalGame(DAOFactory dao, GameData data) {
-		
-		cities = dao.getCityDAO().getAll();
-		institutions = dao.getInstitutionDAO().getAll();
-		divisions = dao.getDivisionDAO().getAll();
-		categories = dao.getCategoryDAO().getAll();
-		schools = dao.getSchoolDAO().getAll();
-		students = dao.getStudentDAO().getAll();
-		teachers = dao.getTeacherDAO().getAll();
-		
-		this.data = data;
-		
-	    ses = Executors.newSingleThreadScheduledExecutor();
-	}
-	
+public class LocalGame implements Game {
+    private int curYear;
+    private int curMounth;
+    
+    final private GameData data;
+    final private DAOFactory dao;
+    final private TheStudismeTheory app;
+    
+    final private Calendar calendar = Calendar.getInstance();
+
+    final private ScheduledExecutorService ses;
+
+    public LocalGame(DAOFactory dao, GameData data, TheStudismeTheory app) {
+        this.data = data;
+        this.dao = dao;
+        this.app = app;
+
+        ses = Executors.newSingleThreadScheduledExecutor();
+    }
+
     @Override
     public void start() {
+        calendar.setTime(data.getGameDate());
+        
+        curYear = calendar.get(Calendar.YEAR);
+        curMounth = calendar.get(Calendar.MONTH);
+        
         ses.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-            	
-            	Calendar cal = Calendar.getInstance();
-            	cal.setTime(data.getGameDate());
-            	cal.add(Calendar.DATE, data.getSpeed());
-            	data.setGameDate(cal.getTime());
-            	
-            	updateScore();
-            	
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(data.getGameDate());
+                cal.add(Calendar.DATE, data.getSpeed());
+                data.setGameDate(cal.getTime());
+
+                updateScore();
+
                 onTick(data.getGameDate());
             }
         }, 1, 1, TimeUnit.SECONDS);
@@ -70,26 +66,63 @@ public class LocalGame implements Game{
 
     @Override
     public void onTick(Date currentDate) {
-    	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(">> Tick " + currentDate);
+        
+        calendar.setTime(currentDate);
+        int nYear = calendar.get(Calendar.YEAR);
+        int nMounth = calendar.get(Calendar.MONTH);
+        
+        if(nYear > curYear){
+            curYear = nYear;
+            onNewYear();
+        }
+        
+        if(curMounth != nMounth){
+            curMounth = nMounth;
+            onNewMounth();
+        }
+        
+        
+    }
+    
+    private void onNewYear(){
+        app.getStudentHandler().passExams(this);
+        app.getStudentHandler().onEndYear(this);
+    }
+    
+    private void onNewMounth(){
+        app.getSchoolHandler().paySchools(this);
+        app.getTeacherHandler().paySalary(this);
     }
 
     @Override
     public void pause() {
-    	data.setSpeed(0);
+        data.setSpeed(0);
     }
 
     @Override
     public void resume() {
-    	data.setSpeed(1);
+        data.setSpeed(1);
     }
 
     @Override
     public void quit() {
         ses.shutdown();
     }
-    
+
     public void updateScore() {
-    	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
+
+    @Override
+    public GameData getGameData() {
+        return data;
+    }
+
+    @Override
+    public DAOFactory getDAO() {
+        return dao;
+    }
+    
     
 }

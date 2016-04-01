@@ -1,13 +1,16 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
+import fr.thestudismetheory.ui.listener.GameDataListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 
 /**
@@ -18,9 +21,16 @@ public class MainGameInterface extends AbstractGameInterface {
 
     private boolean saved = false;
     private JFrame gameWindow;
+    
+    final private JLabel statResources = new JLabel("???");
+    final private JLabel statTime = new JLabel("???");
+    
+    final private GameDataListener gameDataListener;
 
-    public MainGameInterface() {
-        centralPanel = new CentralGamePanel();
+    public MainGameInterface(TheStudismeTheory app) {
+        gameDataListener = new GameDataListener(this);
+        
+        centralPanel = new CentralGamePanel(app);
         
         setLayout(new BorderLayout());
 
@@ -132,7 +142,9 @@ public class MainGameInterface extends AbstractGameInterface {
         });
 
         south.add(new JLabel(UIConstants.LABEL_RESSOURCE));
+        south.add(statResources);
         south.add(new JLabel(UIConstants.LABEL_TIME));
+        south.add(statTime);
         south.add(new JLabel(UIConstants.LABEL_STAT));
         south.add(optGame);
         return south;
@@ -166,6 +178,14 @@ public class MainGameInterface extends AbstractGameInterface {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+    
+    public void setTime(Date date){
+        statTime.setText(date.toString());
+    }
+    
+    public void setResources(long money){
+        statResources.setText(money + "");
     }
 
     public void optGame() {
@@ -215,5 +235,9 @@ public class MainGameInterface extends AbstractGameInterface {
         });
 
         opts.setVisible(true);
+    }
+
+    public GameDataListener getGameDataListener() {
+        return gameDataListener;
     }
 }

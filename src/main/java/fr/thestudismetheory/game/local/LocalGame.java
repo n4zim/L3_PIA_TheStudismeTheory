@@ -8,6 +8,7 @@ package fr.thestudismetheory.game.local;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.game.Game;
+import fr.thestudismetheory.handler.SchoolHandler;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -26,13 +27,16 @@ public class LocalGame implements Game {
     
     final private GameData data;
     final private DAOFactory dao;
+    final private SchoolHandler schoolHandler;
+    
     final private Calendar calendar = Calendar.getInstance();
 
     final private ScheduledExecutorService ses;
 
-    public LocalGame(DAOFactory dao, GameData data) {
+    public LocalGame(DAOFactory dao, GameData data, SchoolHandler schoolHandler) {
         this.data = data;
         this.dao = dao;
+        this.schoolHandler = schoolHandler;
 
         ses = Executors.newSingleThreadScheduledExecutor();
     }
@@ -85,7 +89,7 @@ public class LocalGame implements Game {
     }
     
     private void onNewMounth(){
-        
+        schoolHandler.paySchools(this);
     }
 
     @Override

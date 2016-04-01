@@ -1,12 +1,7 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
-import fr.thestudismetheory.ui.gamepanel.FinancePanel;
-import fr.thestudismetheory.ui.gamepanel.InstitutionPanel;
-import fr.thestudismetheory.ui.gamepanel.SchoolPanel;
-import fr.thestudismetheory.ui.gamepanel.StudentPanel;
-import fr.thestudismetheory.ui.gamepanel.TeacherPanel;
-import fr.thestudismetheory.ui.UIConstants;
+import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
 
 import javax.swing.*;

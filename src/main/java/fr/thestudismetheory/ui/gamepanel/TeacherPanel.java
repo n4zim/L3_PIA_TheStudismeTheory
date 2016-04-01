@@ -1,7 +1,6 @@
 package fr.thestudismetheory.ui.gamepanel;
 
-import fr.thestudismetheory.ui.UIConstants;
-import fr.thestudismetheory.ui.WindowConstants;
+import fr.thestudismetheory.data.strings.UIConstants;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

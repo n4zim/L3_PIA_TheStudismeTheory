@@ -6,7 +6,7 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
-import fr.thestudismetheory.ui.interfaces.NewGameInterface;
+import fr.thestudismetheory.ui.interfaces.SelectGameInterface;
 
 /**
  *
@@ -19,7 +19,13 @@ public class HomeHandler {
         this.app = app;
     }
     
+    public void start(){
+        app.getMainWindow().getInterfacesHandler().init();
+        home();
+        app.getMainWindow().setVisible(true);
+    }
+    
     public void home(){
-        app.getMainWindow().getInterfacesHandler().switchInterface(NewGameInterface.class);
+        app.getMainWindow().getInterfacesHandler().switchInterface(SelectGameInterface.class);
     }
 }

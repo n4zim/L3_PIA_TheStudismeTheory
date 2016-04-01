@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.game.local;
 
+import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.*;
 import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.game.Game;

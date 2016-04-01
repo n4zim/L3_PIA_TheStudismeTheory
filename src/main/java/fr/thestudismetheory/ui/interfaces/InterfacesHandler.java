@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.ui.interfaces;
 
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.ui.MainWindow;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +16,13 @@ import java.util.Map;
  */
 public class InterfacesHandler {
     final private MainWindow mainWindow;
+    final private TheStudismeTheory app;
     
     final private Map<Class, AbstractGameInterface> interfaces = new HashMap<>();
 
-    public InterfacesHandler(MainWindow mainWindow) {
+    public InterfacesHandler(MainWindow mainWindow, TheStudismeTheory app) {
         this.mainWindow = mainWindow;
+        this.app = app;
     }
     
     public void init(){
@@ -31,7 +34,7 @@ public class InterfacesHandler {
     }
     
     private void constructAll(){
-        registerInterface(new NewGameInterface(this));
+        registerInterface(new SelectGameInterface(app.getGameHandler()));
         registerInterface(new MainGameInterface());
     }
     

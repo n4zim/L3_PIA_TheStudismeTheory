@@ -1,5 +1,6 @@
 package fr.thestudismetheory.ui;
 
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.interfaces.InterfacesHandler;
 import javax.swing.*;
@@ -9,20 +10,22 @@ import java.awt.*;
  * Created by Nazim on 24/02/2016.
  */
 public class MainWindow extends JFrame {
+    final private TheStudismeTheory app;
+    
     final private CardLayout layout;
     final private InterfacesHandler interfacesHandler;
 
-    public MainWindow() {
+    public MainWindow(TheStudismeTheory app) {
         super(UIConstants.TITLE_GAME);
-        interfacesHandler = new InterfacesHandler(this);
+        
+        this.app = app;
+        interfacesHandler = new InterfacesHandler(this, app);
 
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
 
         //Crée la content pane avec pour layout un CardLayout
         layout = new CardLayout();
         setContentPane(new JPanel(layout));
-        
-        interfacesHandler.init();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();

@@ -6,6 +6,8 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
+import fr.thestudismetheory.ui.interfaces.MainGameInterface;
 
 /**
  *
@@ -16,5 +18,9 @@ public class GameHandler {
 
     public GameHandler(TheStudismeTheory app) {
         this.app = app;
+    }
+    
+    public void newGame(){
+        app.getMainWindow().getInterfacesHandler().switchInterface(MainGameInterface.class);
     }
 }

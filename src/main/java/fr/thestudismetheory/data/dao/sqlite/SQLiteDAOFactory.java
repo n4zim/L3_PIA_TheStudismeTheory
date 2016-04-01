@@ -31,7 +31,7 @@ public class SQLiteDAOFactory implements DAOFactory {
     final private SQLiteInterest interest;
 
     public SQLiteDAOFactory(String dbname) throws SQLException {
-        connection = DriverManager.getConnection("jdbc://sqlite:" + dbname);
+        connection = DriverManager.getConnection("jdbc:sqlite:" + dbname);
 
         categoryDAO = new SQLiteCategoryDAO(connection);
         cityDAO = new SQLiteCityDAO(connection);

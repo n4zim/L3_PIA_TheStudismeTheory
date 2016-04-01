@@ -7,6 +7,7 @@ package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
 import fr.thestudismetheory.data.strings.UIConstants;
+import fr.thestudismetheory.handler.GameHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,21 +17,24 @@ import java.awt.event.ActionListener;
 /**
  * @author vincent
  */
-public class NewGameInterface extends AbstractGameInterface {
-    final private InterfacesHandler interfacesHandler;
+public class SelectGameInterface extends AbstractGameInterface {
+    final private GameHandler gameHandler;
     
     final private JButton startBtn = new JButton(UIConstants.BUTTON_START_GAME);
 
-    public NewGameInterface(InterfacesHandler interfacesHandler) {
-        this.interfacesHandler = interfacesHandler;
+    public SelectGameInterface(GameHandler gameHandler) {
+        this.gameHandler = gameHandler;
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
         
         add(startBtn);
-        
+        actions();
+    }
+    
+    private void actions(){
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                onStart();
+                gameHandler.newGame();
             }
         });
     }
@@ -42,11 +46,7 @@ public class NewGameInterface extends AbstractGameInterface {
 
     @Override
     public String getId() {
-        return "NEW_GAME";
-    }
-    
-    public void onStart(){
-        interfacesHandler.switchInterface(MainGameInterface.class);
+        return "SELECT_GAME";
     }
 
     @Override

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.thestudismetheory.data;
+package fr.thestudismetheory.data.global;
 
+import fr.thestudismetheory.data.AbstractModel;
+import fr.thestudismetheory.data.ModelListener;
 import java.util.Date;
 
 /**

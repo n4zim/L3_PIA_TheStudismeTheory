@@ -95,5 +95,19 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
         internalInsert(model);
         return model;
     }
-    
+
+    @Override
+    public boolean gameExists(String name) {
+        try(PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM " + getTableName() + " WHERE " + ATTR_ID + " = ?")){
+            stmt.setString(1, name);
+            ResultSet RS = stmt.executeQuery();
+            
+            if(RS.next())
+                return RS.getInt(1) > 0;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
 }

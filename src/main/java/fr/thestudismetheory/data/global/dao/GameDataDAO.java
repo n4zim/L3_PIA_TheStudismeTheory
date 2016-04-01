@@ -14,5 +14,5 @@ import fr.thestudismetheory.data.global.GameData;
  * @author vincent
  */
 public interface GameDataDAO extends DAO<GameData>{
-    
+    public boolean gameExists(String name);
 }

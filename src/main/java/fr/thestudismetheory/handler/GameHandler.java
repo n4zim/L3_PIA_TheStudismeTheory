@@ -30,6 +30,11 @@ public class GameHandler {
             return;
         }
         
+        if(app.getGlobalDAOFactory().getGameDataDAO().gameExists(name)){
+            JOptionPane.showMessageDialog(app.getMainWindow(), "Nom déjà pris", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         GameData gameData = app.getGlobalDAOFactory().getGameDataDAO().insert(new GameData(name, 1, new Date(0)));
         internalStartGame(gameData);
     }

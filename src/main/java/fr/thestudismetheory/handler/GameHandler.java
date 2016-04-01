@@ -6,8 +6,10 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
-import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
+import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.ui.interfaces.MainGameInterface;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +22,19 @@ public class GameHandler {
         this.app = app;
     }
     
-    public void newGame(){
+    public void newGame(String name){
+        name = name.trim();
+        
+        if(name.isEmpty()){
+            JOptionPane.showMessageDialog(app.getMainWindow(), "Veuillez spécifier un nom pour la partie", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        GameData gameData = app.getGlobalDAOFactory().getGameDataDAO().insert(new GameData(name, 1, new Date(0)));
+        internalStartGame(gameData);
+    }
+    
+    private void internalStartGame(GameData gameData){
         app.getMainWindow().getInterfacesHandler().switchInterface(MainGameInterface.class);
     }
 }

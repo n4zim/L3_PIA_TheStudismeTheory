@@ -26,6 +26,10 @@ public class HomeHandler {
     }
     
     public void home(){
-        app.getMainWindow().getInterfacesHandler().switchInterface(SelectGameInterface.class);
+        SelectGameInterface sgi = app.getMainWindow().getInterfacesHandler().getInterface(SelectGameInterface.class);
+        
+        sgi.setGames(app.getGlobalDAOFactory().getGameDataDAO().getAll());
+        
+        app.getMainWindow().getInterfacesHandler().switchInterface(sgi);
     }
 }

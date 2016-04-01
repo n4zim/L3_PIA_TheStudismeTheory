@@ -19,13 +19,15 @@ final public class UIConstants {
     final static public String TITLE_STUDENT = "Gestion des étudiants";
     final static public String TITLE_TEACHER = "Gestion des professeurs";
     final static public String TITLE_FINANCE = "Finances";
+    final static public String TITLE_NEW_GAME = "Nouvelle partie";
+    final static public String TITLE_SELECT_GAME = "Sélectionner un partie";
 
     //COMMON BUTTONS
     final static public String BUTTON_VALIDATE = "Enregistrer";
     final static public String BUTTON_CANCEL = "Annuler";
     
-    //NewGameInterface
-    final static public String BUTTON_START_GAME = "Lancer le jeu";
+    //SelectGameInterface
+    final static public String BUTTON_NEW_GAME = TITLE_NEW_GAME;
 
     // GAME WINDOW
     final static public String BUTTON_INST = "Institutions";

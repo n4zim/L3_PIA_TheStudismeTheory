@@ -102,7 +102,7 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
         for(int i = getColumns().length; i > 0; --i){
             sb.append('?');
             
-            if(i > 0)
+            if(i > 1)
                 sb.append(", ");
         }
         
@@ -245,17 +245,18 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
     protected long internalInsert(M entity){
         try(PreparedStatement stmt = connection.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)){
             bindPk(entity, stmt, 1);
-            bindValues(entity, stmt, getNonPkColumns().length + 1);
+            bindValues(entity, stmt, getNonPkColumns().length);
             stmt.execute();
             ResultSet RS = stmt.getGeneratedKeys();
             
             if(RS.next()){
-                return RS.getLong(0);
+                return RS.getLong(1);
             }else{
                 return 0;
             }
         }catch(SQLException e){
             e.printStackTrace();
+            System.err.println("For query " + insertQuery);
             return -1;
         }
     }

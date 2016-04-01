@@ -45,7 +45,7 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     protected void makeTable() throws SQLException {
         connection.createStatement().execute(
             "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
-                    ATTR_ID + " INTEGER PRIMARY KEY AUTOINCREMNT," +
+                    ATTR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     ATTR_NAME + " TEXT," +
                     ATTR_ATTRACT + " INTEGER" +
             ")"

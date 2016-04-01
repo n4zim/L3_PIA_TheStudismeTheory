@@ -7,6 +7,8 @@ package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.global.GameData;
+import fr.thestudismetheory.game.Game;
+import fr.thestudismetheory.game.local.LocalGame;
 import fr.thestudismetheory.ui.interfaces.MainGameInterface;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -17,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class GameHandler {
     final private TheStudismeTheory app;
+    
+    private Game currentGame;
 
     public GameHandler(TheStudismeTheory app) {
         this.app = app;
@@ -40,7 +44,16 @@ public class GameHandler {
     }
     
     private void internalStartGame(GameData gameData){
-        app.getMainWindow().getInterfacesHandler().switchInterface(MainGameInterface.class);
+        currentGame = new LocalGame(
+                app.getModulesFactory().createGameDAOFactory(gameData.getId()), 
+                gameData
+        );
+        
+        MainGameInterface mgi = app.getMainWindow().getInterfacesHandler().getInterface(MainGameInterface.class);
+        
+        //Initialiser le GUI ici
+        
+        app.getMainWindow().getInterfacesHandler().switchInterface(mgi);
     }
     
     public void selectGame(String name){

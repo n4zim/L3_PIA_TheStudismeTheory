@@ -82,7 +82,7 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
     protected void makeTable() throws SQLException {
         connection.createStatement().execute(
                 "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
-                        ATTR_ID + " INTEGER PRIMARY KEY AUTOINCEMENT," +
+                        ATTR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         ATTR_NAME + " TEXT," +
                         ATTR_BIRTH + " INTEGER," +
                         ATTR_FLAWS + " INTEGER," +

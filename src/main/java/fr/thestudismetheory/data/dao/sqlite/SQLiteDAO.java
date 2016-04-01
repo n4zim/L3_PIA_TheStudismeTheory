@@ -208,7 +208,10 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
                 stmt.setObject(i + 1, pk[i]);
             }
 
-            stmt.execute();
+            ResultSet RS = stmt.executeQuery();
+            
+            if(RS.next())
+                return createByRS(RS);
         } catch (SQLException e) {
             e.printStackTrace();
         }

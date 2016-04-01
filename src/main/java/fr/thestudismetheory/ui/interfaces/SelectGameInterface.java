@@ -31,6 +31,8 @@ public class SelectGameInterface extends AbstractGameInterface {
     final private JButton startBtn = new JButton(UIConstants.BUTTON_NEW_GAME);
     final private JTextField gameName = new JTextField();
     
+    private ActionListener selectGameAction;
+    
     final private JPanel gamesList = new JPanel();
 
     public SelectGameInterface(GameHandler gameHandler) {
@@ -48,7 +50,10 @@ public class SelectGameInterface extends AbstractGameInterface {
         gamesList.removeAll();
         
         for(GameData gd : games){
-            gamesList.add(new JButton(gd.getId()));
+            JButton btn = new JButton(gd.getId());
+            btn.setActionCommand(gd.getId());
+            btn.addActionListener(selectGameAction);
+            gamesList.add(btn);
         }
         
         gamesList.repaint();
@@ -85,6 +90,13 @@ public class SelectGameInterface extends AbstractGameInterface {
                 gameHandler.newGame(gameName.getText());
             }
         });
+        
+        selectGameAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameHandler.selectGame(e.getActionCommand());
+            }
+        };
     }
 
     @Override

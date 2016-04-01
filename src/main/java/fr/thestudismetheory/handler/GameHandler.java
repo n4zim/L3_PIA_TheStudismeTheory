@@ -42,4 +42,15 @@ public class GameHandler {
     private void internalStartGame(GameData gameData){
         app.getMainWindow().getInterfacesHandler().switchInterface(MainGameInterface.class);
     }
+    
+    public void selectGame(String name){
+        GameData gameData = app.getGlobalDAOFactory().getGameDataDAO().findByPrimaryKey(name);
+        
+        if(gameData == null){
+            JOptionPane.showMessageDialog(app.getMainWindow(), "Partie " + name + " introuvable", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        internalStartGame(gameData);
+    }
 }

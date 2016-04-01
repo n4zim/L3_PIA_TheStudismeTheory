@@ -35,7 +35,7 @@ public class InterfacesHandler {
     
     private void constructAll(){
         registerInterface(new SelectGameInterface(app.getGameHandler()));
-        registerInterface(new MainGameInterface());
+        registerInterface(new MainGameInterface(app));
     }
     
     public<T extends AbstractGameInterface> T getInterface(Class<T> type){

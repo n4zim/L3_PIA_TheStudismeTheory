@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
 import fr.thestudismetheory.ui.listener.GameDataListener;
@@ -26,10 +27,10 @@ public class MainGameInterface extends AbstractGameInterface {
     
     final private GameDataListener gameDataListener;
 
-    public MainGameInterface() {
+    public MainGameInterface(TheStudismeTheory app) {
         gameDataListener = new GameDataListener(this);
         
-        centralPanel = new CentralGamePanel();
+        centralPanel = new CentralGamePanel(app);
         
         setLayout(new BorderLayout());
 

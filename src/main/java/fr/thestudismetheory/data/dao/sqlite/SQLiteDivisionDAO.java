@@ -124,6 +124,19 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
 
     @Override
     public List<Division> getDivisionsBySchool(int schoolId) {
-        return new ArrayList<Division>();
+        List<Division> divisions = new ArrayList<>();
+        
+        try(PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + ATTR_SCHOOL + " = ?")){
+            stmt.setInt(1, schoolId);
+            
+            ResultSet RS = stmt.executeQuery();
+            
+            while(RS.next())
+                divisions.add(createByRS(RS));
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return divisions;
     }
 }

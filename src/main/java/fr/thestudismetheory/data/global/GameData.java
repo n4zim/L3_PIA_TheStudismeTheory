@@ -40,10 +40,12 @@ public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
 
     public void setSpeed(int speed) {
         this.speed = speed;
+        notifyUpdate();
     }
 
     public void setGameDate(Date gameDate) {
         this.gameDate = gameDate;
+        notifyUpdate();
     }
 
     public long getMoney() {
@@ -52,7 +54,6 @@ public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
 
     public void setMoney(long money) {
         this.money = money;
+        notifyUpdate();
     }
-    
-    
 }

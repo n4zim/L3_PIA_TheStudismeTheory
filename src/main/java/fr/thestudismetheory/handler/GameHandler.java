@@ -56,14 +56,19 @@ public class GameHandler {
     private void internalStartGame(GameData gameData){
         currentGame = new LocalGame(
                 app.getModulesFactory().createGameDAOFactory(gameData.getId()), 
-                gameData
+                gameData,
+                app.getSchoolHandler()
         );
         
         MainGameInterface mgi = app.getMainWindow().getInterfacesHandler().getInterface(MainGameInterface.class);
         
         //Initialiser le GUI ici
+        gameData.addListener(mgi.getGameDataListener());
+        mgi.getGameDataListener().onUpdate(gameData);
         
         app.getMainWindow().getInterfacesHandler().switchInterface(mgi);
+        
+        currentGame.start();
     }
     
     public void selectGame(String name){

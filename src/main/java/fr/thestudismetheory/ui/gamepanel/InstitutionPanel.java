@@ -96,7 +96,7 @@ public class InstitutionPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 if(CURRENT_CARD == UIConstants.BUTTON_NEW_SCHOOL)
                 {
-                    
+
                 }
                 centralPanel.switchDefaultPanel();
             }

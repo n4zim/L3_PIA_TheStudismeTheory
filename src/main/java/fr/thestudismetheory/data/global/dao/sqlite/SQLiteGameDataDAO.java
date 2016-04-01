@@ -80,13 +80,13 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
                 RS.getString(ATTR_ID),
                 RS.getInt(ATTR_SPEED),
                 new Date(RS.getLong(ATTR_DATE)),
-                RS.getLong(selectCond)
+                RS.getLong(ATTR_MONEY)
         );
     }
 
     @Override
     protected void bindValues(GameData entity, PreparedStatement stmt, int offset) throws SQLException {
-        stmt.setInt(offset, entity.getSpeed());
+        stmt.setInt(offset++, entity.getSpeed());
         stmt.setLong(offset++, entity.getGameDate().getTime());
         stmt.setLong(offset++, entity.getMoney());
     }

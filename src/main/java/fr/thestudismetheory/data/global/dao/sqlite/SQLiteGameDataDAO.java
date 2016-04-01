@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -33,9 +32,13 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
      * timestamp in milliseconds (long)
      */
     final static public String ATTR_DATE = "GAME_DATE";
+    /**
+     * INTEGER
+     */
+    final static public String ATTR_MONEY = "GAME_MONEY";
     
     final static private String[] COLUMNS = new String[]{
-        ATTR_ID, ATTR_SPEED, ATTR_DATE
+        ATTR_ID, ATTR_SPEED, ATTR_DATE, ATTR_MONEY
     };
     
     final static private String[] PK_COL = new String[]{ATTR_ID};
@@ -50,7 +53,8 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
                 "CREATE TABLE IF NOT EXISTS " + getTableName() + "(" +
                         ATTR_ID + " TEXT PRIMARY KEY," +
                         ATTR_SPEED + " INTEGER," +
-                        ATTR_DATE + " INTEGER" +
+                        ATTR_DATE + " INTEGER," +
+                        ATTR_MONEY + " INTEGER" +
                 ")"
         );
     }
@@ -75,14 +79,16 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
         return new GameData(
                 RS.getString(ATTR_ID),
                 RS.getInt(ATTR_SPEED),
-                new Date(RS.getLong(ATTR_DATE))
+                new Date(RS.getLong(ATTR_DATE)),
+                RS.getLong(selectCond)
         );
     }
 
     @Override
     protected void bindValues(GameData entity, PreparedStatement stmt, int offset) throws SQLException {
         stmt.setInt(offset, entity.getSpeed());
-        stmt.setLong(offset + 1, entity.getGameDate().getTime());
+        stmt.setLong(offset++, entity.getGameDate().getTime());
+        stmt.setLong(offset++, entity.getMoney());
     }
 
     @Override

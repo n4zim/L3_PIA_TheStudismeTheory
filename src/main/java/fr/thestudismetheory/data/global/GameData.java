@@ -17,11 +17,13 @@ public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
     final private String id;
     private int speed;
     private Date gameDate;
+    private long money;
 
-    public GameData(String id, int speed, Date gameDate) {
+    public GameData(String id, int speed, Date gameDate, long money) {
         this.id = id;
         this.speed = speed;
         this.gameDate = gameDate;
+        this.money = money;
     }
 
     public String getId() {
@@ -43,4 +45,14 @@ public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
     public void setGameDate(Date gameDate) {
         this.gameDate = gameDate;
     }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public void setMoney(long money) {
+        this.money = money;
+    }
+    
+    
 }

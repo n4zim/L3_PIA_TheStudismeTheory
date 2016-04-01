@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
  * @author vincent
  */
 public class GameHandler {
+    final static public Date START_DATE = new Date(0);
+    final static public int DEFAULT_SPEED = 1;
+    final static public long START_MONEY = 10000;
+    
     final private TheStudismeTheory app;
     
     private Game currentGame;
@@ -39,7 +43,13 @@ public class GameHandler {
             return;
         }
         
-        GameData gameData = app.getGlobalDAOFactory().getGameDataDAO().insert(new GameData(name, 1, new Date(0)));
+        GameData gameData = app.getGlobalDAOFactory().getGameDataDAO().insert(new GameData(
+                name, 
+                DEFAULT_SPEED, 
+                START_DATE,
+                START_MONEY
+        ));
+        
         internalStartGame(gameData);
     }
     

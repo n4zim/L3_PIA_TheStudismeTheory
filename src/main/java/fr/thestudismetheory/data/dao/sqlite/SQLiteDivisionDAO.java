@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author vincent
@@ -120,4 +121,8 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
         return model;
     }
 
+    @Override
+    public List<Division> getDivisionsBySchool(int schoolId) {
+        
+    }
 }

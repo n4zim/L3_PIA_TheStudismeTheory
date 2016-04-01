@@ -1,9 +1,13 @@
 package fr.thestudismetheory;
 
+import fr.thestudismetheory.data.City;
 import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
+import fr.thestudismetheory.generator.PeopleGenerator;
 import fr.thestudismetheory.handler.GameHandler;
 import fr.thestudismetheory.handler.HomeHandler;
 import fr.thestudismetheory.ui.MainWindow;
+
+import java.util.Date;
 
 public class TheStudismeTheory {
     final private ModulesFactory modulesFactory = new ModulesFactory();

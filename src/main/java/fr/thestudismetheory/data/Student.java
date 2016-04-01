@@ -151,4 +151,19 @@ public class Student extends AbstractModel<Student, StudentListener> {
             
         this.graduations = graduations;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birth=" + birth +
+                ", flaws=" + flaws +
+                ", interests=" + interests +
+                ", graduations=" + graduations +
+                ", city=" + city +
+                ", studism=" + studism +
+                ", procrass=" + procrass +
+                '}';
+    }
 }

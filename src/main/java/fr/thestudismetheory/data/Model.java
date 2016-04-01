@@ -12,7 +12,7 @@ package fr.thestudismetheory.data;
  */
 public interface Model<M extends Model<M, L>, L extends ModelListener<M>> {
 
-    public static int ID_NOT_DEFINED = -1;
+    public static final int ID_NOT_DEFINED = -1;
 
     /**
      * Ajoute un listener dans la liste des listeners

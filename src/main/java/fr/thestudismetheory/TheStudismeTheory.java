@@ -4,6 +4,8 @@ import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
 import fr.thestudismetheory.handler.GameHandler;
 import fr.thestudismetheory.handler.HomeHandler;
 import fr.thestudismetheory.handler.SchoolHandler;
+import fr.thestudismetheory.handler.StudentHandler;
+import fr.thestudismetheory.handler.TeacherHandler;
 import fr.thestudismetheory.ui.MainWindow;
 
 public class TheStudismeTheory {
@@ -16,6 +18,8 @@ public class TheStudismeTheory {
     final private GameHandler gameHandler;
     final private HomeHandler homeHandler;
     final private SchoolHandler schoolHandler;
+    final private StudentHandler studentHandler;
+    final private TeacherHandler teacherHandler;
     
     public TheStudismeTheory() {
         globalDAOFactory = modulesFactory.createGlobalDAOFactory();
@@ -24,6 +28,8 @@ public class TheStudismeTheory {
         gameHandler = new GameHandler(this);
         homeHandler = new HomeHandler(this);
         schoolHandler = new SchoolHandler(this);
+        studentHandler = new StudentHandler(this);
+        teacherHandler = new TeacherHandler(this);
     }
 
     public MainWindow getMainWindow() {
@@ -40,6 +46,14 @@ public class TheStudismeTheory {
 
     public SchoolHandler getSchoolHandler() {
         return schoolHandler;
+    }
+
+    public StudentHandler getStudentHandler() {
+        return studentHandler;
+    }
+
+    public TeacherHandler getTeacherHandler() {
+        return teacherHandler;
     }
 
     public ModulesFactory getModulesFactory() {

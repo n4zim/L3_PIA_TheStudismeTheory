@@ -43,7 +43,7 @@ public class SQLiteDAOFactory implements DAOFactory {
         graduation = new SQLiteGraduation(connection, divisionDAO);
         studentDAO = new SQLiteStudentDAO(graduation, interest, cityDAO, connection);
         
-        teacherDAO = new SQLiteTeacherDAO(categoryDAO, connection);
+        teacherDAO = new SQLiteTeacherDAO(categoryDAO, connection, divisionDAO);
     }
 
     @Override

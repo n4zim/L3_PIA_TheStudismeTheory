@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.game.local;
 
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.game.Game;
@@ -27,16 +28,16 @@ public class LocalGame implements Game {
     
     final private GameData data;
     final private DAOFactory dao;
-    final private SchoolHandler schoolHandler;
+    final private TheStudismeTheory app;
     
     final private Calendar calendar = Calendar.getInstance();
 
     final private ScheduledExecutorService ses;
 
-    public LocalGame(DAOFactory dao, GameData data, SchoolHandler schoolHandler) {
+    public LocalGame(DAOFactory dao, GameData data, TheStudismeTheory app) {
         this.data = data;
         this.dao = dao;
-        this.schoolHandler = schoolHandler;
+        this.app = app;
 
         ses = Executors.newSingleThreadScheduledExecutor();
     }
@@ -85,11 +86,13 @@ public class LocalGame implements Game {
     }
     
     private void onNewYear(){
-        
+        app.getStudentHandler().passExams(this);
+        app.getStudentHandler().onEndYear(this);
     }
     
     private void onNewMounth(){
-        schoolHandler.paySchools(this);
+        app.getSchoolHandler().paySchools(this);
+        app.getTeacherHandler().paySalary(this);
     }
 
     @Override

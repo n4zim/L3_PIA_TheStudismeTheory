@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -35,6 +37,8 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
     
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_STU_COUNT};
     final static private String[] PK_COL = new String[]{ATTR_ID};
+    
+    final private Map<Integer, City> cacheById = new HashMap<>();
 
     public SQLiteCityDAO(Connection connection) throws SQLException {
         super(connection);
@@ -81,18 +85,33 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
     }
 
     @Override
+    protected City getCached(Object... pk) {
+        return cacheById.get(pk[0]);
+    }
+
+    @Override
     protected City createByRS(ResultSet RS) throws SQLException {
-        return new City(
-                RS.getInt(ATTR_ID), 
+        int id = RS.getInt(ATTR_ID);
+        
+        if(cacheById.containsKey(id))
+            return cacheById.get(id);
+        
+        City city = new City(
+                id, 
                 RS.getString(ATTR_NAME), 
                 RS.getInt(ATTR_STU_COUNT)
         );
+        
+        cacheById.put(id, city);
+        return city;
     }
 
     @Override
     public City insert(City model) {
         int id = (int)internalInsert(model);
-        return new City(id, model.getName(), model.getStudentsCount());
+        City city = new City(id, model.getName(), model.getStudentsCount());
+        cacheById.put(id, city);
+        return city;
     }
 
 }

@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -35,7 +37,8 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_ATTRACT};
     final static private String[] PK_COLS = new String[]{ATTR_ID};
-    
+
+    final private Map<Integer, Category> cacheById = new HashMap<>();
 
     public SQLiteCategoryDAO(Connection connection) throws SQLException {
         super(connection);
@@ -53,6 +56,11 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     }
 
     @Override
+    protected Category getCached(Object... pk) {
+        return cacheById.get(pk[0]);
+    }
+    
+    @Override
     protected String[] getColumns() {
         return COLUMNS;
     }
@@ -69,17 +77,30 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
 
     @Override
     protected Category createByRS(ResultSet RS) throws SQLException {
-        return new Category(
-            RS.getInt(ATTR_ID),
+        int id = RS.getInt(ATTR_ID);
+        
+        if(cacheById.containsKey(id))
+            return cacheById.get(id);
+        
+        Category cat = new Category(
+            id,
             RS.getString(ATTR_NAME),
             RS.getInt(ATTR_ATTRACT)
         );
+        
+        cacheById.put(id, cat);
+        
+        return cat;
     }
 
     @Override
     public Category insert(Category model) {
         int id = (int)internalInsert(model);
-        return new Category(id, model.getName(), model.getAttract());
+        Category cat = new Category(id, model.getName(), model.getAttract());
+        
+        cacheById.put(id, cat);
+        
+        return cat;
     }
 
     @Override

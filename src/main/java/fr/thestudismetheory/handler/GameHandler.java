@@ -57,7 +57,7 @@ public class GameHandler {
         currentGame = new LocalGame(
                 app.getModulesFactory().createGameDAOFactory(gameData.getId()), 
                 gameData,
-                app.getSchoolHandler()
+                app
         );
         
         MainGameInterface mgi = app.getMainWindow().getInterfacesHandler().getInterface(MainGameInterface.class);

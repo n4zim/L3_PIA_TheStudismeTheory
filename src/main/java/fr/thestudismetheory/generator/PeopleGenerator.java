@@ -2,17 +2,16 @@ package fr.thestudismetheory.generator;
 
 import fr.thestudismetheory.Resources;
 import fr.thestudismetheory.data.*;
+import fr.thestudismetheory.data.enums.InstitutionType;
 import fr.thestudismetheory.data.enums.StudentFlaw;
 import fr.thestudismetheory.data.subentity.Graduate;
-import fr.thestudismetheory.data.Category;
 
 import java.util.*;
 
 public class PeopleGenerator {
 
-    private Random random = new Random();
     private final String[] names = Resources.STUDENT_NAMES;
-
+    private Random random = new Random();
     private String[] specialStudents = {
             "Alexandre Sanigou",
             "Benoit Petiteau",
@@ -68,12 +67,12 @@ public class PeopleGenerator {
         calendar.setTime(currentDate);
 
         String name = nameGeneration();
-        Date birth = randomDateBetweenTwoYears(calendar.get(Calendar.YEAR)-18, (calendar.get(Calendar.YEAR)-18)+4);
+        Date birth = randomDateBetweenTwoYears(calendar.get(Calendar.YEAR) - 18, (calendar.get(Calendar.YEAR) - 18) + 4);
         int studism = studismGeneration();
         int procrass = procrassGeneration();
         Set<StudentFlaw> flaws = new HashSet<>();
         Map<Category, Integer> interests = new HashMap<>();
-        Map<Integer, Graduate > graduations = new HashMap<>();
+        Map<Integer, Graduate> graduations = new HashMap<>();
 
         return new Student(Model.ID_NOT_DEFINED, name, birth, city, studism, procrass, flaws, interests, graduations);
     }
@@ -83,7 +82,7 @@ public class PeopleGenerator {
      */
     public List<Student> newStudentList(int number, Date currentDate, City currentCity) {
         List<Student> list = new ArrayList<>();
-        for(int i = 0; i < number; i++)
+        for (int i = 0; i < number; i++)
             list.add(newStudent(currentDate, currentCity));
         return list;
     }
@@ -104,11 +103,11 @@ public class PeopleGenerator {
         // Fin du T O D O
 
         //if(!convertFromStudent) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(currentDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
 
-            name = nameGeneration();
-            birth = randomDateBetweenTwoYears(calendar.get(Calendar.YEAR)-25, (calendar.get(Calendar.YEAR)-25)+20);
+        name = nameGeneration();
+        birth = randomDateBetweenTwoYears(calendar.get(Calendar.YEAR) - 25, (calendar.get(Calendar.YEAR) - 25) + 20);
         //}
 
         Date entering = currentDate;
@@ -117,7 +116,12 @@ public class PeopleGenerator {
         int punct = 0;
         int teachSkill = 0;
         Category category = new Category(1, "Test", 0);
-        return new Teacher(Model.ID_NOT_DEFINED, name, birth, entering, charisma, skill, punct, teachSkill, category);
+
+        Set<StudentFlaw> cond = new HashSet<>();
+        Division division = new Division(new School(0, new City(0, "Test", 0),
+                new Institution(0,"Test", InstitutionType.PUBLIC), "Test", 0, 0, 0), category, 0, 0, cond);
+
+        return new Teacher(Model.ID_NOT_DEFINED, name, birth, entering, charisma, skill, punct, teachSkill, category, division);
     }
 
     /*
@@ -125,7 +129,7 @@ public class PeopleGenerator {
      */
     public List<Teacher> newTeacherList(int number, Date currentDate) {
         List<Teacher> list = new ArrayList<>();
-        for(int i = 0; i < number; i++)
+        for (int i = 0; i < number; i++)
             list.add(newTeacher(currentDate));
         return list;
     }

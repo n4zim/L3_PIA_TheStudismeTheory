@@ -6,8 +6,7 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.Resources;
-import fr.thestudismetheory.generator.WorldMapGenerator2;
-import fr.thestudismetheory.ui.UIConstants;
+import fr.thestudismetheory.data.strings.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;

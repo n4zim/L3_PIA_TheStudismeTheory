@@ -5,19 +5,18 @@
  */
 package fr.thestudismetheory.ui.gamepanel;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Panel pour l'affichage central du jeu (ex: de la map)
+ *
  * @author vincent
  */
-abstract public class GamePanel extends JPanel{
+abstract public class GamePanel extends JPanel {
 
     public GamePanel() {
         setBorder(BorderFactory.createEtchedBorder());
     }
-    
+
     abstract public String getId();
 }

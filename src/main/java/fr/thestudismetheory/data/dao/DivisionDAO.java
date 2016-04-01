@@ -1,6 +1,7 @@
 package fr.thestudismetheory.data.dao;
 
 import fr.thestudismetheory.data.Division;
+
 import java.util.List;
 
 /**
@@ -9,8 +10,9 @@ import java.util.List;
 public interface DivisionDAO extends DAO<Division> {
     /**
      * Récupère la liste des sections par école
+     *
      * @param schoolId
-     * @return 
+     * @return
      */
     public List<Division> getDivisionsBySchool(int schoolId);
 }

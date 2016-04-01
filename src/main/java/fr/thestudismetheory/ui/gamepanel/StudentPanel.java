@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.data.strings.UIConstants;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,16 +14,23 @@ import java.awt.event.ActionListener;
  */
 public class StudentPanel extends GamePanel {
     final static public String PANEL_ID = "STUDENT";
-
+    final private CentralGamePanel gamePanel;
     protected JPanel cards;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
     protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
-    
-    final private CentralGamePanel gamePanel;
+    Object[][] student = {
+            {"Johnathan Sykes", "10/02/1995", 8, 10, "informatique"},
+            {"Nicolas Van de Kampf", "5/03/1994", 3, 15, "sculpture de mehnir"},
+            {"Damien Cuthbert", "8/04/1996", 10, 7, "pornographie"},
+            {"Corinne Valance", "3/05/1992", 16, 9, "droit"},
+            {"Emilie Schrödinger", "20/06/1993", 22, 12, "la sieste"},
+            {"Delphine Duke", "9/07/1995", 42, 5, "veterinaire"},
+            {"Eric Trump", "12/07/1994", 1, 9, "emeux"},
+    };
 
     public StudentPanel(CentralGamePanel centralGamePanel) {
         setLayout(new BorderLayout());
-        
+
         this.gamePanel = centralGamePanel;
 
         //Ajout liste des écoles
@@ -72,18 +80,7 @@ public class StudentPanel extends GamePanel {
         return PANEL_ID;
     }
 
-    
-    Object[][] student = {
-            {"Johnathan Sykes", "10/02/1995", 8, 10, "informatique"},
-            {"Nicolas Van de Kampf", "5/03/1994", 3, 15, "sculpture de mehnir"},
-            {"Damien Cuthbert", "8/04/1996", 10, 7, "pornographie"},
-            {"Corinne Valance", "3/05/1992", 16, 9, "droit"},
-            {"Emilie Schrödinger", "20/06/1993", 22, 12, "la sieste"},
-            {"Delphine Duke", "9/07/1995", 42, 5, "veterinaire"},
-            {"Eric Trump", "12/07/1994", 1, 9, "emeux"},
-    };
-
-    public JPanel studentList(){
+    public JPanel studentList() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
@@ -120,7 +117,7 @@ public class StudentPanel extends GamePanel {
         b_fired.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] selected =  tableau.getSelectedRows();
+                int[] selected = tableau.getSelectedRows();
             }
         });
 

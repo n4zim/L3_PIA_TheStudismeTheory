@@ -26,7 +26,7 @@ public class SQLiteDAOFactory implements DAOFactory {
     final private SQLiteSchoolDAO schoolDAO;
     final private SQLiteStudentDAO studentDAO;
     final private SQLiteTeacherDAO teacherDAO;
-    
+
     final private SQLiteGraduation graduation;
     final private SQLiteInterest interest;
 
@@ -38,11 +38,11 @@ public class SQLiteDAOFactory implements DAOFactory {
         institutionDAO = new SQLiteInstitutionDAO(connection);
         schoolDAO = new SQLiteSchoolDAO(cityDAO, institutionDAO, connection);
         divisionDAO = new SQLiteDivisionDAO(schoolDAO, categoryDAO, connection);
-        
+
         interest = new SQLiteInterest(connection, categoryDAO);
         graduation = new SQLiteGraduation(connection, divisionDAO);
         studentDAO = new SQLiteStudentDAO(graduation, interest, cityDAO, connection);
-        
+
         teacherDAO = new SQLiteTeacherDAO(categoryDAO, connection, divisionDAO);
     }
 

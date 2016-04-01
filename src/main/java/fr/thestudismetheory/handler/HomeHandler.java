@@ -9,7 +9,6 @@ import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.ui.interfaces.SelectGameInterface;
 
 /**
- *
  * @author vincent
  */
 public class HomeHandler {
@@ -18,18 +17,18 @@ public class HomeHandler {
     public HomeHandler(TheStudismeTheory app) {
         this.app = app;
     }
-    
-    public void start(){
+
+    public void start() {
         app.getMainWindow().getInterfacesHandler().init();
         home();
         app.getMainWindow().setVisible(true);
     }
-    
-    public void home(){
+
+    public void home() {
         SelectGameInterface sgi = app.getMainWindow().getInterfacesHandler().getInterface(SelectGameInterface.class);
-        
+
         sgi.setGames(app.getGlobalDAOFactory().getGameDataDAO().getAll());
-        
+
         app.getMainWindow().getInterfacesHandler().switchInterface(sgi);
     }
 }

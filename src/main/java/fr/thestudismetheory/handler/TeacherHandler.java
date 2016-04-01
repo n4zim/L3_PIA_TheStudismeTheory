@@ -9,7 +9,6 @@ import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.game.Game;
 
 /**
- *
  * @author vincent
  */
 public class TeacherHandler {
@@ -18,8 +17,8 @@ public class TeacherHandler {
     public TeacherHandler(TheStudismeTheory app) {
         this.app = app;
     }
-    
-    public void paySalary(Game game){
-        
+
+    public void paySalary(Game game) {
+
     }
 }

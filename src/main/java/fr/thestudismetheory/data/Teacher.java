@@ -34,8 +34,8 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         this.category = category;
         this.division = division;
     }
-    
-    public Teacher(long id, Teacher other){
+
+    public Teacher(long id, Teacher other) {
         this.id = id;
         name = other.name;
         birth = other.birth;

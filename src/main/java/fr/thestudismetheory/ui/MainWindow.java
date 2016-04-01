@@ -3,6 +3,7 @@ package fr.thestudismetheory.ui;
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.interfaces.InterfacesHandler;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,13 +12,13 @@ import java.awt.*;
  */
 public class MainWindow extends JFrame {
     final private TheStudismeTheory app;
-    
+
     final private CardLayout layout;
     final private InterfacesHandler interfacesHandler;
 
     public MainWindow(TheStudismeTheory app) {
         super(UIConstants.TITLE_GAME);
-        
+
         this.app = app;
         interfacesHandler = new InterfacesHandler(this, app);
 
@@ -34,10 +35,11 @@ public class MainWindow extends JFrame {
 
     /**
      * Ajoute une nouvelle interface à la fenêtre.
-     * @warning Ne pas utiliser directement !
+     *
      * @param component l'interface à ajouter
      * @param name      Le nom de l'interface
-     * @see InterfacesHandler#registerInterface(fr.thestudismetheory.ui.interfaces.AbstractGameInterface) 
+     * @warning Ne pas utiliser directement !
+     * @see InterfacesHandler#registerInterface(fr.thestudismetheory.ui.interfaces.AbstractGameInterface)
      */
     public void addInterface(JComponent component, String name) {
         add(component, name);
@@ -45,9 +47,10 @@ public class MainWindow extends JFrame {
 
     /**
      * Change l'interface du jeu
-     * @warning Ne pas utiliser directement !
+     *
      * @param name Le nom de l'interface
-     * @see InterfacesHandler#switchInterface(java.lang.Class) 
+     * @warning Ne pas utiliser directement !
+     * @see InterfacesHandler#switchInterface(java.lang.Class)
      */
     public void switchInterface(String name) {
         layout.show(getContentPane(), name);

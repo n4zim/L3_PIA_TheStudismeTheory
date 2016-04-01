@@ -8,6 +8,7 @@ package fr.thestudismetheory.data.global.dao.sqlite;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteDAO;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.global.dao.GameDataDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +16,9 @@ import java.sql.SQLException;
 import java.util.Date;
 
 /**
- *
  * @author vincent
  */
-public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDAO{
+public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDAO {
     /**
      * TEXT PRIMARY KEY
      */
@@ -36,11 +36,11 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
      * INTEGER
      */
     final static public String ATTR_MONEY = "GAME_MONEY";
-    
+
     final static private String[] COLUMNS = new String[]{
-        ATTR_ID, ATTR_SPEED, ATTR_DATE, ATTR_MONEY
+            ATTR_ID, ATTR_SPEED, ATTR_DATE, ATTR_MONEY
     };
-    
+
     final static private String[] PK_COL = new String[]{ATTR_ID};
 
     public SQLiteGameDataDAO(Connection connection) throws SQLException {
@@ -55,7 +55,7 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
                         ATTR_SPEED + " INTEGER," +
                         ATTR_DATE + " INTEGER," +
                         ATTR_MONEY + " INTEGER" +
-                ")"
+                        ")"
         );
     }
 
@@ -104,16 +104,16 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
 
     @Override
     public boolean gameExists(String name) {
-        try(PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM " + getTableName() + " WHERE " + ATTR_ID + " = ?")){
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM " + getTableName() + " WHERE " + ATTR_ID + " = ?")) {
             stmt.setString(1, name);
             ResultSet RS = stmt.executeQuery();
-            
-            if(RS.next())
+
+            if (RS.next())
                 return RS.getInt(1) > 0;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return false;
     }
 }

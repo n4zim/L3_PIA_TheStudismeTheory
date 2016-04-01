@@ -119,7 +119,7 @@ public class PeopleGenerator {
 
         Set<StudentFlaw> cond = new HashSet<>();
         Division division = new Division(new School(0, new City(0, "Test", 0),
-                new Institution(0,"Test", InstitutionType.PUBLIC), "Test", 0, 0, 0), category, 0, 0, cond);
+                new Institution(0, "Test", InstitutionType.PUBLIC), "Test", 0, 0, 0), category, 0, 0, cond);
 
         return new Teacher(Model.ID_NOT_DEFINED, name, birth, entering, charisma, skill, punct, teachSkill, category, division);
     }

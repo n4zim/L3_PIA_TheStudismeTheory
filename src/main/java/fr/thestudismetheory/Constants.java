@@ -6,7 +6,6 @@
 package fr.thestudismetheory;
 
 /**
- *
  * @author vincent
  */
 public class Constants {

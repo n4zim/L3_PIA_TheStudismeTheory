@@ -26,35 +26,36 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
      * @see SQLiteSchoolDAO#ATTR_ID
      */
     final static public String ATTR_SCHOOL = SQLiteSchoolDAO.ATTR_ID;
-    
+
     /**
      * @see SQLiteCategoryDAO#ATTR_ID
      */
     final static public String ATTR_CATEGORY = SQLiteCategoryDAO.ATTR_ID;
-    
+
     /**
      * INTEGER between 0 and 100
      */
     final static public String ATTR_SEATS_RATE = "DIVISION_SEATS_RATE";
-    
+
     /**
      * INTEGER > 0
      */
     final static public String ATTR_COST = "DIVISION_COST";
-    
+
     /**
      * INTEGER
-     * @see StudentFlaw#parseFlaws(int) 
+     *
+     * @see StudentFlaw#parseFlaws(int)
      */
     final static public String ATTR_COND = "DIVISION_COND";
-    
+
     final static private String[] COLUMNS = new String[]{
-        ATTR_SCHOOL, ATTR_CATEGORY, ATTR_SEATS_RATE, 
-        ATTR_COST, ATTR_COND
+            ATTR_SCHOOL, ATTR_CATEGORY, ATTR_SEATS_RATE,
+            ATTR_COST, ATTR_COND
     };
-    
+
     final static private String[] PK_COLS = new String[]{ATTR_SCHOOL, ATTR_CATEGORY};
-    
+
     final private SchoolDAO schoolDAO;
     final private CategoryDAO categoryDAO;
 
@@ -73,7 +74,7 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
                         ATTR_SEATS_RATE + " INTEGER," +
                         ATTR_COST + " INTEGER," +
                         ATTR_COND + " INTEGER" +
-                ")"
+                        ")"
         );
     }
 
@@ -97,7 +98,7 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
     @Override
     protected void bindPk(Division entity, PreparedStatement stmt, int offset) throws SQLException {
         stmt.setInt(offset, entity.getSchool().getId());
-        stmt.setInt(offset+1, entity.getCategory().getId());
+        stmt.setInt(offset + 1, entity.getCategory().getId());
     }
 
     @Override
@@ -108,10 +109,10 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
     @Override
     protected Division createByRS(ResultSet RS) throws SQLException {
         return new Division(
-                schoolDAO.findByPrimaryKey(RS.getInt(ATTR_SCHOOL)), 
-                categoryDAO.findByPrimaryKey(RS.getInt(ATTR_CATEGORY)), 
-                RS.getInt(ATTR_SEATS_RATE), 
-                RS.getInt(ATTR_COST), 
+                schoolDAO.findByPrimaryKey(RS.getInt(ATTR_SCHOOL)),
+                categoryDAO.findByPrimaryKey(RS.getInt(ATTR_CATEGORY)),
+                RS.getInt(ATTR_SEATS_RATE),
+                RS.getInt(ATTR_COST),
                 StudentFlaw.parseFlaws(RS.getInt(ATTR_COND))
         );
     }
@@ -125,18 +126,18 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
     @Override
     public List<Division> getDivisionsBySchool(int schoolId) {
         List<Division> divisions = new ArrayList<>();
-        
-        try(PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + ATTR_SCHOOL + " = ?")){
+
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + ATTR_SCHOOL + " = ?")) {
             stmt.setInt(1, schoolId);
-            
+
             ResultSet RS = stmt.executeQuery();
-            
-            while(RS.next())
+
+            while (RS.next())
                 divisions.add(createByRS(RS));
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return divisions;
     }
 }

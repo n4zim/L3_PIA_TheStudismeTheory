@@ -7,6 +7,7 @@ package fr.thestudismetheory.data.global.dao;
 
 /**
  * Factory DAO pour les données globales (communes à toutes les parties)
+ *
  * @author vincent
  */
 public interface GlobalDAOFactory {

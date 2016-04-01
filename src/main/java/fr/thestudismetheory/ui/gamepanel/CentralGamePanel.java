@@ -7,15 +7,14 @@ package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.generator.WorldCityGenerator;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.JPanel;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
- *
  * @author vincent
  */
-public class CentralGamePanel extends JPanel{
+public class CentralGamePanel extends JPanel {
     final private InstitutionPanel institutionView;
     final private WorldCityGenerator cityView;
     final private SchoolPanel schoolPanel;
@@ -31,35 +30,35 @@ public class CentralGamePanel extends JPanel{
         studentPanel = new StudentPanel(this);
         teacherPanel = new TeacherPanel(this);
         financePanel = new FinancePanel();
-        
+
         switchDefaultPanel();
     }
-    
-    public void switchInstitution(){
+
+    public void switchInstitution() {
         switchPanel(institutionView);
     }
-    
-    public void switchSchool(){
+
+    public void switchSchool() {
         switchPanel(schoolPanel);
     }
-    
-    public void switchStudent(){
+
+    public void switchStudent() {
         switchPanel(studentPanel);
     }
-    
-    public void switchTeacher(){
+
+    public void switchTeacher() {
         switchPanel(teacherPanel);
     }
-    
-    public void switchFinance(){
+
+    public void switchFinance() {
         switchPanel(financePanel);
     }
-    
-    public void switchDefaultPanel(){
+
+    public void switchDefaultPanel() {
         switchPanel(cityView);
     }
-    
-    private void switchPanel(JPanel panel){
+
+    private void switchPanel(JPanel panel) {
         removeAll();
         add(panel);
         revalidate();

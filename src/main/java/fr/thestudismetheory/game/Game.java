@@ -7,6 +7,7 @@ package fr.thestudismetheory.game;
 
 import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.data.global.GameData;
+
 import java.util.Date;
 
 /**
@@ -42,16 +43,18 @@ public interface Game {
      * Quitter le jeu (sauvegarde, fin boucle temporel, etc...)
      */
     public void quit();
-    
+
     /**
      * Récupère les données globles du jeu
-     * @return 
+     *
+     * @return
      */
     public GameData getGameData();
-    
+
     /**
      * Récupère les DAOs
-     * @return 
+     *
+     * @return
      */
     public DAOFactory getDAO();
 }

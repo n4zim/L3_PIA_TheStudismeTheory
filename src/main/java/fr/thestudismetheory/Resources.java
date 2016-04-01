@@ -7,7 +7,10 @@ package fr.thestudismetheory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
@@ -36,16 +39,16 @@ final public class Resources {
     static public String[] getStudentNames(String name) {
         StringBuilder sb = new StringBuilder();
         System.out.println(name);
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(getResource(name).openStream()))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(getResource(name).openStream()))) {
             String line = br.readLine();
             while (line != null) {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-        } catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             System.out.println("Impossible d'ouvrir le fichier des prénoms");
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Erreur de lecture du fichier des prénoms");
             e.printStackTrace();
         }

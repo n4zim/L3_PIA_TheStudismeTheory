@@ -6,18 +6,19 @@
 package fr.thestudismetheory.ui.interfaces;
 
 import fr.thestudismetheory.data.strings.UIConstants;
-import javax.swing.JPanel;
+
+import javax.swing.*;
 
 /**
- *
  * @author vincent
  */
-abstract public class AbstractGameInterface extends JPanel{
+abstract public class AbstractGameInterface extends JPanel {
 
     public AbstractGameInterface() {
         setPreferredSize(UIConstants.DEFAULT_WIN_DIM);
     }
-    
+
     abstract public String getTitle();
+
     abstract public String getId();
 }

@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.data.strings.UIConstants;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,16 +14,25 @@ import java.awt.event.ActionListener;
  */
 public class TeacherPanel extends GamePanel {
     final static public String PANEL_ID = "TEACHER";
-
+    final private CentralGamePanel gamePanel;
     protected JPanel cards;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
     protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
-    
-    final private CentralGamePanel gamePanel;
+    private Object[][] teachers = {
+            {"Johnathan", "Sykes", 10, 8, 10, 8},
+            {"Nicolas", "Van de Kampf", 5, 3, 15, 5},
+            {"Damien", "Cuthbert", 8, 10, 7, 20},
+            {"Corinne", "Valance", 3, 16, 9, 30},
+            {"Emilie", "Schrödinger", 20, 22, 12, 14},
+            {"Delphine", "Duke", 9, 42, 5, 19},
+            {"Eric", "Trump", 12, 1, 9, 1},
+    };
+    private JTable tableau = new JTable();
+
 
     public TeacherPanel(CentralGamePanel centralGamePanel) {
         setLayout(new BorderLayout());
-        
+
         this.gamePanel = centralGamePanel;
 
         //Ajout liste des écoles
@@ -71,21 +81,8 @@ public class TeacherPanel extends GamePanel {
     public String getId() {
         return PANEL_ID;
     }
-    
 
-    private Object[][] teachers = {
-            {"Johnathan", "Sykes", 10, 8, 10, 8},
-            {"Nicolas", "Van de Kampf", 5, 3, 15, 5},
-            {"Damien", "Cuthbert", 8, 10, 7, 20},
-            {"Corinne", "Valance", 3, 16, 9, 30},
-            {"Emilie", "Schrödinger", 20, 22, 12, 14},
-            {"Delphine", "Duke", 9, 42, 5, 19},
-            {"Eric", "Trump", 12, 1, 9, 1},
-    };
-
-    private JTable tableau = new JTable();
-
-    public JPanel teacherList(){
+    public JPanel teacherList() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
@@ -117,8 +114,7 @@ public class TeacherPanel extends GamePanel {
                 int select = tableau.getSelectedRow();
 
                 //Sélection correcte
-                if(select >= 0)
-                {
+                if (select >= 0) {
                     System.out.println(select);
 
                 }

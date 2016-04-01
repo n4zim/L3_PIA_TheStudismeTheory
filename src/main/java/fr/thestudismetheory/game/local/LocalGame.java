@@ -6,10 +6,9 @@
 package fr.thestudismetheory.game.local;
 
 import fr.thestudismetheory.TheStudismeTheory;
-import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.dao.DAOFactory;
+import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.game.Game;
-import fr.thestudismetheory.handler.SchoolHandler;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,16 +22,13 @@ import java.util.concurrent.TimeUnit;
  * @author vincent
  */
 public class LocalGame implements Game {
-    private int curYear;
-    private int curMounth;
-    
     final private GameData data;
     final private DAOFactory dao;
     final private TheStudismeTheory app;
-    
     final private Calendar calendar = Calendar.getInstance();
-
     final private ScheduledExecutorService ses;
+    private int curYear;
+    private int curMounth;
 
     public LocalGame(DAOFactory dao, GameData data, TheStudismeTheory app) {
         this.data = data;
@@ -45,10 +41,10 @@ public class LocalGame implements Game {
     @Override
     public void start() {
         calendar.setTime(data.getGameDate());
-        
+
         curYear = calendar.get(Calendar.YEAR);
         curMounth = calendar.get(Calendar.MONTH);
-        
+
         ses.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -67,30 +63,30 @@ public class LocalGame implements Game {
     @Override
     public void onTick(Date currentDate) {
         System.out.println(">> Tick " + currentDate);
-        
+
         calendar.setTime(currentDate);
         int nYear = calendar.get(Calendar.YEAR);
         int nMounth = calendar.get(Calendar.MONTH);
-        
-        if(nYear > curYear){
+
+        if (nYear > curYear) {
             curYear = nYear;
             onNewYear();
         }
-        
-        if(curMounth != nMounth){
+
+        if (curMounth != nMounth) {
             curMounth = nMounth;
             onNewMounth();
         }
-        
-        
+
+
     }
-    
-    private void onNewYear(){
+
+    private void onNewYear() {
         app.getStudentHandler().passExams(this);
         app.getStudentHandler().onEndYear(this);
     }
-    
-    private void onNewMounth(){
+
+    private void onNewMounth() {
         app.getSchoolHandler().paySchools(this);
         app.getTeacherHandler().paySalary(this);
     }
@@ -111,7 +107,7 @@ public class LocalGame implements Game {
     }
 
     public void updateScore() {
-        
+
     }
 
     @Override
@@ -123,6 +119,6 @@ public class LocalGame implements Game {
     public DAOFactory getDAO() {
         return dao;
     }
-    
-    
+
+
 }

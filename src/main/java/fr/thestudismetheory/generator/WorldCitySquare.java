@@ -4,8 +4,6 @@ import fr.thestudismetheory.Resources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class WorldCitySquare extends JButton {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(type == 0) {
+        if (type == 0) {
             Image img = Resources.SCHOOL_TILE.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
             setIcon(new ImageIcon(img));
         }

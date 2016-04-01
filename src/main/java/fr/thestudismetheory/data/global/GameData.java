@@ -7,13 +7,15 @@ package fr.thestudismetheory.data.global;
 
 import fr.thestudismetheory.data.AbstractModel;
 import fr.thestudismetheory.data.ModelListener;
+
 import java.util.Date;
 
 /**
  * Données du jeu
+ *
  * @author vincent
  */
-public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
+public class GameData extends AbstractModel<GameData, ModelListener<GameData>> {
     final private String id;
     private int speed;
     private Date gameDate;
@@ -34,13 +36,13 @@ public class GameData extends AbstractModel<GameData, ModelListener<GameData>>{
         return speed;
     }
 
-    public Date getGameDate() {
-        return gameDate;
-    }
-
     public void setSpeed(int speed) {
         this.speed = speed;
         notifyUpdate();
+    }
+
+    public Date getGameDate() {
+        return gameDate;
     }
 
     public void setGameDate(Date gameDate) {

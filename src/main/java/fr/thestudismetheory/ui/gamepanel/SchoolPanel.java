@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.data.strings.UIConstants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,17 +13,15 @@ import java.awt.event.ActionListener;
  */
 public class SchoolPanel extends GamePanel {
     static final public String PANEL_ID = "SCHOOL";
-
+    final private CentralGamePanel centralPanel;
     protected JPanel cards;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
     protected String[] cat_list = {"** Informatique **", "** Sport **", "** Médecine **", "** Science **", "** Ninja **"};
     protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
-    
-    final private CentralGamePanel centralPanel;
 
     public SchoolPanel(CentralGamePanel centralGamePanel) {
         setLayout(new BorderLayout());
-        
+
         this.centralPanel = centralGamePanel;
 
         //Ajout liste des écoles

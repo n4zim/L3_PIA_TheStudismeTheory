@@ -18,20 +18,17 @@ import java.util.Date;
  */
 public class MainGameInterface extends AbstractGameInterface {
     final private CentralGamePanel centralPanel;
-
-    private boolean saved = false;
-    private JFrame gameWindow;
-    
     final private JLabel statResources = new JLabel("???");
     final private JLabel statTime = new JLabel("???");
-    
     final private GameDataListener gameDataListener;
+    private boolean saved = false;
+    private JFrame gameWindow;
 
     public MainGameInterface(TheStudismeTheory app) {
         gameDataListener = new GameDataListener(this);
-        
+
         centralPanel = new CentralGamePanel(app);
-        
+
         setLayout(new BorderLayout());
 
         // Titre de la fenetre
@@ -179,12 +176,12 @@ public class MainGameInterface extends AbstractGameInterface {
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
-    
-    public void setTime(Date date){
+
+    public void setTime(Date date) {
         statTime.setText(date.toString());
     }
-    
-    public void setResources(long money){
+
+    public void setResources(long money) {
         statResources.setText(money + "");
     }
 

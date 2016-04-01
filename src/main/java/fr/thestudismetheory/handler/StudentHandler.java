@@ -9,7 +9,6 @@ import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.game.Game;
 
 /**
- *
  * @author vincent
  */
 public class StudentHandler {
@@ -18,12 +17,12 @@ public class StudentHandler {
     public StudentHandler(TheStudismeTheory app) {
         this.app = app;
     }
-    
-    public void passExams(Game game){
+
+    public void passExams(Game game) {
         //TODO
     }
-    
-    public void onEndYear(Game game){
+
+    public void onEndYear(Game game) {
         //TODO
     }
 }

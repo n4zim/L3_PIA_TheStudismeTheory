@@ -1,7 +1,5 @@
 package fr.thestudismetheory.generator;
 
-import fr.thestudismetheory.Resources;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,10 +15,8 @@ public class WorldCityGenerator extends JPanel {
 
     private final int KIND_OF_TYPES = 5;
     private final int MAX_SECTION_SQUARES = 6;
-
-    private WorldCitySquare[][] cityMap = new WorldCitySquare[GRID_SIZE][GRID_SIZE];
-
     private final Color[] TYPES_COLORS = {Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.GREEN};
+    private WorldCitySquare[][] cityMap = new WorldCitySquare[GRID_SIZE][GRID_SIZE];
 
     public WorldCityGenerator() {
         super(new GridLayout(GRID_SIZE, GRID_SIZE));
@@ -51,7 +47,7 @@ public class WorldCityGenerator extends JPanel {
                 currentWorldCitySquare.setRightBorder(true);
 
             // Si c'est une école
-            if(currentWorldCitySquare.getType() == 0) {
+            if (currentWorldCitySquare.getType() == 0) {
                 currentWorldCitySquare.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

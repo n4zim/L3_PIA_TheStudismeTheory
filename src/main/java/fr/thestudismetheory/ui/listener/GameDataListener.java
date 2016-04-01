@@ -10,10 +10,9 @@ import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.ui.interfaces.MainGameInterface;
 
 /**
- *
  * @author vincent
  */
-public class GameDataListener implements ModelListener<GameData>{
+public class GameDataListener implements ModelListener<GameData> {
     final private MainGameInterface gameInterface;
 
     public GameDataListener(MainGameInterface gameInterface) {

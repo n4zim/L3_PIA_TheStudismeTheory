@@ -5,7 +5,7 @@ package fr.thestudismetheory.ui.gamepanel;
  */
 public class FinancePanel extends GamePanel {
     final static public String PANEL_ID = "FINANCE";
-    
+
     public FinancePanel() {
     }
 
@@ -13,6 +13,6 @@ public class FinancePanel extends GamePanel {
     public String getId() {
         return PANEL_ID;
     }
-    
-    
+
+
 }

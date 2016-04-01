@@ -11,8 +11,9 @@ import fr.thestudismetheory.data.global.GameData;
 /**
  * DAO pour les données du jeu (options, vitesse, temps...)
  * Cette donnée est globale
+ *
  * @author vincent
  */
-public interface GameDataDAO extends DAO<GameData>{
+public interface GameDataDAO extends DAO<GameData> {
     public boolean gameExists(String name);
 }

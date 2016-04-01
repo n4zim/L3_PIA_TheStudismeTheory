@@ -5,9 +5,9 @@
  */
 package fr.thestudismetheory.data;
 
-import fr.thestudismetheory.data.subentity.Graduate;
 import fr.thestudismetheory.data.enums.StudentFlaw;
 import fr.thestudismetheory.data.listener.StudentListener;
+import fr.thestudismetheory.data.subentity.Graduate;
 
 import java.util.Date;
 import java.util.Map;
@@ -110,8 +110,8 @@ public class Student extends AbstractModel<Student, StudentListener> {
 
     public void setInterestRate(Category category, int interestRate) {
         interests.put(category, interestRate);
-        
-        for(StudentListener listener : listeners)
+
+        for (StudentListener listener : listeners)
             listener.onInterestChange(this, category, interestRate);
     }
 
@@ -125,30 +125,32 @@ public class Student extends AbstractModel<Student, StudentListener> {
 
     public void setGraduate(int year, Graduate graduate) {
         graduations.put(year, graduate);
-        
-        for(StudentListener listener : listeners)
+
+        for (StudentListener listener : listeners)
             listener.onNewGraduation(this, graduate);
     }
 
     /**
      * A appeler uniquement dans le DAO
-     * @param interests 
+     *
+     * @param interests
      */
     public void setInterests(Map<Category, Integer> interests) {
-        if(this.interests != null)
+        if (this.interests != null)
             throw new IllegalStateException("interests are already set");
-        
+
         this.interests = interests;
     }
 
     /**
      * A appeler uniquement dans le DAO
-     * @param graduations  
+     *
+     * @param graduations
      */
     public void setGraduations(Map<Integer, Graduate> graduations) {
-        if(this.graduations != null)
+        if (this.graduations != null)
             throw new IllegalStateException("graduations are already set");
-            
+
         this.graduations = graduations;
     }
 

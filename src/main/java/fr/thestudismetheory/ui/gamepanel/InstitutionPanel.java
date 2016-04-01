@@ -14,18 +14,15 @@ import java.awt.event.ActionListener;
  */
 public class InstitutionPanel extends GamePanel {
     final static public String PANEL_ID = "INSTITUTION";
-
+    final private CentralGamePanel centralPanel;
     protected JPanel cards;
     protected String CURRENT_CARD = UIConstants.BUTTON_NEW_SCHOOL;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
-
     private JTextField schoolName;
-    
-    final private CentralGamePanel centralPanel;
 
     public InstitutionPanel(final CentralGamePanel parent, final TheStudismeTheory app) {
         setLayout(new BorderLayout());
-        
+
         this.centralPanel = parent;
 
         //Ajout des bouttons
@@ -97,10 +94,9 @@ public class InstitutionPanel extends GamePanel {
         b_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(CURRENT_CARD == UIConstants.BUTTON_NEW_SCHOOL)
-                {
+                if (CURRENT_CARD == UIConstants.BUTTON_NEW_SCHOOL) {
                     String name = schoolName.getText();
-                    if(name.length() > 0) {
+                    if (name.length() > 0) {
                         app.getSchoolHandler().createSchool(app.getGameHandler().getCurrentGame(), name);
                     }
                 }

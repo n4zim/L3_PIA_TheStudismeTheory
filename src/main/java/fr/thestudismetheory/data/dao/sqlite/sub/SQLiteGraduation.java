@@ -7,7 +7,6 @@ package fr.thestudismetheory.data.dao.sqlite.sub;
 
 import fr.thestudismetheory.data.Student;
 import fr.thestudismetheory.data.dao.DivisionDAO;
-import fr.thestudismetheory.data.dao.sqlite.SQLiteCategoryDAO;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteDivisionDAO;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteSchoolDAO;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteStudentDAO;

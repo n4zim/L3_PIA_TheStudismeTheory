@@ -13,6 +13,7 @@ import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.enums.InstitutionType;
 import fr.thestudismetheory.game.Game;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
  *
@@ -52,7 +53,7 @@ public class SchoolHandler {
     }
 
     public void createSchool(Game game, String name){
-        School newSchool = new School(-1, city, institution, name, 0, 0, 0);
+        School newSchool = new School(-1, city, institution, name, 0, 0, 200);
         game.getDAO().getSchoolDAO().insert(newSchool);
     }
 }

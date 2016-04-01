@@ -81,4 +81,8 @@ public class GameHandler {
         
         internalStartGame(gameData);
     }
+
+    public Game getCurrentGame(){
+        return this.currentGame;
+    }
 }

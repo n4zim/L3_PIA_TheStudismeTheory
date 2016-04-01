@@ -1,5 +1,6 @@
 package fr.thestudismetheory.ui.gamepanel;
 
+import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.strings.UIConstants;
 
 import javax.swing.*;
@@ -17,10 +18,12 @@ public class InstitutionPanel extends GamePanel {
     protected JPanel cards;
     protected String CURRENT_CARD = UIConstants.BUTTON_NEW_SCHOOL;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
+
+    private JTextField schoolName;
     
     final private CentralGamePanel centralPanel;
 
-    public InstitutionPanel(CentralGamePanel parent) {
+    public InstitutionPanel(final CentralGamePanel parent, final TheStudismeTheory app) {
         setLayout(new BorderLayout());
         
         this.centralPanel = parent;
@@ -96,7 +99,10 @@ public class InstitutionPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 if(CURRENT_CARD == UIConstants.BUTTON_NEW_SCHOOL)
                 {
-
+                    String name = schoolName.getText();
+                    if(name.length() > 0) {
+                        app.getSchoolHandler().createSchool(app.getGameHandler().getCurrentGame(), name);
+                    }
                 }
                 centralPanel.switchDefaultPanel();
             }
@@ -129,11 +135,9 @@ public class InstitutionPanel extends GamePanel {
         JLabel cost = new JLabel(UIConstants.NEW_SCHOOL_COST);
 
         JLabel schoolNameLabel = new JLabel("Nom de l'école : ");
-        JTextField schoolName = new JTextField(30);
+        schoolName = new JTextField(100);
 
         JPanel formPanel = new JPanel();
-        formPanel.add(schoolNameLabel);
-        formPanel.add(schoolName);
 
         panel.add(north, BorderLayout.NORTH);
         panel.add(formPanel, BorderLayout.CENTER);
@@ -146,6 +150,8 @@ public class InstitutionPanel extends GamePanel {
         gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
         formPanel.setLayout(new GridBagLayout());
 
+        formPanel.add(schoolNameLabel, gbc);
+        formPanel.add(schoolName, gbc);
         formPanel.add(cost, gbc);
 
         return panel;

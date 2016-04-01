@@ -6,8 +6,11 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.City;
 import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.Institution;
 import fr.thestudismetheory.data.School;
+import fr.thestudismetheory.data.enums.InstitutionType;
 import fr.thestudismetheory.game.Game;
 import javax.swing.JOptionPane;
 
@@ -19,9 +22,13 @@ public class SchoolHandler {
     final static public int BASE_SCHOOL_COST_PER_MONTH = 1000;
     
     final private TheStudismeTheory app;
+    final private City city;
+    final private Institution institution;
 
     public SchoolHandler(TheStudismeTheory app) {
         this.app = app;
+        this.city = new City(-1, "City Cool", 42);
+        this.institution = new Institution(-1, "Institut Lol", InstitutionType.PUBLIC);
     }
     
     public void paySchools(Game game){
@@ -42,5 +49,10 @@ public class SchoolHandler {
         }
         
         game.getGameData().setMoney(money);
+    }
+
+    public void createSchool(Game game, String name){
+        School newSchool = new School(-1, city, institution, name, 0, 0, 0);
+        game.getDAO().getSchoolDAO().insert(newSchool);
     }
 }

@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.data.strings.UIConstants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ public class InstitutionPanel extends GamePanel {
     final static public String PANEL_ID = "INSTITUTION";
 
     protected JPanel cards;
+    protected String CURRENT_CARD = UIConstants.BUTTON_NEW_SCHOOL;
     protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
     
     final private CentralGamePanel centralPanel;
@@ -67,6 +69,7 @@ public class InstitutionPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_NEW_SCHOOL);
+                CURRENT_CARD = UIConstants.BUTTON_NEW_SCHOOL;
             }
         });
 
@@ -75,6 +78,7 @@ public class InstitutionPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_SELL_SCHOOL);
+                CURRENT_CARD = UIConstants.BUTTON_SELL_SCHOOL;
             }
         });
 
@@ -83,12 +87,17 @@ public class InstitutionPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_GRANT);
+                CURRENT_CARD = UIConstants.BUTTON_GRANT;
             }
         });
 
         b_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(CURRENT_CARD == UIConstants.BUTTON_NEW_SCHOOL)
+                {
+
+                }
                 centralPanel.switchDefaultPanel();
             }
         });

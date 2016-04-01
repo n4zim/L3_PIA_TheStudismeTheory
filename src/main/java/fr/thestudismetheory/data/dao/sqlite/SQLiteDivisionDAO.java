@@ -123,6 +123,6 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
 
     @Override
     public List<Division> getDivisionsBySchool(int schoolId) {
-        
+
     }
 }

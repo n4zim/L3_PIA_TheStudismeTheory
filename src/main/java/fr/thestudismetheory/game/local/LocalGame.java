@@ -61,6 +61,8 @@ public class LocalGame implements Game {
 
     @Override
     public void onTick(Date currentDate) {
+        System.out.println(">> Tick " + currentDate);
+        
         calendar.setTime(currentDate);
         int nYear = calendar.get(Calendar.YEAR);
         int nMounth = calendar.get(Calendar.MONTH);

@@ -248,7 +248,7 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
     protected long internalInsert(M entity){
         try(PreparedStatement stmt = connection.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)){
             bindPk(entity, stmt, 1);
-            bindValues(entity, stmt, getNonPkColumns().length);
+            bindValues(entity, stmt, getPkColumns().length + 1);
             stmt.execute();
             ResultSet RS = stmt.getGeneratedKeys();
             

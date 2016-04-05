@@ -232,7 +232,7 @@ public class InstitutionPanel extends GamePanel {
         return panel;
     }
 
-    public void updatePanel(){
+    protected void updatePanel(){
         schools_list = app.getGameHandler().getCurrentGame().getDAO().getSchoolDAO().getAll();
 
         cb_schools.removeAllItems();

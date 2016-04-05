@@ -1,5 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
+import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.strings.UIConstants;
 
 import javax.swing.*;
@@ -7,16 +9,19 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Fenetre permettant la gestion des étudiants d'une école
  * Created by Maeva on 11/03/2016.
  */
 public class StudentPanel extends GamePanel {
+    private TheStudismeTheory app;
     final static public String PANEL_ID = "STUDENT";
     final private CentralGamePanel gamePanel;
     protected JPanel cards;
-    protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
+    protected List<School> schools_list = Collections.emptyList();
     protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
     Object[][] student = {
             {"Johnathan Sykes", "10/02/1995", 8, 10, "informatique"},
@@ -28,7 +33,10 @@ public class StudentPanel extends GamePanel {
             {"Eric Trump", "12/07/1994", 1, 9, "emeux"},
     };
 
-    public StudentPanel(CentralGamePanel centralGamePanel) {
+    protected JComboBox cb_schools;
+
+    public StudentPanel(CentralGamePanel centralGamePanel, final TheStudismeTheory app) {
+        this.app = app;
         setLayout(new BorderLayout());
 
         this.gamePanel = centralGamePanel;
@@ -37,7 +45,7 @@ public class StudentPanel extends GamePanel {
         JPanel north = new JPanel();
         add(north, BorderLayout.NORTH);
 
-        JComboBox cb_schools = new JComboBox(schools_list);
+        cb_schools = new JComboBox(schools_list.toArray());
         JComboBox cb_poles = new JComboBox(pole_list);
 
         north.add(cb_schools);
@@ -126,5 +134,13 @@ public class StudentPanel extends GamePanel {
         panel.add(center, BorderLayout.CENTER);
 
         return panel;
+    }
+
+    protected void updatePanel(){
+        schools_list = app.getGameHandler().getCurrentGame().getDAO().getSchoolDAO().getAll();
+        cb_schools.removeAllItems();
+        for(School school : schools_list)
+            cb_schools.addItem(school);
+
     }
 }

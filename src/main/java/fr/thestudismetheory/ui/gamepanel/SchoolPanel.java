@@ -1,25 +1,36 @@
 package fr.thestudismetheory.ui.gamepanel;
 
+import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.Category;
+import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.strings.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Fenetre permettant la gestion d'une école
  * Created by Maeva on 11/03/2016.
  */
 public class SchoolPanel extends GamePanel {
+    private TheStudismeTheory app;
     static final public String PANEL_ID = "SCHOOL";
     final private CentralGamePanel centralPanel;
     protected JPanel cards;
-    protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
-    protected String[] cat_list = {"** Informatique **", "** Sport **", "** Médecine **", "** Science **", "** Ninja **"};
-    protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
+    protected List<School> schools_list = Collections.emptyList();
+    protected List<Category> cat_list = Collections.emptyList();
+    protected List<Division> pole_list = Collections.emptyList();
+    protected JComboBox cb_schools;
+    protected JComboBox cb_categories;
+    protected JComboBox cb_pole;
 
-    public SchoolPanel(CentralGamePanel centralGamePanel) {
+    public SchoolPanel(CentralGamePanel centralGamePanel, final TheStudismeTheory app) {
+        this.app = app;
         setLayout(new BorderLayout());
 
         this.centralPanel = centralGamePanel;
@@ -28,7 +39,7 @@ public class SchoolPanel extends GamePanel {
         JPanel north = new JPanel();
         add(north, BorderLayout.NORTH);
 
-        JComboBox cb_schools = new JComboBox(schools_list);
+        cb_schools = new JComboBox(schools_list.toArray());
 
         north.add(cb_schools);
 
@@ -117,10 +128,10 @@ public class SchoolPanel extends GamePanel {
 
         JLabel cost = new JLabel(UIConstants.ADD_POLE_COST);
 
-        JLabel poleNameLabel = new JLabel("Nom de l'école : ");
+        JLabel poleNameLabel = new JLabel("Nom du pôle : ");
         JTextField poleName = new JTextField(30);
         JLabel catLabel = new JLabel("Catégorie : ");
-        JComboBox catName = new JComboBox(cat_list);
+        cb_categories = new JComboBox(cat_list.toArray());
 
         JPanel formPanel = new JPanel();
 
@@ -138,7 +149,7 @@ public class SchoolPanel extends GamePanel {
         formPanel.add(poleNameLabel, gbc);
         formPanel.add(poleName, gbc);
         formPanel.add(catLabel, gbc);
-        formPanel.add(catName, gbc);
+        formPanel.add(cb_categories, gbc);
         formPanel.add(cost, gbc);
 
         return panel;
@@ -158,7 +169,7 @@ public class SchoolPanel extends GamePanel {
         JButton cost = new JButton(UIConstants.UPGRADE_POLE_COST);
 
         JLabel poleListLabel = new JLabel("Pôle : ");
-        JComboBox cb_pole = new JComboBox(pole_list);
+        cb_pole = new JComboBox(pole_list.toArray());
         JLabel description = new JLabel(UIConstants.UPGRADE_POLE_DESC);
 
         JPanel formPanel = new JPanel();
@@ -180,5 +191,22 @@ public class SchoolPanel extends GamePanel {
         formPanel.add(cost, gbc);
 
         return panel;
+    }
+
+    public void updatePanel(){
+        schools_list = app.getGameHandler().getCurrentGame().getDAO().getSchoolDAO().getAll();
+        cb_schools.removeAllItems();
+        for(School school : schools_list)
+            cb_schools.addItem(school);
+
+        cat_list = app.getGameHandler().getCurrentGame().getDAO().getCategoryDAO().getAll();
+        cb_categories.removeAllItems();
+        for(Category category : cat_list)
+            cb_categories.addItem(category);
+
+        pole_list = app.getGameHandler().getCurrentGame().getDAO().getDivisionDAO().getAll();
+        cb_pole.removeAllItems();
+        for(Division division : pole_list)
+            cb_pole.addItem(division);
     }
 }

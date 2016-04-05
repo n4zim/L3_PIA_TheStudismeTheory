@@ -26,7 +26,7 @@ public class CentralGamePanel extends JPanel {
         setLayout(new BorderLayout());
         institutionView = new InstitutionPanel(this, app);
         cityView = new WorldCityGenerator();
-        schoolPanel = new SchoolPanel(this);
+        schoolPanel = new SchoolPanel(this, app);
         studentPanel = new StudentPanel(this);
         teacherPanel = new TeacherPanel(this);
         financePanel = new FinancePanel();
@@ -41,6 +41,7 @@ public class CentralGamePanel extends JPanel {
 
     public void switchSchool() {
         switchPanel(schoolPanel);
+        schoolPanel.updatePanel();
     }
 
     public void switchStudent() {

@@ -11,6 +11,7 @@ import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.Institution;
 import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.enums.InstitutionType;
+import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.game.Game;
 
 import javax.swing.*;
@@ -54,15 +55,20 @@ public class SchoolHandler {
     }
 
     public void createSchool(Game game, String name) {
-        School newSchool = new School(-1, city, institution, name, 0, 0, 200);
-        game.getDAO().getSchoolDAO().insert(newSchool);
+        int cost = UIConstants.NEW_SCHOOL_PRICE;
+        if(game.getGameData().getMoney() > cost) {
+            School newSchool = new School(-1, city, institution, name, 0, cost, 200);
+            game.getDAO().getSchoolDAO().insert(newSchool);
+            game.getGameData().setMoney(game.getGameData().getMoney() - cost);
+        }
+        else {
+            JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez pas assez d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void deleteSchool(Game game, School school){
+        int income = UIConstants.SELL_SCHOOL_PRICE;
         game.getDAO().getSchoolDAO().delete(school);
-    }
-
-    public List<School> getSchools(Game game) {
-        return game.getDAO().getSchoolDAO().getAll();
+        game.getGameData().setMoney(game.getGameData().getMoney() + income);
     }
 }

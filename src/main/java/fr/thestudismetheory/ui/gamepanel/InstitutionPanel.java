@@ -1,26 +1,33 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.strings.UIConstants;
+import fr.thestudismetheory.game.Game;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Fenetre permettant la gestion de l'institution
  * Created by Maeva on 11/03/2016.
  */
 public class InstitutionPanel extends GamePanel {
+    private  TheStudismeTheory app;
     final static public String PANEL_ID = "INSTITUTION";
     final private CentralGamePanel centralPanel;
     protected JPanel cards;
     protected String CURRENT_CARD = UIConstants.BUTTON_NEW_SCHOOL;
-    protected String[] schools_list = {"** Ecole 1 **", "** Ecole 2 **", "** Ecole 3 **", "** Ecole 4 **", "** Ecole 5 **"};
+    protected List<School> schools_list = Collections.emptyList();
     private JTextField schoolName;
 
     public InstitutionPanel(final CentralGamePanel parent, final TheStudismeTheory app) {
+        this.app = app;
+
         setLayout(new BorderLayout());
 
         this.centralPanel = parent;
@@ -98,7 +105,11 @@ public class InstitutionPanel extends GamePanel {
                     String name = schoolName.getText();
                     if (name.length() > 0) {
                         app.getSchoolHandler().createSchool(app.getGameHandler().getCurrentGame(), name);
+                        schoolName.setText("");
                     }
+                }
+                else if(CURRENT_CARD == UIConstants.BUTTON_SELL_SCHOOL){
+                    app.getSchoolHandler().deleteSchool(app.getGameHandler().getCurrentGame(), (School) cb_schools.getSelectedItem());
                 }
                 centralPanel.switchDefaultPanel();
             }
@@ -153,6 +164,8 @@ public class InstitutionPanel extends GamePanel {
         return panel;
     }
 
+    protected JComboBox cb_schools;
+
     public JPanel sellSchoolPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -167,7 +180,7 @@ public class InstitutionPanel extends GamePanel {
         JLabel cost = new JLabel(UIConstants.SELL_SCHOOL_COST);
 
         JLabel schoolNameLabel = new JLabel("Nom de l'école : ");
-        JComboBox cb_schools = new JComboBox(schools_list);
+        cb_schools = new JComboBox(schools_list.toArray());
 
         JPanel formPanel = new JPanel();
         formPanel.add(schoolNameLabel);
@@ -217,5 +230,13 @@ public class InstitutionPanel extends GamePanel {
         formPanel.setLayout(new GridBagLayout());
 
         return panel;
+    }
+
+    public void updatePanel(){
+        schools_list = app.getSchoolHandler().getSchools(app.getGameHandler().getCurrentGame());
+
+        cb_schools.removeAllItems();
+        for(School school : schools_list)
+            cb_schools.addItem(school);
     }
 }

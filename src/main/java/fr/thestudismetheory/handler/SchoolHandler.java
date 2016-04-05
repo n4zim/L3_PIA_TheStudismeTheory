@@ -14,6 +14,8 @@ import fr.thestudismetheory.data.enums.InstitutionType;
 import fr.thestudismetheory.game.Game;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author vincent
@@ -54,5 +56,13 @@ public class SchoolHandler {
     public void createSchool(Game game, String name) {
         School newSchool = new School(-1, city, institution, name, 0, 0, 200);
         game.getDAO().getSchoolDAO().insert(newSchool);
+    }
+
+    public void deleteSchool(Game game, School school){
+        game.getDAO().getSchoolDAO().delete(school);
+    }
+
+    public List<School> getSchools(Game game) {
+        return game.getDAO().getSchoolDAO().getAll();
     }
 }

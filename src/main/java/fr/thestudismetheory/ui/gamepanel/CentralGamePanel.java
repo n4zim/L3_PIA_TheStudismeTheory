@@ -36,6 +36,7 @@ public class CentralGamePanel extends JPanel {
 
     public void switchInstitution() {
         switchPanel(institutionView);
+        institutionView.updatePanel();
     }
 
     public void switchSchool() {

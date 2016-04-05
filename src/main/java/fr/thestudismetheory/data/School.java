@@ -85,5 +85,9 @@ public class School extends AbstractModel<School, ModelListener<School>> {
         notifyUpdate();
     }
 
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 
 }

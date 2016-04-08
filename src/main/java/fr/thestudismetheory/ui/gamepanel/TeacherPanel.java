@@ -1,6 +1,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.strings.UIConstants;
 
@@ -9,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class TeacherPanel extends GamePanel {
     final private CentralGamePanel gamePanel;
     protected JPanel cards;
     protected List<School> schools_list = Collections.emptyList(); // initialisation liste vide
-    protected String[] pole_list = {"** Pole 1 **", "** Pole 2 **", "** Pole 3 **", "** Pole 4 **", "** Pole 5 **"};
+    protected List<Division> pole_list = Collections.emptyList();
     private Object[][] teachers = {
             {"Johnathan", "Sykes", 10, 8, 10, 8},
             {"Nicolas", "Van de Kampf", 5, 3, 15, 5},
@@ -34,6 +37,7 @@ public class TeacherPanel extends GamePanel {
     };
     private JTable tableau = new JTable();
     protected JComboBox cb_schools;
+    protected JComboBox cb_poles;
 
 
     public TeacherPanel(CentralGamePanel centralGamePanel, final TheStudismeTheory app) {
@@ -47,7 +51,35 @@ public class TeacherPanel extends GamePanel {
         add(north, BorderLayout.NORTH);
 
         cb_schools = new JComboBox(schools_list.toArray());
-        JComboBox cb_poles = new JComboBox(pole_list);
+        cb_poles = new JComboBox(pole_list.toArray());
+
+        cb_schools.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    School selectedSchool = (School) cb_schools.getSelectedItem();
+
+                    pole_list = app.getGameHandler().getCurrentGame().getDAO().getDivisionDAO().getDivisionsBySchool(selectedSchool.getId());
+                    cb_poles.removeAllItems();
+                    for(Division division : pole_list)
+                        cb_poles.addItem(division);
+                }
+            }
+        });
+
+        cb_poles.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+
+                Object item = event.getItem();
+
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    //int indexDivision = cb_poles.getSelectedIndex();
+                    //Division selectedDivision = pole_list.get(indexDivision);
+
+
+                }
+            }
+        });
 
         north.add(cb_schools);
         north.add(cb_poles);
@@ -141,9 +173,17 @@ public class TeacherPanel extends GamePanel {
     }
 
     protected void updatePanel(){
+        //ComboBox Ecoles
         schools_list = app.getGameHandler().getCurrentGame().getDAO().getSchoolDAO().getAll();
         cb_schools.removeAllItems();
         for(School school : schools_list)
             cb_schools.addItem(school);
+
+        School selectedSchool = (School) cb_schools.getSelectedItem();
+
+        pole_list = app.getGameHandler().getCurrentGame().getDAO().getDivisionDAO().getDivisionsBySchool(selectedSchool.getId());
+        cb_poles.removeAllItems();
+        for(Division division : pole_list)
+            cb_poles.addItem(division);
     }
 }

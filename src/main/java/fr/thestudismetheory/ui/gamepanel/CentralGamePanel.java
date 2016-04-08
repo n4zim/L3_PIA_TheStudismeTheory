@@ -30,7 +30,7 @@ public class CentralGamePanel extends JPanel {
         institutionView = new InstitutionPanel(this, app);
 
         // Tests en cours
-        countryView = new WorldCountryGenerator(new CountryGenerate(650, 450, 4));
+        countryView = new WorldCountryGenerator(this,new CountryGenerate(620, 450, 4));
         schoolPanel = new SchoolPanel(this, app);
 
         studentPanel = new StudentPanel(this , app);
@@ -68,7 +68,7 @@ public class CentralGamePanel extends JPanel {
         switchPanel(countryView);
     }
 
-    public void swicthCityPanel(int id) {
+    public void switchCityPanel(int id) {
         switchPanel(countryView.getCity(id));
     }
 

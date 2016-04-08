@@ -1,27 +1,38 @@
 package fr.thestudismetheory.generator;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import fr.thestudismetheory.Constants;
 import fr.thestudismetheory.data.generation.CityGenerate;
 import fr.thestudismetheory.data.generation.CountryGenerate;
+import fr.thestudismetheory.data.strings.UIConstants;
+import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
 
 public class WorldCountryGenerator extends JPanel {
 	private Graphics2D g2d;
-	
+	final private CentralGamePanel centralPanel;
 	private CountryGenerate countryGenerate;
+	private JButton[] cityButtons;
 
-	private WorldCityGenerator[] cities; // A l'instanciation ajouter des return new CityGenerate(Constants.DEFAULT_CITY_GRID_SIZE)
-	
-	public WorldCountryGenerator(CountryGenerate countryGenerate) {
+	public WorldCountryGenerator(CentralGamePanel centralPanel, CountryGenerate countryGenerate) {
+		setLayout(null);
 		this.countryGenerate = countryGenerate;
-		
+		this.centralPanel = centralPanel;
 		if(!countryGenerate.isGenerated()) generateCountryMap();
+		
+		createButtons();
+		
+		
 	}
 
 	private void generateCountryMap() {
@@ -74,11 +85,15 @@ public class WorldCountryGenerator extends JPanel {
 	}
 
 	public WorldCityGenerator getCity(int id) {
-		return cities[id];
+		return countryGenerate.getCityGenerator(id);
 	}
 
 
 	private void generateCities() {
+		
+		for(int i = 0; i< countryGenerate.getNbCities();i++) {
+			countryGenerate.setCityGenerator(i, new WorldCityGenerator(new CityGenerate(Constants.DEFAULT_CITY_GRID_SIZE)));
+		}
 		
 		Color white = new Color(255,255,255);
 		
@@ -108,6 +123,23 @@ public class WorldCountryGenerator extends JPanel {
 			g2d.fillRect(city.x-10,city.y-10,20,20);
 		}
 		
+	}
+	
+	private void createButtons() {
+		cityButtons = new JButton[countryGenerate.getNbCities()];
+		
+		for(int i=0;i<countryGenerate.getNbCities();i++){
+			cityButtons[i] = new JButton();
+			cityButtons[i].setBounds(countryGenerate.getCityPoint(i).x-10, countryGenerate.getCityPoint(i).y-10, 20, 20);
+			add(cityButtons[i]);
+			final int id = i;
+			cityButtons[i].addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                centralPanel.switchCityPanel(id);
+	            }
+	        });
+		}	
 	}
 	
 	public void paintComponent(Graphics g) {	

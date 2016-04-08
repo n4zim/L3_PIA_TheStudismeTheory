@@ -3,18 +3,16 @@ package fr.thestudismetheory.data.generation;
 import fr.thestudismetheory.generator.WorldCitySquare;
 
 public class CityGenerate {
-    private int kindOfSections;
+    private int kindOfSections = 5; // A mettre par défaut
     private WorldCitySquare[][] cityMap;
     private boolean generated = false;
 
-    public CityGenerate(int gridSize, int kindOfSections) {
+    public CityGenerate(int gridSize) {
         this.cityMap = new WorldCitySquare[gridSize][gridSize];
-        this.kindOfSections = kindOfSections;
     }
 
-    public CityGenerate(WorldCitySquare[][] cityMap, int kindOfSections) {
+    public CityGenerate(WorldCitySquare[][] cityMap) {
         this.cityMap = cityMap;
-        this.kindOfSections = kindOfSections;
         this.generated = true;
     }
 

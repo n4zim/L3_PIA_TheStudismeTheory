@@ -8,14 +8,15 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
+import fr.thestudismetheory.data.generation.CityGenerate;
 import fr.thestudismetheory.data.generation.CountryGenerate;
 
-public class WorldCountryGenerator extends JPanel{
-
-	private static final long serialVersionUID = 1L;
+public class WorldCountryGenerator extends JPanel {
 	private Graphics2D g2d;
 	
 	private CountryGenerate countryGenerate;
+
+	private WorldCityGenerator[] cities; // A l'instanciation ajouter des return new CityGenerate(Constants.DEFAULT_CITY_GRID_SIZE)
 	
 	public WorldCountryGenerator(CountryGenerate countryGenerate) {
 		this.countryGenerate = countryGenerate;
@@ -24,7 +25,6 @@ public class WorldCountryGenerator extends JPanel{
 	}
 
 	private void generateCountryMap() {
-		
 		int width = countryGenerate.getWidth();
 		int height = countryGenerate.getHeight();
 		
@@ -73,6 +73,11 @@ public class WorldCountryGenerator extends JPanel{
 		countryGenerate.setAsGenerated();
 	}
 
+	public WorldCityGenerator getCity(int id) {
+		return cities[id];
+	}
+
+
 	private void generateCities() {
 		
 		Color white = new Color(255,255,255);
@@ -84,8 +89,8 @@ public class WorldCountryGenerator extends JPanel{
 		for(int i = 0; i< countryGenerate.getNbCities(); i++) {
 			ok = false;
 			do {
-				city.x = (int)(Math.random()*(1080-60)+30);
-				city.y = (int)(Math.random()*(720-60)+30);
+				city.x = (int)(Math.random()*(countryGenerate.getWidth()-60)+30);
+				city.y = (int)(Math.random()*(countryGenerate.getHeight()-60)+30);
 				
 				if(countryGenerate.getCountryImage().getRGB(city.x, city.y)==white.getRGB()) ok = true;
 				
@@ -95,7 +100,6 @@ public class WorldCountryGenerator extends JPanel{
 						break;
 					}
 				}
-				
 
 			} while(ok==false);
 			

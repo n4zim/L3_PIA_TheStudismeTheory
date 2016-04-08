@@ -7,7 +7,9 @@ package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.generation.CityGenerate;
+import fr.thestudismetheory.data.generation.CountryGenerate;
 import fr.thestudismetheory.generator.WorldCityGenerator;
+import fr.thestudismetheory.generator.WorldCountryGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,7 @@ import java.awt.*;
  */
 public class CentralGamePanel extends JPanel {
     final private InstitutionPanel institutionView;
-    final private WorldCityGenerator cityView;
+    final private WorldCountryGenerator countryView;
     final private SchoolPanel schoolPanel;
     final private StudentPanel studentPanel;
     final private TeacherPanel teacherPanel;
@@ -28,7 +30,7 @@ public class CentralGamePanel extends JPanel {
         institutionView = new InstitutionPanel(this, app);
 
         // Tests en cours
-        cityView = new WorldCityGenerator(new CityGenerate(20, 5));
+        countryView = new WorldCountryGenerator(new CountryGenerate(650, 450, 4));
         schoolPanel = new SchoolPanel(this, app);
 
         studentPanel = new StudentPanel(this , app);
@@ -37,7 +39,7 @@ public class CentralGamePanel extends JPanel {
 
         switchDefaultPanel();
     }
-
+    
     public void switchInstitution() {
         switchPanel(institutionView);
         institutionView.updatePanel();
@@ -63,7 +65,11 @@ public class CentralGamePanel extends JPanel {
     }
 
     public void switchDefaultPanel() {
-        switchPanel(cityView);
+        switchPanel(countryView);
+    }
+
+    public void swicthCityPanel(int id) {
+        switchPanel(countryView.getCity(id));
     }
 
     private void switchPanel(JPanel panel) {

@@ -6,6 +6,7 @@
 package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.generation.CityGenerate;
 import fr.thestudismetheory.generator.WorldCityGenerator;
 
 import javax.swing.*;
@@ -25,7 +26,10 @@ public class CentralGamePanel extends JPanel {
     public CentralGamePanel(TheStudismeTheory app) {
         setLayout(new BorderLayout());
         institutionView = new InstitutionPanel(this, app);
-        cityView = new WorldCityGenerator();
+
+        // Tests en cours
+        cityView = new WorldCityGenerator(new CityGenerate(20, 5));
+
         schoolPanel = new SchoolPanel(this);
         studentPanel = new StudentPanel(this);
         teacherPanel = new TeacherPanel(this);

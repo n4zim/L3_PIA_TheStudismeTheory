@@ -1,5 +1,7 @@
 package fr.thestudismetheory.generator;
 
+import fr.thestudismetheory.data.generation.CityGenerate;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,41 +11,42 @@ import java.util.List;
 import java.util.Random;
 
 public class WorldCityGenerator extends JPanel {
-    public static final int GRID_SIZE = 20;
 
     private final Color BORDER_COLOR = Color.BLACK;
-
-    private final int KIND_OF_TYPES = 5;
     private final int MAX_SECTION_SQUARES = 6;
     private final Color[] TYPES_COLORS = {Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.GREEN};
-    private WorldCitySquare[][] cityMap = new WorldCitySquare[GRID_SIZE][GRID_SIZE];
 
-    public WorldCityGenerator() {
-        super(new GridLayout(GRID_SIZE, GRID_SIZE));
+    private CityGenerate cityGenerate;
+
+    public WorldCityGenerator(CityGenerate cityGenerate) {
+        super(new GridLayout(cityGenerate.getSize(), cityGenerate.getSize()));
+
         //this.setPreferredSize(new Dimension(GRID_SIZE * SQUARE_SIZE, GRID_SIZE * SQUARE_SIZE));
 
+        this.cityGenerate = cityGenerate;
+
         // G?n?re les cases de la grille
-        generateCitySquares();
+        if(!cityGenerate.isGenerated()) generateCitySquares();
 
         // Ins?re des zones dans les cases
         generateCityAreas();
 
         // Affiche toutes les cases
-        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
-            int w = i % GRID_SIZE;
-            int h = i / GRID_SIZE;
+        for (int i = 0; i < cityGenerate.getSize() * cityGenerate.getSize(); i++) {
+            int w = i % cityGenerate.getSize();
+            int h = i / cityGenerate.getSize();
 
-            final WorldCitySquare currentWorldCitySquare = cityMap[h][w];
+            final WorldCitySquare currentWorldCitySquare = cityGenerate.getSquareFromCityMap(h, w);
             currentWorldCitySquare.setBorderPainted(true);
 
-            if (h > 0 && cityMap[h][w].getAreaId() != cityMap[h - 1][w].getAreaId())
+            if (h > 0 && cityGenerate.getSquareFromCityMap(h, w).getAreaId() != cityGenerate.getSquareFromCityMap(h-1, w).getAreaId())
                 currentWorldCitySquare.setTopBorder(true);
-            if (w > 0 && cityMap[h][w].getAreaId() != cityMap[h][w - 1].getAreaId())
+            if (w > 0 && cityGenerate.getSquareFromCityMap(h, w).getAreaId() != cityGenerate.getSquareFromCityMap(h, w-1).getAreaId())
                 currentWorldCitySquare.setLeftBorder(true);
 
-            if (h < (GRID_SIZE - 1) && cityMap[h][w].getAreaId() != cityMap[h + 1][w].getAreaId())
+            if (h < (cityGenerate.getSize() - 1) && cityGenerate.getSquareFromCityMap(h, w).getAreaId() != cityGenerate.getSquareFromCityMap(h+1, w).getAreaId())
                 currentWorldCitySquare.setBottomBorder(true);
-            if (w < (GRID_SIZE - 1) && cityMap[h][w].getAreaId() != cityMap[h][w + 1].getAreaId())
+            if (w < (cityGenerate.getSize() - 1) && cityGenerate.getSquareFromCityMap(h, w).getAreaId() != cityGenerate.getSquareFromCityMap(h, w+1).getAreaId())
                 currentWorldCitySquare.setRightBorder(true);
 
             // Si c'est une école
@@ -74,41 +77,39 @@ public class WorldCityGenerator extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-        WorldCityGenerator worldCityGenerator = new WorldCityGenerator();
-        worldCityGenerator.display();
-    }
-
     private void generateCitySquares() {
         // Instantiation de toutes les cases
-        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
+        for (int i = 0; i < cityGenerate.getSize() * cityGenerate.getSize(); i++) {
             WorldCitySquare worldCitySquare = new WorldCitySquare();
-            if ((i / WorldCityGenerator.GRID_SIZE + i % WorldCityGenerator.GRID_SIZE) % 2 == 1) {
+            if ((i / cityGenerate.getSize() + i % cityGenerate.getSize()) % 2 == 1) {
                 worldCitySquare.setBackground(Color.gray);
             }
-            cityMap[i / GRID_SIZE][i % GRID_SIZE] = worldCitySquare;
+
+            cityGenerate.setSquareFromCityMap(i/cityGenerate.getSize(), i%cityGenerate.getSize(), worldCitySquare);
         }
 
         // Ajout des voisins
-        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
-            int w = i % GRID_SIZE;
-            int h = i / GRID_SIZE;
+        for (int i = 0; i < cityGenerate.getSize() * cityGenerate.getSize(); i++) {
+            int w = i % cityGenerate.getSize();
+            int h = i / cityGenerate.getSize();
 
-            WorldCitySquare currentWorldCitySquare = cityMap[h][w];
-            if (w > 0) currentWorldCitySquare.addNeighbors(cityMap[h][w - 1]); // Voisin de gauche
-            if (w < (GRID_SIZE - 1)) currentWorldCitySquare.addNeighbors(cityMap[h][w + 1]); // Voisin de droite
-            if (h > 0) currentWorldCitySquare.addNeighbors(cityMap[h - 1][w]); // Voisin du haut
-            if (h < (GRID_SIZE - 1)) currentWorldCitySquare.addNeighbors(cityMap[h + 1][w]); // Voisin du bas
+            WorldCitySquare currentWorldCitySquare = cityGenerate.getSquareFromCityMap(h, w);
+            if (w > 0) currentWorldCitySquare.addNeighbors(cityGenerate.getSquareFromCityMap(h, w-1)); // Voisin de gauche
+            if (w < (cityGenerate.getSize() - 1)) currentWorldCitySquare.addNeighbors(cityGenerate.getSquareFromCityMap(h, w+1)); // Voisin de droite
+            if (h > 0) currentWorldCitySquare.addNeighbors(cityGenerate.getSquareFromCityMap(h-1, w)); // Voisin du haut
+            if (h < (cityGenerate.getSize() - 1)) currentWorldCitySquare.addNeighbors(cityGenerate.getSquareFromCityMap(h+1, w)); // Voisin du bas
         }
+
+        cityGenerate.setAsGenerated();
     }
 
     private void generateCityAreas() {
         Random random = new Random();
         // Zones allouables par le joueur
-        int availableAreas = (GRID_SIZE / 2) + 2;
+        int availableAreas = (cityGenerate.getSize() / 2) + 2;
 
         // Nombre de cases encore vides
-        int remainingSquares = GRID_SIZE * GRID_SIZE;
+        int remainingSquares = cityGenerate.getSize() * cityGenerate.getSize();
 
         // Identifiant, taille et type de la zone actuelle
         int currentAreaId = 0;
@@ -116,7 +117,7 @@ public class WorldCityGenerator extends JPanel {
         int currentAreaType = 0;
 
         // Case actuelle
-        WorldCitySquare currentWorldCitySquare = cityMap[0][0]; // D?part sur la case initiale
+        WorldCitySquare currentWorldCitySquare = cityGenerate.getSquareFromCityMap(0, 0); // D?part sur la case initiale
 
         // Tant que toutes les cases ne sont pas parcourues
         while (remainingSquares > 0) {
@@ -127,7 +128,7 @@ public class WorldCityGenerator extends JPanel {
                     currentAreaSize--;
             } else {
                 // Prend un type al?atoire entre 0 et KIND_OF_TYPES
-                currentAreaType = random.nextInt(KIND_OF_TYPES) + ((availableAreas > 0) ? 0 : 1);
+                currentAreaType = random.nextInt(cityGenerate.getKindOfSections()) + ((availableAreas > 0) ? 0 : 1);
                 if (availableAreas > 0 && currentAreaType == 0) availableAreas--;
 
                 // Si inst. : entre 2 et 4 cases OU si autre : entre 1 et MAX_SECTION_SQUARES+2 cases
@@ -160,14 +161,5 @@ public class WorldCityGenerator extends JPanel {
                 }
             }
         }
-    }
-
-    private void display() {
-        JFrame f = new JFrame("The Studisme Theory City Generation");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(this);
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
     }
 }

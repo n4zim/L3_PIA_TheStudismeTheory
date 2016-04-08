@@ -48,7 +48,7 @@ public class SchoolHandler {
         long money = game.getGameData().getMoney() - price;
 
         if (money < 0) {
-            JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez plus d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+          //  JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez plus d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
         }
 
         game.getGameData().setMoney(money);

@@ -126,9 +126,10 @@ public class MainGameInterface extends AbstractGameInterface {
     public JPanel stat() {
         JPanel south = new JPanel();
 
-        FlowLayout f = new FlowLayout();
-        f.setHgap(90);
+       FlowLayout f = new FlowLayout();
+        f.setHgap(45);
         south.setLayout(f);
+
 
         final JButton optGame = new JButton(UIConstants.LABEL_OPT_GAME);
         optGame.addActionListener(new ActionListener() {
@@ -201,7 +202,6 @@ public class MainGameInterface extends AbstractGameInterface {
 
         JButton save = new JButton(UIConstants.BUTTON_SAVE);
         JButton load = new JButton(UIConstants.BUTTON_LOAD);
-        //JButton time = new JButton("time");
         JButton exit = new JButton(UIConstants.BUTTON_EXIT);
 
         opt.add(save, gbc);

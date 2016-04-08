@@ -57,4 +57,9 @@ public class Category extends AbstractModel<Category, ModelListener<Category>> {
         }
         return true;
     }
+
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 }

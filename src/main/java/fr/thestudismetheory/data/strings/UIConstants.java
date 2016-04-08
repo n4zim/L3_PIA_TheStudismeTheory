@@ -49,9 +49,11 @@ final public class UIConstants {
     final static public String BUTTON_SELL_SCHOOL = "Vendre une école";
     final static public String BUTTON_GRANT = "Demander une subvention";
     //Onglet créer une école
-    final static public String NEW_SCHOOL_COST = "Prix de la création : ????€";
+    final static public int NEW_SCHOOL_PRICE = 2000;
+    final static public String NEW_SCHOOL_COST = "Prix de la création : " + NEW_SCHOOL_PRICE + "€";
     //Onglet vendre une école
-    final static public String SELL_SCHOOL_COST = "Prix de la vente : ????€";
+    final static public int SELL_SCHOOL_PRICE = 2000;
+    final static public String SELL_SCHOOL_COST = "Prix de la vente : " + SELL_SCHOOL_PRICE + "€";
     //Onglet demander une subvention
     final static public String GRANT_COST = "Demander une subvention (????€)";
 

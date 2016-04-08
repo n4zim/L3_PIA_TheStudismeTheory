@@ -10,9 +10,9 @@ import java.util.*;
 
 public class PeopleGenerator {
 
-    private final String[] names = Resources.STUDENT_NAMES;
-    private Random random = new Random();
-    private String[] specialStudents = {
+    private static final String[] names = Resources.STUDENT_NAMES;
+    private static Random random = new Random();
+    private static String[] specialStudents = {
             "Alexandre Sanigou",
             "Benoit Petiteau",
             "Nazim Lachter",
@@ -20,7 +20,7 @@ public class PeopleGenerator {
             "Vincent Quatrevieux"
     };
 
-    private String nameGeneration() {
+    private static String nameGeneration() {
         String firstName = "", lastName = "";
 
         int rand = random.nextInt(names.length);
@@ -37,7 +37,7 @@ public class PeopleGenerator {
                 + " " + lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
     }
 
-    private Date randomDateBetweenTwoYears(int start, int end) {
+    private static Date randomDateBetweenTwoYears(int start, int end) {
         GregorianCalendar gc = new GregorianCalendar();
 
         int year = start + random.nextInt(end - start);
@@ -49,12 +49,12 @@ public class PeopleGenerator {
         return gc.getTime();
     }
 
-    private int studismGeneration() {
+    private static int studismGeneration() {
         int studism = 0;
         return studism;
     }
 
-    private int procrassGeneration() {
+    private static int procrassGeneration() {
         int studism = 0;
         return studism;
     }
@@ -62,7 +62,7 @@ public class PeopleGenerator {
     /*
      * Génération d'un nouvel étudiant
      */
-    public Student newStudent(Date currentDate, City city) {
+    public static Student newStudent(Date currentDate, City city) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
 
@@ -80,7 +80,7 @@ public class PeopleGenerator {
     /*
      * Génération de plusieurs nouveaux étudiants
      */
-    public List<Student> newStudentList(int number, Date currentDate, City currentCity) {
+    public static List<Student> newStudentList(int number, Date currentDate, City currentCity) {
         List<Student> list = new ArrayList<>();
         for (int i = 0; i < number; i++)
             list.add(newStudent(currentDate, currentCity));
@@ -90,7 +90,7 @@ public class PeopleGenerator {
     /*
      * Génération d'un nouvel enseignant
      */
-    public Teacher newTeacher(Date currentDate) {
+    public static Teacher newTeacher(Date currentDate) {
         String name;
         Date birth;
 
@@ -127,7 +127,7 @@ public class PeopleGenerator {
     /*
      * Génération de plusieurs nouveaux enseignants
      */
-    public List<Teacher> newTeacherList(int number, Date currentDate) {
+    public static List<Teacher> newTeacherList(int number, Date currentDate) {
         List<Teacher> list = new ArrayList<>();
         for (int i = 0; i < number; i++)
             list.add(newTeacher(currentDate));

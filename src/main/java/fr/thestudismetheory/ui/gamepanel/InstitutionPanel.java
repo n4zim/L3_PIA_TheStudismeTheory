@@ -2,6 +2,7 @@ package fr.thestudismetheory.ui.gamepanel;
 
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.School;
+import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.game.Game;
 
@@ -214,6 +215,17 @@ public class InstitutionPanel extends GamePanel {
         north.add(title);
 
         JButton cost = new JButton(UIConstants.GRANT_COST);
+
+        cost.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameData gameData = app.getGameHandler().getCurrentGame().getGameData();
+
+                long currentMoney = gameData.getMoney();
+                gameData.setMoney(currentMoney + UIConstants.GRANT_PRICE);
+                centralPanel.switchDefaultPanel();
+            }
+        });
 
         JPanel formPanel = new JPanel();
         formPanel.add(cost);

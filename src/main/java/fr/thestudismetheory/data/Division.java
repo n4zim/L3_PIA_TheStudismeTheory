@@ -56,4 +56,9 @@ public class Division extends AbstractModel<Division, ModelListener<Division>> {
     public Set<StudentFlaw> getCond() {
         return cond;
     }
+
+    @Override
+    public String toString(){
+        return this.getCategory().getName();
+    }
 }

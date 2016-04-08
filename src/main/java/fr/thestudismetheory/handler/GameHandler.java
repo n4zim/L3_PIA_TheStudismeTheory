@@ -5,7 +5,12 @@
  */
 package fr.thestudismetheory.handler;
 
+import fr.thestudismetheory.Constants;
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.Category;
+import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.dao.CategoryDAO;
+import fr.thestudismetheory.data.dao.DivisionDAO;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.game.Game;
 import fr.thestudismetheory.game.local.LocalGame;
@@ -13,6 +18,7 @@ import fr.thestudismetheory.ui.interfaces.MainGameInterface;
 
 import javax.swing.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author vincent
@@ -51,6 +57,18 @@ public class GameHandler {
         ));
 
         internalStartGame(gameData);
+
+        //Génération des catégories
+        CategoryDAO categoryDAO = app.getGameHandler().getCurrentGame().getDAO().getCategoryDAO();
+
+        categoryDAO.insert(new Category(-1, "Mathématique", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Sciences", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Langues", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Ninja", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Magie", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Français", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Sport", Constants.DEFAULT_CATEGORY_ATTRACT));
+        categoryDAO.insert(new Category(-1, "Informatique", Constants.DEFAULT_CATEGORY_ATTRACT));
     }
 
     private void internalStartGame(GameData gameData) {

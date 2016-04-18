@@ -71,6 +71,10 @@ public class PeopleGenerator {
         int studism = studismGeneration();
         int procrass = procrassGeneration();
         Set<StudentFlaw> flaws = new HashSet<>();
+        
+        //TODO
+        flaws.add(StudentFlaw.FAINEANT);
+        
         Map<Category, Integer> interests = new HashMap<>();
         Map<Integer, Graduate> graduations = new HashMap<>();
 

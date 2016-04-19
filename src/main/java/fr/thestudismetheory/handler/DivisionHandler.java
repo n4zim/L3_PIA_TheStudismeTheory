@@ -24,7 +24,7 @@ public class DivisionHandler {
 
     }
 
-    public void addPole(Game game, String name, Category cat, School school){
+    public void addDivision(Game game, String name, Category cat, School school){
         int cost = UIConstants.NEW_POLE_COST;
         if(game.getGameData().getMoney() > cost) {
             HashSet<StudentFlaw> cond = new HashSet<>();
@@ -35,8 +35,23 @@ public class DivisionHandler {
             game.getDAO().getDivisionDAO().insert(newDivision);
             game.getGameData().setMoney(game.getGameData().getMoney() - cost);
         }
-        else {
+        else
             JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez pas assez d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void upgradeDivision(Game game, School school, Division division){
+        int cost = UIConstants.UPGRADE_DIVISION_COST;
+        if(game.getGameData().getMoney() > cost) {
+            int seatsRate = UIConstants.UPGRADE_DIVISION_SEATS;
+            division.setSeatsRate(seatsRate + 200);
+            game.getGameData().setMoney(game.getGameData().getMoney() - cost);
         }
+        else
+            JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez pas assez d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+
+
+
+
+
     }
 }

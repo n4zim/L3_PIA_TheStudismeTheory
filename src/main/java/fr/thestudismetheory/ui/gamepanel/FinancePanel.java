@@ -7,6 +7,7 @@ public class FinancePanel extends GamePanel {
     final static public String PANEL_ID = "FINANCE";
 
     public FinancePanel() {
+
     }
 
     @Override

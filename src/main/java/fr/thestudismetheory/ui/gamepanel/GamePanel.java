@@ -17,6 +17,5 @@ abstract public class GamePanel extends JPanel {
     public GamePanel() {
         setBorder(BorderFactory.createEtchedBorder());
     }
-
     abstract public String getId();
 }

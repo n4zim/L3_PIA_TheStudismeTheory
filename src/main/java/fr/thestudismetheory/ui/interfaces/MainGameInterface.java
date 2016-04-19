@@ -131,11 +131,11 @@ public class MainGameInterface extends AbstractGameInterface {
         south.setLayout(f);
 
 
-        final JButton optGame = new JButton(UIConstants.LABEL_OPT_GAME);
+        final JButton optGame = new JButton(UIConstants.BUTTON_EXIT);
         optGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                optGame();
+                System.exit(0);
             }
         });
 
@@ -184,54 +184,6 @@ public class MainGameInterface extends AbstractGameInterface {
 
     public void setResources(long money) {
         statResources.setText(money + "");
-    }
-
-    public void optGame() {
-        JDialog opts = new JDialog(gameWindow, UIConstants.LABEL_OPT_GAME, true);
-        opts.setSize(UIConstants.DEFAULT_OPT_DIM);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        JPanel opt = new JPanel();
-        opts.add(opt, BorderLayout.CENTER);
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(15, 15, 15, 15); // Taille et espacement des boutons
-        opt.setLayout(new GridBagLayout());
-
-        JButton save = new JButton(UIConstants.BUTTON_SAVE);
-        JButton load = new JButton(UIConstants.BUTTON_LOAD);
-        JButton exit = new JButton(UIConstants.BUTTON_EXIT);
-
-        opt.add(save, gbc);
-        opt.add(load, gbc);
-        opt.add(exit, gbc);
-
-        // Listener des boutons
-        save.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Fonction save
-                if (!isSaved()) setSaved(true);
-            }
-        });
-
-        load.addActionListener((new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Fonction load
-            }
-        }));
-
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        opts.setVisible(true);
     }
 
     public GameDataListener getGameDataListener() {

@@ -104,14 +104,22 @@ public class SchoolPanel extends GamePanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (CURRENT_CARD == UIConstants.BUTTON_ADD_POLE) {
-                    String name = divisionName.getText();
-                    if (name.length() > 0) {
-                        app.getDivisionHandler().addPole(app.getGameHandler().getCurrentGame(), name,(Category) cb_categories.getSelectedItem(),(School) cb_schools.getSelectedItem());
-                        divisionName.setText("");
+                    if(cb_schools.getSelectedItem() != null) {
+                        String name = divisionName.getText();
+                        if (name.length() > 0) {
+                            app.getDivisionHandler().addDivision(app.getGameHandler().getCurrentGame(), name, (Category) cb_categories.getSelectedItem(), (School) cb_schools.getSelectedItem());
+                            divisionName.setText("");
+                        }
                     }
+                    else
+                        JOptionPane.showMessageDialog(app.getMainWindow(), "Aucune école sélectionnée", "Attention", JOptionPane.ERROR_MESSAGE);
                 }
                 else if(CURRENT_CARD == UIConstants.BUTTON_UPGRADE_POLE){
-                   // app.getSchoolHandler().deleteSchool(app.getGameHandler().getCurrentGame(), (School) cb_schools.getSelectedItem());
+                    if(cb_pole.getSelectedItem() != null) {
+                        app.getDivisionHandler().upgradeDivision(app.getGameHandler().getCurrentGame(), (School) cb_schools.getSelectedItem(), (Division) cb_pole.getSelectedItem());
+                    }
+                    else
+                        JOptionPane.showMessageDialog(app.getMainWindow(), "Aucune école sélectionnée", "Attention", JOptionPane.ERROR_MESSAGE);
                 }
                 centralPanel.switchDefaultPanel();
             }
@@ -181,7 +189,8 @@ public class SchoolPanel extends GamePanel {
 
         north.add(title);
 
-        JButton cost = new JButton(UIConstants.UPGRADE_POLE_COST);
+        JLabel cost = new JLabel(UIConstants.UPGRADE_POLE_COST);
+
 
         JLabel poleListLabel = new JLabel("Pôle : ");
         cb_pole = new JComboBox(pole_list.toArray());

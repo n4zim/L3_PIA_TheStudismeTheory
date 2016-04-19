@@ -73,7 +73,8 @@ public class PeopleGenerator {
         Set<StudentFlaw> flaws = new HashSet<>();
         
         //TODO
-        flaws.add(StudentFlaw.FAINEANT);
+        flaws.add(StudentFlaw.PROCRASTINATION);
+        flaws.add(StudentFlaw.TRAVAILLEUR);
         
         Map<Category, Integer> interests = new HashMap<>();
         Map<Integer, Graduate> graduations = new HashMap<>();

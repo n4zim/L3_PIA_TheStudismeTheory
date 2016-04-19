@@ -5,6 +5,7 @@ import fr.thestudismetheory.data.Category;
 import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.strings.UIConstants;
+import sun.util.resources.cldr.ebu.CalendarData_ebu_KE;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class SchoolPanel extends GamePanel {
     protected JComboBox cb_schools;
     protected JComboBox cb_categories;
     protected JComboBox cb_pole;
+    protected String CURRENT_CARD = UIConstants.BUTTON_ADD_POLE;
+    protected JTextField divisionName;
 
     public SchoolPanel(CentralGamePanel centralGamePanel, final TheStudismeTheory app) {
         this.app = app;
@@ -84,6 +87,7 @@ public class SchoolPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_ADD_POLE);
+                CURRENT_CARD = UIConstants.BUTTON_ADD_POLE;
             }
         });
 
@@ -92,12 +96,23 @@ public class SchoolPanel extends GamePanel {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) (cards.getLayout());
                 cl.show(cards, UIConstants.BUTTON_UPGRADE_POLE);
+                CURRENT_CARD = UIConstants.BUTTON_UPGRADE_POLE;
             }
         });
 
         b_save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (CURRENT_CARD == UIConstants.BUTTON_ADD_POLE) {
+                    String name = divisionName.getText();
+                    if (name.length() > 0) {
+                        app.getDivisionHandler().addPole(app.getGameHandler().getCurrentGame(), name,(Category) cb_categories.getSelectedItem(),(School) cb_schools.getSelectedItem());
+                        divisionName.setText("");
+                    }
+                }
+                else if(CURRENT_CARD == UIConstants.BUTTON_UPGRADE_POLE){
+                   // app.getSchoolHandler().deleteSchool(app.getGameHandler().getCurrentGame(), (School) cb_schools.getSelectedItem());
+                }
                 centralPanel.switchDefaultPanel();
             }
         });
@@ -129,7 +144,7 @@ public class SchoolPanel extends GamePanel {
         JLabel cost = new JLabel(UIConstants.ADD_POLE_COST);
 
         JLabel poleNameLabel = new JLabel("Nom du pôle : ");
-        JTextField poleName = new JTextField(30);
+        divisionName = new JTextField(100);
         JLabel catLabel = new JLabel("Catégorie : ");
         cb_categories = new JComboBox(cat_list.toArray());
 
@@ -147,7 +162,7 @@ public class SchoolPanel extends GamePanel {
         formPanel.setLayout(new GridBagLayout());
 
         formPanel.add(poleNameLabel, gbc);
-        formPanel.add(poleName, gbc);
+        formPanel.add(divisionName, gbc);
         formPanel.add(catLabel, gbc);
         formPanel.add(cb_categories, gbc);
         formPanel.add(cost, gbc);

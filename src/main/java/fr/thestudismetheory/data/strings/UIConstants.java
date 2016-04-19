@@ -61,7 +61,9 @@ final public class UIConstants {
     final static public String BUTTON_ADD_POLE = "Ajouter un pôle";
     final static public String BUTTON_UPGRADE_POLE = "Améliorer un pôle";
     //Onglet ajouter un pole
-    final static public String ADD_POLE_COST = "Prix de l'ajout d'un pôle : ????€";
+    final static public int NEW_POLE_COST = 3000;
+    final static public String ADD_POLE_COST = "Prix de l'ajout d'un pôle : " + NEW_POLE_COST + "€";
+
     //Onglet améliorer un pole
     final static public String UPGRADE_POLE_COST = "Améliorer le pôle (????€)";
     final static public String UPGRADE_POLE_DESC = "Description : Améliorer un pôle permet d'augmenter la capacité d'étudiants de celui-ci.";

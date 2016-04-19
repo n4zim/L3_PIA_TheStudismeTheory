@@ -14,6 +14,8 @@ import java.util.Set;
  * @author vincent
  */
 public enum StudentFlaw {
+    PROCRASTINATION,
+    TRAVAILLEUR
     ;
 
     /**

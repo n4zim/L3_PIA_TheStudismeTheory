@@ -11,4 +11,5 @@ package fr.thestudismetheory;
 public class Constants {
     final static public String GLOBAL_DB_FILE = "games.db";
     final static public int DEFAULT_CATEGORY_ATTRACT = 50;
+    final static public int DEFAULT_CITY_GRID_SIZE = 20;
 }

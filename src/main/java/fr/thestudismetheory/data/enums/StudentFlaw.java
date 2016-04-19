@@ -14,8 +14,13 @@ import java.util.Set;
  * @author vincent
  */
 public enum StudentFlaw {
+<<<<<<< HEAD
     PROCRASTINATION,
     TRAVAILLEUR
+=======
+    PROCRASTINEUR,
+    FAINEANT,
+>>>>>>> 43ce1d70bc7b8d1cca0df6339c0e66ed4163469d
     ;
 
     /**

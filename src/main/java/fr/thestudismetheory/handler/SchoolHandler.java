@@ -6,10 +6,7 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
-import fr.thestudismetheory.data.City;
-import fr.thestudismetheory.data.Division;
-import fr.thestudismetheory.data.Institution;
-import fr.thestudismetheory.data.School;
+import fr.thestudismetheory.data.*;
 import fr.thestudismetheory.data.enums.InstitutionType;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.game.Game;
@@ -57,7 +54,7 @@ public class SchoolHandler {
     public void createSchool(Game game, String name) {
         int cost = UIConstants.NEW_SCHOOL_PRICE;
         if(game.getGameData().getMoney() > cost) {
-            School newSchool = new School(-1, city, institution, name, 0, cost, 200);
+            School newSchool = new School(Model.ID_NOT_DEFINED, city, institution, name, 0, cost, 200);
             game.getDAO().getSchoolDAO().insert(newSchool);
             game.getGameData().setMoney(game.getGameData().getMoney() - cost);
         }

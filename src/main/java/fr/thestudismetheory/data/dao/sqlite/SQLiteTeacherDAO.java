@@ -5,13 +5,16 @@
  */
 package fr.thestudismetheory.data.dao.sqlite;
 
+import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.dao.CategoryDAO;
 import fr.thestudismetheory.data.dao.DivisionDAO;
 import fr.thestudismetheory.data.dao.TeacherDAO;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author vincent
@@ -168,4 +171,23 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
         return new Teacher(id, model);
     }
 
+    @Override
+    public List<Teacher> getTeachersByDivision(Division division){
+        List<Teacher> teachers = new ArrayList<>();
+        
+        try(PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE " + ATTR_CATEGORY + " = ? AND " + ATTR_SCHOOL + " = ?")){
+            stmt.setInt(1, division.getCategory().getId());
+            stmt.setInt(2, division.getSchool().getId());
+            
+            ResultSet RS = stmt.executeQuery();
+            
+            while(RS.next())
+                teachers.add(createByRS(RS));
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return teachers;
+    }
 }

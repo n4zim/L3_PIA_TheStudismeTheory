@@ -1,9 +1,12 @@
 package fr.thestudismetheory;
 
 import com.sun.org.apache.xpath.internal.operations.Div;
+import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
 import fr.thestudismetheory.handler.*;
 import fr.thestudismetheory.ui.MainWindow;
+
+import java.util.List;
 
 public class TheStudismeTheory {
     final private ModulesFactory modulesFactory = new ModulesFactory();

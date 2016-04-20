@@ -1,5 +1,6 @@
 package fr.thestudismetheory;
 
+import com.sun.org.apache.xpath.internal.operations.Div;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.global.dao.GlobalDAOFactory;
 import fr.thestudismetheory.handler.*;
@@ -19,6 +20,7 @@ public class TheStudismeTheory {
     final private SchoolHandler schoolHandler;
     final private StudentHandler studentHandler;
     final private TeacherHandler teacherHandler;
+    final private DivisionHandler divisionHandler;
 
     public TheStudismeTheory() {
         globalDAOFactory = modulesFactory.createGlobalDAOFactory();
@@ -29,6 +31,7 @@ public class TheStudismeTheory {
         schoolHandler = new SchoolHandler(this);
         studentHandler = new StudentHandler(this);
         teacherHandler = new TeacherHandler(this);
+        divisionHandler = new DivisionHandler(this);
     }
 
     public static void main(String[] args) {
@@ -58,6 +61,10 @@ public class TheStudismeTheory {
 
     public TeacherHandler getTeacherHandler() {
         return teacherHandler;
+    }
+
+    public DivisionHandler getDivisionHandler() {
+        return divisionHandler;
     }
 
     public ModulesFactory getModulesFactory() {

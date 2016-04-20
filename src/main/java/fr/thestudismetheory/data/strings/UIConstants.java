@@ -14,11 +14,6 @@ import java.awt.*;
  */
 final public class UIConstants {
     final static public String TITLE_GAME = "The Studisme Theory";
-    final static public String TITLE_INSTITUTION = "Gestion de l'institution";
-    final static public String TITLE_SCHOOL = "Gestion de l'école";
-    final static public String TITLE_STUDENT = "Gestion des étudiants";
-    final static public String TITLE_TEACHER = "Gestion des professeurs";
-    final static public String TITLE_FINANCE = "Finances";
     final static public String TITLE_NEW_GAME = "Nouvelle partie";
     final static public String TITLE_SELECT_GAME = "Sélectionner un partie";
 
@@ -35,13 +30,10 @@ final public class UIConstants {
     final static public String BUTTON_TEACHER = "Professeurs";
     final static public String BUTTON_STUDENT = "Etudiants";
     final static public String BUTTON_FINANCE = "Finances";
-    final static public String BUTTON_SAVE = "Sauvegarder la partie";
-    final static public String BUTTON_LOAD = "Charger une partie";
     final static public String BUTTON_EXIT = "Quitter le jeu";
     final static public String LABEL_RESSOURCE = "Ressources";
     final static public String LABEL_TIME = "Temps";
     final static public String LABEL_STAT = "Statistiques";
-    final static public String LABEL_OPT_GAME = "Options du jeu";
 
 
     // INSTITUTION WINDOW
@@ -62,14 +54,17 @@ final public class UIConstants {
     final static public String BUTTON_ADD_POLE = "Ajouter un pôle";
     final static public String BUTTON_UPGRADE_POLE = "Améliorer un pôle";
     //Onglet ajouter un pole
-    final static public String ADD_POLE_COST = "Prix de l'ajout d'un pôle : ????€";
+    final static public int NEW_POLE_COST = 3000;
+    final static public String ADD_POLE_COST = "Prix de l'ajout d'un pôle : " + NEW_POLE_COST + "€";
+
     //Onglet améliorer un pole
-    final static public String UPGRADE_POLE_COST = "Améliorer le pôle (????€)";
+    final static public String UPGRADE_POLE_COST = "Améliorer le pôle (1500€)";
+    final static public int UPGRADE_DIVISION_COST = 1500;
     final static public String UPGRADE_POLE_DESC = "Description : Améliorer un pôle permet d'augmenter la capacité d'étudiants de celui-ci.";
+    final static public int UPGRADE_DIVISION_SEATS = 200;
 
 
-    final static public Dimension DEFAULT_WIN_DIM = new Dimension(800, 600);
-    final static public Dimension DEFAULT_OPT_DIM = new Dimension(400, 300);
+    final static public Dimension DEFAULT_WIN_DIM = new Dimension(850, 650);
 
     //STUDENT WINDOW
 

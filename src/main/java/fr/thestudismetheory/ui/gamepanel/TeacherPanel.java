@@ -3,7 +3,9 @@ package fr.thestudismetheory.ui.gamepanel;
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.School;
+import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.strings.UIConstants;
+import fr.thestudismetheory.generator.PeopleGenerator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,19 +30,21 @@ public class TeacherPanel extends GamePanel {
     protected JPanel cards;
     protected List<School> schools_list = Collections.emptyList(); // initialisation liste vide
     protected List<Division> pole_list = Collections.emptyList();
-    private Object[][] teachers = {
-            {"Johnathan", "Sykes", 10, 8, 10, 8},
-            {"Nicolas", "Van de Kampf", 5, 3, 15, 5},
-            {"Damien", "Cuthbert", 8, 10, 7, 20},
-            {"Corinne", "Valance", 3, 16, 9, 30},
-            {"Emilie", "Schrödinger", 20, 22, 12, 14},
-            {"Delphine", "Duke", 9, 42, 5, 19},
-            {"Eric", "Trump", 12, 1, 9, 1},
-    };
-    private JTable tableau = new JTable();
     protected JComboBox cb_schools;
     protected JComboBox cb_poles;
 
+    /* Tableaux */
+    protected Object[] columnNames = {"Nom", "Charisme", "Skill", "Ponctualité", "Compétence d'apprentissage"};
+
+    //Professeurs disponibles
+    private JTable tabHire = new JTable();
+    protected DefaultTableModel modelTableHire;
+    protected List<Teacher> teachersHire = Collections.emptyList();
+
+    //Professeurs engagés
+    private JTable tabFire = new JTable();
+    protected DefaultTableModel modelTableFire;
+    protected List<Teacher> teachersFire = Collections.emptyList();
 
     public TeacherPanel(CentralGamePanel centralGamePanel, final TheStudismeTheory app) {
         this.app = app;
@@ -62,6 +68,10 @@ public class TeacherPanel extends GamePanel {
                     cb_poles.removeAllItems();
                     for(Division division : pole_list)
                         cb_poles.addItem(division);
+
+                    Division selectedDivision = (Division) cb_poles.getSelectedItem();
+
+                    updateTeachersListByDivision(selectedDivision);
                 }
             }
         });
@@ -73,10 +83,9 @@ public class TeacherPanel extends GamePanel {
                 Object item = event.getItem();
 
                 if (event.getStateChange() == ItemEvent.SELECTED) {
-                    //int indexDivision = cb_poles.getSelectedIndex();
-                    //Division selectedDivision = pole_list.get(indexDivision);
+                    Division selectedDivision = (Division) cb_poles.getSelectedItem();
 
-
+                    updateTeachersListByDivision(selectedDivision);
                 }
             }
         });
@@ -127,44 +136,69 @@ public class TeacherPanel extends GamePanel {
 
         JPanel north = new JPanel();
 
-        JLabel title = new JLabel("Liste des professeurs");
+        JLabel title = new JLabel("Liste des professeurs disponibles");
         title.setFont(new Font("Verdana", 1, 20));
 
         north.add(title);
 
-        //Liste des professeurs (table)
-        String[] entetes = {"Prénom", "Nom", "Charisme", "Skill", "Ponctualité", "Compétence d'apprentissage"};
+        //Liste des professeurs à engager (table)
+        modelTableHire = new DefaultTableModel(new Object[0][0], columnNames);
+        tabHire.setModel(modelTableHire);
+        tabHire.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        //Création d'une table non éditable
-        tableau.setModel(new DefaultTableModel(teachers, entetes) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        });
-
-        tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        //Liste des professeurs à renvoyer (table)
+        modelTableFire = new DefaultTableModel(new Object[0][0], columnNames);
+        tabFire.setModel(modelTableFire);
+        tabFire.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         JButton b_engager = new JButton("Engager le professeur sélectionné");
 
         b_engager.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int select = tableau.getSelectedRow();
+                int select = tabHire.getSelectedRow();
 
                 //Sélection correcte
                 if (select >= 0) {
                     System.out.println(select);
 
+                    School selectedSchool = (School) cb_schools.getSelectedItem();
+                    Division selectedDivision = (Division) cb_poles.getSelectedItem();
+
+                    if(selectedSchool != null && selectedDivision != null)
+                    {
+                        Teacher selectedTeacher = teachersHire.get(select);
+
+                        app.getTeacherHandler().hireTeacher(selectedDivision, selectedTeacher);
+                        teachersHire.remove(select);
+                        modelTableHire.removeRow(select);
+                        modelTableHire.fireTableStructureChanged();
+
+                        //Débug
+                        List<Teacher> list = app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().getTeachersByDivision(selectedDivision);
+
+                        System.out.println("Professeurs engagés dans l'école : " + selectedSchool.getName() + " dans le pôle : " + selectedDivision.getCategory());
+                        for(Teacher el : list)
+                            System.out.println(el.getName());
+                    }
                 }
             }
         });
 
+        JLabel titleFire = new JLabel("Liste des professeurs du pôle sélectionné");
+        titleFire.setFont(new Font("Verdana", 1, 20));
+
+        JButton b_renvoyer = new JButton("Renvoyer le professeur sélectionné");
+
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.PAGE_AXIS));
-        center.add(tableau.getTableHeader());
-        center.add(tableau);
+        center.add(tabHire.getTableHeader());
+        center.add(tabHire);
         center.add(b_engager);
+        center.add(titleFire);
+        center.add(tabFire.getTableHeader());
+        center.add(tabFire);
+        center.add(b_renvoyer);
 
         panel.add(north, BorderLayout.NORTH);
         panel.add(center, BorderLayout.CENTER);
@@ -185,5 +219,50 @@ public class TeacherPanel extends GamePanel {
         cb_poles.removeAllItems();
         for(Division division : pole_list)
             cb_poles.addItem(division);
+
+        Division selectedDivision = (Division) cb_poles.getSelectedItem();
+
+        if(selectedDivision != null)
+        {
+            //Mise à jour de la liste des professerus à engager
+            teachersHire = Collections.emptyList();
+            teachersHire = PeopleGenerator.newTeacherList(10, new Date(0));
+
+            modelTableHire = new DefaultTableModel(new Object[0][0], columnNames);
+            for (Teacher value : teachersHire) {
+                Object[] o = new Object[5];
+                o[0] = value.getName();
+                o[1] = value.getCharisma();
+                o[2] = value.getSkill();
+                o[3] = value.getPunct();
+                o[4] = value.getTeachSkill();
+                modelTableHire.addRow(o);
+            }
+            tabHire.setModel(modelTableHire);
+            modelTableHire.fireTableStructureChanged();
+
+            updateTeachersListByDivision(selectedDivision);
+        }
+    }
+
+    public void updateTeachersListByDivision(Division division){
+        if(division != null) {
+            //Mise à jour de la liste des professeurs du pôle selectionné
+            teachersFire = Collections.emptyList();
+            teachersFire = app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().getTeachersByDivision(division);
+
+            modelTableFire = new DefaultTableModel(new Object[0][0], columnNames);
+            for (Teacher value : teachersFire) {
+                Object[] o = new Object[5];
+                o[0] = value.getName();
+                o[1] = value.getCharisma();
+                o[2] = value.getSkill();
+                o[3] = value.getPunct();
+                o[4] = value.getTeachSkill();
+                modelTableFire.addRow(o);
+            }
+            tabFire.setModel(modelTableFire);
+            modelTableFire.fireTableStructureChanged();
+        }
     }
 }

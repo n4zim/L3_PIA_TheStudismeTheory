@@ -6,6 +6,9 @@
 package fr.thestudismetheory.handler;
 
 import fr.thestudismetheory.TheStudismeTheory;
+import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.School;
+import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.game.Game;
 
 /**
@@ -20,5 +23,11 @@ public class TeacherHandler {
 
     public void paySalary(Game game) {
 
+    }
+
+    public void hireTeacher(Division division, Teacher teacher) {
+        teacher.setDivision(division);
+
+        app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().update(teacher);
     }
 }

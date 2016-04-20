@@ -69,4 +69,12 @@ final public class UIConstants {
     //STUDENT WINDOW
 
     final static public String BUTTON_FIRED = "Renvoyer";
+
+    //TEACHER WINDOW
+
+    final static public int HIRE_TEACHER_COST = 1000;
+    final static public String BUTTON_HIRE_TEACHER = "Engager le professeur sélectionné (" + HIRE_TEACHER_COST + "€)";
+
+    final static public int FIRE_TEACHER_COST = 500;
+    final static public String BUTTON_FIRE_TEACHER = "Renvoyer le professeur sélectionné (-" + FIRE_TEACHER_COST + "€)";
 }

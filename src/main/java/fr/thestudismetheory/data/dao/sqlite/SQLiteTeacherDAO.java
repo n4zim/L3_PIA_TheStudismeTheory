@@ -149,7 +149,7 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
                 RS.getString(ATTR_NAME),
                 new Date(RS.getLong(ATTR_BIRTH)),
                 new Date(RS.getLong(ATTR_ENTERING)),
-                RS.getInt(RS.getInt(ATTR_CHARISMA)),
+                RS.getInt(ATTR_CHARISMA),
                 RS.getInt(ATTR_SKILL),
                 RS.getInt(ATTR_PUNCT),
                 RS.getInt(ATTR_TEACH_SKILL),

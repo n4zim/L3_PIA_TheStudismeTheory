@@ -151,7 +151,7 @@ public class TeacherPanel extends GamePanel {
         tabFire.setModel(modelTableFire);
         tabFire.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        JButton b_engager = new JButton("Engager le professeur sélectionné");
+        JButton b_engager = new JButton(UIConstants.BUTTON_HIRE_TEACHER);
 
         b_engager.addActionListener(new ActionListener() {
             @Override
@@ -160,8 +160,6 @@ public class TeacherPanel extends GamePanel {
 
                 //Sélection correcte
                 if (select >= 0) {
-                    System.out.println(select);
-
                     School selectedSchool = (School) cb_schools.getSelectedItem();
                     Division selectedDivision = (Division) cb_poles.getSelectedItem();
 
@@ -174,12 +172,7 @@ public class TeacherPanel extends GamePanel {
                         modelTableHire.removeRow(select);
                         modelTableHire.fireTableStructureChanged();
 
-                        //Débug
-                        List<Teacher> list = app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().getTeachersByDivision(selectedDivision);
-
-                        System.out.println("Professeurs engagés dans l'école : " + selectedSchool.getName() + " dans le pôle : " + selectedDivision.getCategory());
-                        for(Teacher el : list)
-                            System.out.println(el.getName());
+                        updateTeachersListByDivision(selectedDivision);
                     }
                 }
             }
@@ -188,7 +181,32 @@ public class TeacherPanel extends GamePanel {
         JLabel titleFire = new JLabel("Liste des professeurs du pôle sélectionné");
         titleFire.setFont(new Font("Verdana", 1, 20));
 
-        JButton b_renvoyer = new JButton("Renvoyer le professeur sélectionné");
+        JButton b_renvoyer = new JButton(UIConstants.BUTTON_FIRE_TEACHER);
+
+        b_renvoyer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int select = tabFire.getSelectedRow();
+
+                //Sélection correcte
+                if (select >= 0) {
+                    School selectedSchool = (School) cb_schools.getSelectedItem();
+                    Division selectedDivision = (Division) cb_poles.getSelectedItem();
+
+                    if(selectedSchool != null && selectedDivision != null)
+                    {
+                        Teacher selectedTeacher = teachersFire.get(select);
+
+                        app.getTeacherHandler().fireTeacher(selectedTeacher);
+                        teachersFire.remove(select);
+                        modelTableFire.removeRow(select);
+                        modelTableFire.fireTableStructureChanged();
+
+                        updateTeachersListByDivision(selectedDivision);
+                    }
+                }
+            }
+        });
 
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.PAGE_AXIS));
@@ -260,6 +278,9 @@ public class TeacherPanel extends GamePanel {
                 o[3] = value.getPunct();
                 o[4] = value.getTeachSkill();
                 modelTableFire.addRow(o);
+
+                System.out.println("-----------------DEBUG PROF");
+                System.out.println("Nom : " + value.getName() + " | Category : " + value.getDivision().getCategory() + " | School : " + value.getDivision().getSchool());
             }
             tabFire.setModel(modelTableFire);
             modelTableFire.fireTableStructureChanged();

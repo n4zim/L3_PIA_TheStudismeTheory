@@ -9,6 +9,7 @@ import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.Teacher;
+import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.game.Game;
 
 /**
@@ -28,6 +29,28 @@ public class TeacherHandler {
     public void hireTeacher(Division division, Teacher teacher) {
         teacher.setDivision(division);
 
-        app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().update(teacher);
+        app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().insert(teacher);
+
+        //Mise à jour de l'argent
+        long money = app.getGameHandler().getCurrentGame().getGameData().getMoney() - UIConstants.HIRE_TEACHER_COST;
+
+        if (money < 0) {
+            //  JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez plus d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+        }
+
+        app.getGameHandler().getCurrentGame().getGameData().setMoney(money);
+    }
+
+    public void fireTeacher(Teacher teacher) {
+        app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().delete(teacher);
+
+        //Mise à jour de l'argent
+        long money = app.getGameHandler().getCurrentGame().getGameData().getMoney() - UIConstants.FIRE_TEACHER_COST;
+
+        if (money < 0) {
+            //  JOptionPane.showMessageDialog(app.getMainWindow(), "Vous n'avez plus d'argent !", "Attention", JOptionPane.ERROR_MESSAGE);
+        }
+
+        app.getGameHandler().getCurrentGame().getGameData().setMoney(money);
     }
 }

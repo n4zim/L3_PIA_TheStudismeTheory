@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.data.dao.sqlite;
 
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.School;
 import fr.thestudismetheory.data.dao.CityDAO;
 import fr.thestudismetheory.data.dao.InstitutionDAO;
@@ -60,6 +61,13 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
 
     final private CityDAO cityDAO;
     final private InstitutionDAO institutionDAO;
+    
+    final private ModelListener<School> saveListener = new ModelListener<School>() {
+        @Override
+        public void onUpdate(School model) {
+            update(model);
+        }
+    };
 
     public SQLiteSchoolDAO(CityDAO cityDAO, InstitutionDAO institutionDAO, Connection connection) throws SQLException {
         super(connection);
@@ -117,7 +125,7 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
 
     @Override
     protected School createByRS(ResultSet RS) throws SQLException {
-        return new School(
+        School school = new School(
                 RS.getInt(ATTR_ID),
                 cityDAO.findByPrimaryKey(RS.getInt(ATTR_CITY)),
                 institutionDAO.findByPrimaryKey(RS.getInt(ATTR_INSITUTION)),
@@ -126,12 +134,18 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
                 RS.getInt(ATTR_COST),
                 RS.getInt(ATTR_SEATS)
         );
+        
+        school.addListener(saveListener);
+        
+        return school;
     }
 
     @Override
     public School insert(School model) {
         int id = (int) internalInsert(model);
-        return new School(id, model);
+        School school = new School(id, model);
+        school.addListener(saveListener);
+        return school;
     }
 
 }

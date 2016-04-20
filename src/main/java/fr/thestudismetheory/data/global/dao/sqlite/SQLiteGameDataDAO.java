@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.data.global.dao.sqlite;
 
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.dao.sqlite.SQLiteDAO;
 import fr.thestudismetheory.data.global.GameData;
 import fr.thestudismetheory.data.global.dao.GameDataDAO;
@@ -42,6 +43,13 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
     };
 
     final static private String[] PK_COL = new String[]{ATTR_ID};
+    
+    final private ModelListener<GameData> saveListener = new ModelListener<GameData>() {
+        @Override
+        public void onUpdate(GameData model) {
+            update(model);
+        }
+    };
 
     public SQLiteGameDataDAO(Connection connection) throws SQLException {
         super(connection);
@@ -76,12 +84,16 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
 
     @Override
     protected GameData createByRS(ResultSet RS) throws SQLException {
-        return new GameData(
+        GameData gd = new GameData(
                 RS.getString(ATTR_ID),
                 RS.getInt(ATTR_SPEED),
                 new Date(RS.getLong(ATTR_DATE)),
                 RS.getLong(ATTR_MONEY)
         );
+        
+        gd.addListener(saveListener);
+        
+        return gd;
     }
 
     @Override
@@ -99,6 +111,7 @@ public class SQLiteGameDataDAO extends SQLiteDAO<GameData> implements GameDataDA
     @Override
     public GameData insert(GameData model) {
         internalInsert(model);
+        model.addListener(saveListener);
         return model;
     }
 

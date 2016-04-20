@@ -6,6 +6,7 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.City;
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.dao.CityDAO;
 
 import java.sql.*;
@@ -35,6 +36,13 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
     final static private String[] PK_COL = new String[]{ATTR_ID};
 
     final private Map<Integer, City> cacheById = new HashMap<>();
+    
+    final private ModelListener<City> saveListener = new ModelListener<City>() {
+        @Override
+        public void onUpdate(City model) {
+            update(model);
+        }
+    };
 
     public SQLiteCityDAO(Connection connection) throws SQLException {
         super(connection);
@@ -97,6 +105,8 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
                 RS.getString(ATTR_NAME),
                 RS.getInt(ATTR_STU_COUNT)
         );
+        
+        city.addListener(saveListener);
 
         cacheById.put(id, city);
         return city;
@@ -106,6 +116,7 @@ public class SQLiteCityDAO extends SQLiteDAO<City> implements CityDAO {
     public City insert(City model) {
         int id = (int) internalInsert(model);
         City city = new City(id, model.getName(), model.getStudentsCount());
+        city.addListener(saveListener);
         cacheById.put(id, city);
         return city;
     }

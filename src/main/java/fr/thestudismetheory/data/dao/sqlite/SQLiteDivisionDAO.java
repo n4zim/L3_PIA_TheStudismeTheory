@@ -6,6 +6,7 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.dao.CategoryDAO;
 import fr.thestudismetheory.data.dao.DivisionDAO;
 import fr.thestudismetheory.data.dao.SchoolDAO;
@@ -58,6 +59,13 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
 
     final private SchoolDAO schoolDAO;
     final private CategoryDAO categoryDAO;
+    
+    final private ModelListener<Division> saveListener = new ModelListener<Division>() {
+        @Override
+        public void onUpdate(Division model) {
+            update(model);
+        }
+    };
 
     public SQLiteDivisionDAO(SchoolDAO schoolDAO, CategoryDAO categoryDAO, Connection connection) throws SQLException {
         super(connection);
@@ -108,18 +116,23 @@ public class SQLiteDivisionDAO extends SQLiteDAO<Division> implements DivisionDA
 
     @Override
     protected Division createByRS(ResultSet RS) throws SQLException {
-        return new Division(
+        Division d = new Division(
                 schoolDAO.findByPrimaryKey(RS.getInt(ATTR_SCHOOL)),
                 categoryDAO.findByPrimaryKey(RS.getInt(ATTR_CATEGORY)),
                 RS.getInt(ATTR_SEATS_RATE),
                 RS.getInt(ATTR_COST),
                 StudentFlaw.parseFlaws(RS.getInt(ATTR_COND))
         );
+        
+        d.addListener(saveListener);
+        
+        return d;
     }
 
     @Override
     public Division insert(Division model) {
         internalInsert(model);
+        model.addListener(saveListener);
         return model;
     }
 

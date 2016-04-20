@@ -6,6 +6,7 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Category;
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.dao.CategoryDAO;
 
 import java.sql.*;
@@ -35,6 +36,13 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     final static private String[] PK_COLS = new String[]{ATTR_ID};
 
     final private Map<Integer, Category> cacheById = new HashMap<>();
+    
+    final private ModelListener<Category> saveListener = new ModelListener<Category>() {
+        @Override
+        public void onUpdate(Category model) {
+            update(model);
+        }
+    };
 
     public SQLiteCategoryDAO(Connection connection) throws SQLException {
         super(connection);
@@ -83,6 +91,8 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
                 RS.getString(ATTR_NAME),
                 RS.getInt(ATTR_ATTRACT)
         );
+        
+        cat.addListener(saveListener);
 
         cacheById.put(id, cat);
 
@@ -93,6 +103,7 @@ public class SQLiteCategoryDAO extends SQLiteDAO<Category> implements CategoryDA
     public Category insert(Category model) {
         int id = (int) internalInsert(model);
         Category cat = new Category(id, model.getName(), model.getAttract());
+        cat.addListener(saveListener);
 
         cacheById.put(id, cat);
 

@@ -6,6 +6,7 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Division;
+import fr.thestudismetheory.data.ModelListener;
 import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.dao.CategoryDAO;
 import fr.thestudismetheory.data.dao.DivisionDAO;
@@ -82,6 +83,13 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
 
     final private CategoryDAO categoryDAO;
     final private DivisionDAO divisionDAO;
+    
+    final private ModelListener<Teacher> saveListener = new ModelListener<Teacher>() {
+        @Override
+        public void onUpdate(Teacher model) {
+            update(model);
+        }
+    };
 
     public SQLiteTeacherDAO(CategoryDAO categoryDAO, Connection connection, DivisionDAO divisionDAO) throws SQLException {
         super(connection);
@@ -127,7 +135,7 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
         int catId = RS.getInt(ATTR_CATEGORY);
         int schoolId = RS.getInt(ATTR_SCHOOL);
 
-        return new Teacher(
+        Teacher teacher = new Teacher(
                 RS.getLong(ATTR_ID),
                 RS.getString(ATTR_NAME),
                 new Date(RS.getLong(ATTR_BIRTH)),
@@ -139,6 +147,10 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
                 categoryDAO.findByPrimaryKey(catId),
                 divisionDAO.findByPrimaryKey(schoolId, catId)
         );
+        
+        teacher.addListener(saveListener);
+        
+        return teacher;
     }
 
     @Override
@@ -169,7 +181,9 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
     @Override
     public Teacher insert(Teacher model) {
         long id = internalInsert(model);
-        return new Teacher(id, model);
+        Teacher teacher = new Teacher(id, model);
+        teacher.addListener(saveListener);
+        return teacher;
     }
 
     @Override

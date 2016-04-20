@@ -5,12 +5,15 @@
  */
 package fr.thestudismetheory.data.dao.sqlite;
 
+import fr.thestudismetheory.data.Category;
 import fr.thestudismetheory.data.Student;
 import fr.thestudismetheory.data.dao.CityDAO;
 import fr.thestudismetheory.data.dao.StudentDAO;
 import fr.thestudismetheory.data.dao.sqlite.sub.SQLiteGraduation;
 import fr.thestudismetheory.data.dao.sqlite.sub.SQLiteInterest;
 import fr.thestudismetheory.data.enums.StudentFlaw;
+import fr.thestudismetheory.data.listener.StudentListener;
+import fr.thestudismetheory.data.subentity.Graduate;
 
 import java.sql.*;
 import java.util.Date;
@@ -67,6 +70,23 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
     final private SQLiteGraduation graduation;
     final private SQLiteInterest interest;
     final private CityDAO cityDAO;
+    
+    final private StudentListener saveListener = new StudentListener() {
+        @Override
+        public void onInterestChange(Student student, Category category, int rate) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onNewGraduation(Student student, Graduate graduate) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void onUpdate(Student model) {
+            update(model);
+        }
+    };
 
     public SQLiteStudentDAO(SQLiteGraduation graduation, SQLiteInterest interest, CityDAO cityDAO, Connection connection) throws SQLException {
         super(connection);
@@ -121,6 +141,8 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
 
         student.setInterests(interest.getInsterestsByStudent(student));
         student.setGraduations(graduation.getStudentGraduation(student));
+        
+        student.addListener(saveListener);
 
         return student;
     }
@@ -146,7 +168,9 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
     @Override
     public Student insert(Student model) {
         long id = internalInsert(model);
-        return new Student(id, model);
+        Student student = new Student(id, model);
+        student.addListener(saveListener);
+        return student;
     }
 
 }

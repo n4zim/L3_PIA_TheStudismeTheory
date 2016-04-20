@@ -101,8 +101,9 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
                         ATTR_SKILL + " INTEGER," +
                         ATTR_PUNCT + " INTEGER," +
                         ATTR_TEACH_SKILL + " INTEGER," +
-                        ATTR_CATEGORY + " INTEGER" +
-                        ")"
+                        ATTR_CATEGORY + " INTEGER," +
+                        ATTR_SCHOOL + " INTEGER" +
+                ")"
         );
     }
 

@@ -117,4 +117,9 @@ public class Teacher extends AbstractModel<Teacher, ModelListener<Teacher>> {
         this.division = division;
         notifyUpdate();
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" + "id=" + id + ", name=" + name + ", charisma=" + charisma + ", skill=" + skill + ", punct=" + punct + ", teachSkill=" + teachSkill + ", division=" + division + '}';
+    }
 }

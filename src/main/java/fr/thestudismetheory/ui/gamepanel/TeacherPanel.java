@@ -162,6 +162,7 @@ public class TeacherPanel extends GamePanel {
                 if (select >= 0) {
                     School selectedSchool = (School) cb_schools.getSelectedItem();
                     Division selectedDivision = (Division) cb_poles.getSelectedItem();
+                    System.out.println("DEBUG: b_engager division " + selectedDivision);
 
                     if(selectedSchool != null && selectedDivision != null)
                     {

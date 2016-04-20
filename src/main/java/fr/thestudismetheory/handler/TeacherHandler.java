@@ -28,8 +28,10 @@ public class TeacherHandler {
 
     public void hireTeacher(Division division, Teacher teacher) {
         teacher.setDivision(division);
-
-        app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().insert(teacher);
+        
+        teacher = app.getGameHandler().getCurrentGame().getDAO().getTeacherDAO().insert(teacher);
+        
+        System.out.println("DEBUG: hireTeacher " + teacher);
 
         //Mise à jour de l'argent
         long money = app.getGameHandler().getCurrentGame().getGameData().getMoney() - UIConstants.HIRE_TEACHER_COST;

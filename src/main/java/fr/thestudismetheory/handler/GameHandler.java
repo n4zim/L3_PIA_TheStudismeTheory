@@ -9,10 +9,13 @@ import fr.thestudismetheory.Constants;
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.data.*;
 import fr.thestudismetheory.data.dao.CategoryDAO;
+import fr.thestudismetheory.data.dao.DAOFactory;
 import fr.thestudismetheory.data.dao.DivisionDAO;
 import fr.thestudismetheory.data.global.GameData;
+import fr.thestudismetheory.data.global.dao.GameDataDAO;
 import fr.thestudismetheory.game.Game;
 import fr.thestudismetheory.game.local.LocalGame;
+import fr.thestudismetheory.generator.CategoriesGenerator;
 import fr.thestudismetheory.generator.PeopleGenerator;
 import fr.thestudismetheory.ui.interfaces.MainGameInterface;
 
@@ -55,26 +58,28 @@ public class GameHandler {
                 START_DATE,
                 START_MONEY
         ));
-
-        internalStartGame(gameData);
-
-        // Génération des étudiants
-        List<Student> students = PeopleGenerator.newStudentList(10, new Date(0), new City(0, "Test", 6));
-
-        // Génération des enseignants
-        List<Teacher> teachers = PeopleGenerator.newTeacherList(10, new Date(0));
+        
+        DAOFactory dao = app.getModulesFactory().createGameDAOFactory(gameData.getId());
 
         // Génération des catégories
-        CategoryDAO categoryDAO = app.getGameHandler().getCurrentGame().getDAO().getCategoryDAO();
+        dao.getCategoryDAO().insertAll(CategoriesGenerator.generateDefaultCategories());
 
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Mathématiques", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Sciences", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Langues", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Ninja", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Magie", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Français", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Sport", Constants.DEFAULT_CATEGORY_ATTRACT));
-        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Informatique", Constants.DEFAULT_CATEGORY_ATTRACT));
+        // Génération des étudiants
+        dao.getStudentDAO().insertAll(PeopleGenerator.newStudentList(10, new Date(0), new City(0, "Test", 6)));
+
+        // Génération des enseignants
+        dao.getTeacherDAO().insertAll(PeopleGenerator.newTeacherList(10, new Date(0)));
+
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Mathématiques", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Sciences", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Langues", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Ninja", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Magie", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Français", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Sport", Constants.DEFAULT_CATEGORY_ATTRACT));
+//        categoryDAO.insert(new Category(Model.ID_NOT_DEFINED, "Informatique", Constants.DEFAULT_CATEGORY_ATTRACT));
+        
+        internalStartGame(gameData);
     }
 
     private void internalStartGame(GameData gameData) {

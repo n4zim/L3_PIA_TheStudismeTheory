@@ -43,6 +43,12 @@ public interface DAO<M extends Model> {
      * </code>
      */
     public M insert(M model);
+    
+    /**
+     * Ajoute à la base de données la liste des entitées
+     * @param entities 
+     */
+    public void insertAll(List<M> entities);
 
     /**
      * Met à jour un modèle dans la BD

@@ -6,11 +6,13 @@
 package fr.thestudismetheory.util;
 
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * @author vincent
  */
 final public class Utils {
+    final static private Random RANDOM = new Random();
 
     private Utils() {
     }
@@ -30,5 +32,13 @@ final public class Utils {
         }
 
         return false;
+    }
+    
+    static public int randInt(int max){
+        return RANDOM.nextInt(max);
+    }
+    
+    static public int randInt(int min, int max){
+        return RANDOM.nextInt(max - min) + min;
     }
 }

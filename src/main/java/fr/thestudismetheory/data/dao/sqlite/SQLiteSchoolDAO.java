@@ -12,6 +12,8 @@ import fr.thestudismetheory.data.dao.InstitutionDAO;
 import fr.thestudismetheory.data.dao.SchoolDAO;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -61,6 +63,8 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
 
     final private CityDAO cityDAO;
     final private InstitutionDAO institutionDAO;
+    
+    final private Map<Integer, School> schoolsById = new HashMap<>();
     
     final private ModelListener<School> saveListener = new ModelListener<School>() {
         @Override
@@ -124,9 +128,19 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
     }
 
     @Override
+    protected School getCached(Object... pk) {
+        return schoolsById.get(pk[0]);
+    }
+    
+    @Override
     protected School createByRS(ResultSet RS) throws SQLException {
+        int id = RS.getInt(ATTR_ID);
+        
+        if(schoolsById.containsKey(id))
+            return schoolsById.get(id);
+        
         School school = new School(
-                RS.getInt(ATTR_ID),
+                id,
                 cityDAO.findByPrimaryKey(RS.getInt(ATTR_CITY)),
                 institutionDAO.findByPrimaryKey(RS.getInt(ATTR_INSITUTION)),
                 RS.getString(ATTR_NAME),
@@ -136,6 +150,7 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
         );
         
         school.addListener(saveListener);
+        schoolsById.put(id, school);
         
         return school;
     }
@@ -145,6 +160,7 @@ public class SQLiteSchoolDAO extends SQLiteDAO<School> implements SchoolDAO {
         int id = (int) internalInsert(model);
         School school = new School(id, model);
         school.addListener(saveListener);
+        schoolsById.put(id, school);
         return school;
     }
 

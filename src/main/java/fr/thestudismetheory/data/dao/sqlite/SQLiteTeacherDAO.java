@@ -15,7 +15,9 @@ import fr.thestudismetheory.data.dao.TeacherDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -84,6 +86,8 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
     final private CategoryDAO categoryDAO;
     final private DivisionDAO divisionDAO;
     
+    final private Map<Long, Teacher> teachersById = new HashMap<>();
+    
     final private ModelListener<Teacher> saveListener = new ModelListener<Teacher>() {
         @Override
         public void onUpdate(Teacher model) {
@@ -132,11 +136,16 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
 
     @Override
     protected Teacher createByRS(ResultSet RS) throws SQLException {
+        long id = RS.getLong(ATTR_ID);
+        
+        if(teachersById.containsKey(id))
+            return teachersById.get(id);
+        
         int catId = RS.getInt(ATTR_CATEGORY);
         int schoolId = RS.getInt(ATTR_SCHOOL);
 
         Teacher teacher = new Teacher(
-                RS.getLong(ATTR_ID),
+                id,
                 RS.getString(ATTR_NAME),
                 new Date(RS.getLong(ATTR_BIRTH)),
                 new Date(RS.getLong(ATTR_ENTERING)),
@@ -149,6 +158,7 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
         );
         
         teacher.addListener(saveListener);
+        teachersById.put(id, teacher);
         
         return teacher;
     }
@@ -183,6 +193,7 @@ public class SQLiteTeacherDAO extends SQLiteDAO<Teacher> implements TeacherDAO {
         long id = internalInsert(model);
         Teacher teacher = new Teacher(id, model);
         teacher.addListener(saveListener);
+        teachersById.put(id, teacher);
         return teacher;
     }
 

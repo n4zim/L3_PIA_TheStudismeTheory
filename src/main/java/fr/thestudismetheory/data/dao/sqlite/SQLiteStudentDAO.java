@@ -17,6 +17,8 @@ import fr.thestudismetheory.data.subentity.Graduate;
 
 import java.sql.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -70,6 +72,8 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
     final private SQLiteGraduation graduation;
     final private SQLiteInterest interest;
     final private CityDAO cityDAO;
+    
+    final private Map<Long, Student> studentById = new HashMap<>();
     
     final private StudentListener saveListener = new StudentListener() {
         @Override
@@ -127,8 +131,13 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
 
     @Override
     protected Student createByRS(ResultSet RS) throws SQLException {
+        long id = RS.getLong(ATTR_ID);
+        
+        if(studentById.containsKey(id))
+            return studentById.get(id);
+        
         Student student = new Student(
-                RS.getLong(ATTR_ID),
+                id,
                 RS.getString(ATTR_NAME),
                 new Date(RS.getLong(ATTR_BIRTH)),
                 cityDAO.findByPrimaryKey(RS.getInt(ATTR_CITY)),
@@ -143,6 +152,8 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
         student.setGraduations(graduation.getStudentGraduation(student));
         
         student.addListener(saveListener);
+        
+        studentById.put(id, student);
 
         return student;
     }
@@ -170,6 +181,7 @@ public class SQLiteStudentDAO extends SQLiteDAO<Student> implements StudentDAO {
         long id = internalInsert(model);
         Student student = new Student(id, model);
         student.addListener(saveListener);
+        studentById.put(id, student);
         return student;
     }
 

@@ -287,4 +287,18 @@ abstract public class SQLiteDAO<M extends Model> implements DAO<M> {
             return -1;
         }
     }
+
+    @Override
+    public void insertAll(List<M> entities){
+        try (PreparedStatement stmt = connection.prepareStatement(insertQuery)) {
+            for(M entity : entities){
+                bindPk(entity, stmt, 1);
+                bindValues(entity, stmt, getPkColumns().length + 1);
+                stmt.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("For query " + insertQuery);
+        }
+    }
 }

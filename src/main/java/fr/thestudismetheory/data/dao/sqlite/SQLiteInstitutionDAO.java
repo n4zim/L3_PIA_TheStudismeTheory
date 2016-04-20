@@ -11,6 +11,8 @@ import fr.thestudismetheory.data.dao.InstitutionDAO;
 import fr.thestudismetheory.data.enums.InstitutionType;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author vincent
@@ -35,6 +37,8 @@ public class SQLiteInstitutionDAO extends SQLiteDAO<Institution> implements Inst
 
     final static private String[] COLUMNS = new String[]{ATTR_ID, ATTR_NAME, ATTR_TYPE};
     final static private String[] PK_COL = new String[]{ATTR_ID};
+    
+    final private Map<Integer, Institution> cacheById = new HashMap<>();
     
     final private ModelListener<Institution> saveListener = new ModelListener<Institution>() {
         @Override
@@ -89,13 +93,19 @@ public class SQLiteInstitutionDAO extends SQLiteDAO<Institution> implements Inst
 
     @Override
     protected Institution createByRS(ResultSet RS) throws SQLException {
+        int id = RS.getInt(ATTR_ID);
+        
+        if(cacheById.containsKey(id))
+            return cacheById.get(id);
+        
         Institution i = new Institution(
-                RS.getInt(ATTR_ID),
+                id,
                 RS.getString(ATTR_NAME),
                 InstitutionType.valueOf(RS.getString(ATTR_TYPE))
         );
         
         i.addListener(saveListener);
+        cacheById.put(id, i);
         
         return i;
     }
@@ -105,7 +115,12 @@ public class SQLiteInstitutionDAO extends SQLiteDAO<Institution> implements Inst
         int id = (int) internalInsert(model);
         Institution i = new Institution(id, model.getName(), model.getType());
         i.addListener(saveListener);
+        cacheById.put(id, i);
         return i;
     }
 
+    @Override
+    protected Institution getCached(Object... pk) {
+        return cacheById.get(pk[0]);
+    }   
 }

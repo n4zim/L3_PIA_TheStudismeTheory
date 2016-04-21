@@ -6,7 +6,9 @@
 package fr.thestudismetheory.data.dao.sqlite;
 
 import fr.thestudismetheory.data.Category;
+import fr.thestudismetheory.data.Division;
 import fr.thestudismetheory.data.Student;
+import fr.thestudismetheory.data.Teacher;
 import fr.thestudismetheory.data.dao.CityDAO;
 import fr.thestudismetheory.data.dao.StudentDAO;
 import fr.thestudismetheory.data.dao.sqlite.sub.SQLiteGraduation;
@@ -16,9 +18,8 @@ import fr.thestudismetheory.data.listener.StudentListener;
 import fr.thestudismetheory.data.subentity.Graduate;
 
 import java.sql.*;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author vincent

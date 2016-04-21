@@ -156,25 +156,29 @@ public class TeacherPanel extends GamePanel {
         b_engager.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int select = tabHire.getSelectedRow();
+                if(teachersFire.size() <= 0) {
+                    int select = tabHire.getSelectedRow();
 
-                //Sélection correcte
-                if (select >= 0) {
-                    School selectedSchool = (School) cb_schools.getSelectedItem();
-                    Division selectedDivision = (Division) cb_poles.getSelectedItem();
-                    System.out.println("DEBUG: b_engager division " + selectedDivision);
+                    //Sélection correcte
+                    if (select >= 0) {
+                        School selectedSchool = (School) cb_schools.getSelectedItem();
+                        Division selectedDivision = (Division) cb_poles.getSelectedItem();
 
-                    if(selectedSchool != null && selectedDivision != null)
-                    {
-                        Teacher selectedTeacher = teachersHire.get(select);
+                        if (selectedSchool != null && selectedDivision != null) {
+                            Teacher selectedTeacher = teachersHire.get(select);
 
-                        app.getTeacherHandler().hireTeacher(selectedDivision, selectedTeacher);
-                        teachersHire.remove(select);
-                        modelTableHire.removeRow(select);
-                        modelTableHire.fireTableStructureChanged();
+                            app.getTeacherHandler().hireTeacher(selectedDivision, selectedTeacher);
+                            teachersHire.remove(select);
+                            modelTableHire.removeRow(select);
+                            modelTableHire.fireTableStructureChanged();
 
-                        updateTeachersListByDivision(selectedDivision);
+                            updateTeachersListByDivision(selectedDivision);
+                        }
                     }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(app.getMainWindow(), "Vous avez déjà engagé un professeur dans ce pôle !", "Attention", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -279,9 +283,6 @@ public class TeacherPanel extends GamePanel {
                 o[3] = value.getPunct();
                 o[4] = value.getTeachSkill();
                 modelTableFire.addRow(o);
-
-                System.out.println("-----------------DEBUG PROF");
-                System.out.println("Nom : " + value.getName() + " | Category : " + value.getDivision().getCategory() + " | School : " + value.getDivision().getSchool());
             }
             tabFire.setModel(modelTableFire);
             modelTableFire.fireTableStructureChanged();

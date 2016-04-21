@@ -23,7 +23,6 @@ public class CentralGamePanel extends JPanel {
     final private SchoolPanel schoolPanel;
     final private StudentPanel studentPanel;
     final private TeacherPanel teacherPanel;
-    final private FinancePanel financePanel;
 
     public CentralGamePanel(TheStudismeTheory app) {
         setLayout(new BorderLayout());
@@ -35,8 +34,6 @@ public class CentralGamePanel extends JPanel {
 
         studentPanel = new StudentPanel(this , app);
         teacherPanel = new TeacherPanel(this, app);
-        financePanel = new FinancePanel();
-
         switchDefaultPanel();
     }
     
@@ -58,10 +55,6 @@ public class CentralGamePanel extends JPanel {
     public void switchTeacher() {
         switchPanel(teacherPanel);
         teacherPanel.updatePanel();
-    }
-
-    public void switchFinance() {
-        switchPanel(financePanel);
     }
 
     public void switchDefaultPanel() {

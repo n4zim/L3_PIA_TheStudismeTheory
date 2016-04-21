@@ -105,20 +105,10 @@ public class MainGameInterface extends AbstractGameInterface {
             }
         });
 
-        // Bouton gerant le déploiement de la fenêtre finance
-        JButton b_fin = new JButton(UIConstants.BUTTON_FINANCE);
-        b_fin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                centralPanel.switchFinance();
-            }
-        });
-
         west.add(b_inst, gbc);
         west.add(b_school, gbc);
         west.add(b_teacher, gbc);
         west.add(b_student, gbc);
-        west.add(b_fin, gbc);
 
         return west;
     }

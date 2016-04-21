@@ -129,11 +129,10 @@ public class MainGameInterface extends AbstractGameInterface {
             }
         });
 
-        south.add(new JLabel(UIConstants.LABEL_RESSOURCE));
+        south.add(new JLabel(UIConstants.LABEL_RESSOURCE + " :"));
         south.add(statResources);
-        south.add(new JLabel(UIConstants.LABEL_TIME));
+        south.add(new JLabel(UIConstants.LABEL_TIME + " :"));
         south.add(statTime);
-        south.add(new JLabel(UIConstants.LABEL_STAT));
         south.add(optGame);
         return south;
     }

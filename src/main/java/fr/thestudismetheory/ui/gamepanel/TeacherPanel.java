@@ -156,7 +156,7 @@ public class TeacherPanel extends GamePanel {
         b_engager.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(teachersFire.size() <= 0) {
+                //if(teachersFire.size() <= 0) {
                     int select = tabHire.getSelectedRow();
 
                     //Sélection correcte
@@ -175,11 +175,11 @@ public class TeacherPanel extends GamePanel {
                             updateTeachersListByDivision(selectedDivision);
                         }
                     }
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(app.getMainWindow(), "Vous avez déjà engagé un professeur dans ce pôle !", "Attention", JOptionPane.ERROR_MESSAGE);
-                }
+//                }
+//                else
+//                {
+//                    JOptionPane.showMessageDialog(app.getMainWindow(), "Vous avez déjà engagé un professeur dans ce pôle !", "Attention", JOptionPane.ERROR_MESSAGE);
+//                }
             }
         });
 

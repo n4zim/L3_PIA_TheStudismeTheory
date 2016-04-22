@@ -5,6 +5,7 @@
  */
 package fr.thestudismetheory.handler;
 
+import fr.thestudismetheory.Constants;
 import fr.thestudismetheory.TheStudismeTheory;
 import fr.thestudismetheory.game.Game;
 
@@ -24,5 +25,8 @@ public class StudentHandler {
 
     public void onEndYear(Game game) {
         //TODO
+        
+        int nbStu = game.getDAO().getStudentDAO().getAll().size();
+        game.getGameData().setMoney(nbStu * Constants.MONEY_PER_STUDENT);
     }
 }

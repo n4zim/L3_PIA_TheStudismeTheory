@@ -17,6 +17,7 @@ import fr.thestudismetheory.data.generation.CityGenerate;
 import fr.thestudismetheory.data.generation.CountryGenerate;
 import fr.thestudismetheory.data.strings.UIConstants;
 import fr.thestudismetheory.ui.gamepanel.CentralGamePanel;
+import java.awt.Image;
 
 public class WorldCountryGenerator extends JPanel {
 	private Graphics2D g2d;
@@ -119,8 +120,8 @@ public class WorldCountryGenerator extends JPanel {
 			} while(ok==false);
 			
 			countryGenerate.addCityPoint(new Point(city.x,city.y));
-			g2d.setColor(Color.RED);
-			g2d.fillRect(city.x-10,city.y-10,20,20);
+			/*g2d.setColor(Color.RED);
+			g2d.fillRect(city.x-10,city.y-10,20,20);*/
 		}
 		
 	}
@@ -142,8 +143,11 @@ public class WorldCountryGenerator extends JPanel {
 		}	
 	}
 	
-	public void paintComponent(Graphics g) {	
-        g.drawImage(countryGenerate.getCountryImage(),0,0,null);
+    @Override
+	public void paintComponent(Graphics g) {
+        Image img = countryGenerate.getCountryImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        //Image img = countryGenerate.getCountryImage();
+        g.drawImage(img,0,0,null);
      }
 	
 }

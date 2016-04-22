@@ -27,6 +27,6 @@ public class StudentHandler {
         //TODO
         
         int nbStu = game.getDAO().getStudentDAO().getAll().size();
-        game.getGameData().setMoney(nbStu * Constants.MONEY_PER_STUDENT);
+        game.getGameData().setMoney(game.getGameData().getMoney() + nbStu * Constants.MONEY_PER_STUDENT);
     }
 }
